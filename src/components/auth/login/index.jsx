@@ -75,7 +75,7 @@ function Login() {
             <span>{err.password}</span>
           </div>
           <p>
-            <Link to="/">Forgot your password?</Link>
+            <Link to="/forgot">Forgot your password?</Link>
           </p>
           <Button name="SIGN IN" type="submit" />
           <p>
