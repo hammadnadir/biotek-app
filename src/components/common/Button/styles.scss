@@ -1,0 +1,13 @@
+.button-field {
+  Button {
+    box-shadow: none !important;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 2px;
+    padding: 7px 18px;
+    &:hover{
+        background-color: var(--color-form-button-hover);
+    }
+  }
+}

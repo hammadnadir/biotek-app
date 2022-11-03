@@ -1,0 +1,56 @@
+.signup-page{
+    padding-top: 78px;
+    .main-form{
+        text-align: center;
+        width: 70%;
+        margin: auto;
+        padding: 70px 0px;
+        @media screen and (max-width: 575px) {
+            width: 100%;
+            padding: 40px 0px;
+          }
+        h1{
+            margin-bottom: 40px;
+            font-size: var(--font-form-heading);
+            text-transform: uppercase;
+        }
+        p{
+            margin-bottom: 20px;
+            a{
+                color: var(--color-form-links);
+                &:hover{
+                    color: var(--color-form-links-hover) !important;
+                }
+            }
+        }
+        .password-field{
+          position: relative;
+          i{
+            position: absolute;
+            top: 45%;
+            right: 20px;
+            cursor: pointer;
+            font-size: large;
+          }
+          input{
+            padding-right: 45px;
+          }
+        }
+        Button{
+            margin-bottom: 25px;
+            width: 200px !important;
+            font-size: clamp(13px,2vw,14px) !important;
+            height: 40px !important;
+            margin-right: 0px !important;
+          }
+        .errors {
+            text-align: left;
+            margin-bottom: 20px !important;
+            margin-top: -8px;
+          span {
+            color: var(--color-form-errors);
+            font-size: 14px;
+          }
+        }
+    }
+}
