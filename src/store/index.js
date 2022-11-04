@@ -1,12 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../redux/rootSaga";
 import combinedReducer from "../redux/rootReducer";
-// import { createWrapper } from "next-redux-wrapper";
 
-export const store = configureStore({ reducer: combinedReducer });
+const CreateStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
 
-export const initStore = () => {
-  return configureStore({
+  const store = configureStore({
     reducer: combinedReducer(),
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: [sagaMiddleware],
+    devTools: window.devToolsExtension ? window.devToolsExtension() : (f) => f,
   });
+  sagaMiddleware.run(rootSaga);
+  return store;
 };
+
+export default CreateStore;

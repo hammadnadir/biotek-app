@@ -1,4 +1,4 @@
-// import { history } from "./history";
+import { history } from "./history";
 
 export const requestInterceptor = async (config) => {
   try {
@@ -24,7 +24,7 @@ export const errorInterceptor = (error) => {
     ) {
       console.log(error.response.data);
       localStorage.setItem("biztek_token", "");
-    //   history.replace("/login");
+      history.replace("/login");
     }
     return Promise.reject(error);
   }

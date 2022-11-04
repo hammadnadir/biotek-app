@@ -1,47 +1,86 @@
 .login-page {
-    padding-top: 78px;
+  background: linear-gradient(180deg, #f78142 0%, #fa3b3b 100%),
+    linear-gradient(180deg, #f78142 0%, #fa3b3b 100%);
+  .main-login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
     .main-form {
       text-align: center;
-      width: 70%;
+      width: 90%;
       margin: auto;
-      padding: 70px 0px;
-      @media screen and (max-width: 575px) {
-        width: 100%;
-        padding: 40px 0px;
+      padding: 30px 30px 90px;
+      background: var(--color-form-bg);
+      border-radius: 20px;
+      @media screen and (min-width: 575px) {
+        max-width: 500px;
+      }
+      @media screen and (max-width: 400px) {
+        width: 95%;
+        padding: 30px 20px 60px;
+      }
+      img {
+        width: 151px;
+        padding-bottom: 60px;
+        @media screen and (max-width: 380px) {
+          padding-bottom: 45px;
+        }
+        @media screen and (max-width: 375px) {
+          width: 100px;
+        }
       }
       h1 {
-        margin-bottom: 18px;
-        font-size: var(--font-form-heading);
-        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-size: var(--font-size-heading);
+        text-align: left;
+        font-weight: 600;
+        text-transform: capitalize;
+        color: var(--color-heading);
       }
       p {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+        text-align: right;
         a {
-          color: var(--color-form-links);
-          &:hover {
-            color: var(--color-form-links-hover) !important;
-          }
+          font-size: var(--font-size-small);
+          text-align: right;
         }
       }
       .errors {
         text-align: left;
         margin-bottom: 20px !important;
         margin-top: -8px;
+        position: relative;
         span {
+          position: absolute;
           color: var(--color-form-errors);
           font-size: 14px;
+          top: 0;
         }
       }
-      Button {
-        margin-top: 30px;
-        margin-bottom: 25px;
-        width: 200px !important;
-        font-size: clamp(13px, 2vw, 14px) !important;
-        height: 40px !important;
-        @media screen and (max-width: 575px) {
-          margin-top: 10px !important;
+      small {
+        font-weight: 600;
+        font-size: var(--font-size-small);
+        a {
+          color: var(--color-red) !important;
+          &:hover {
+            color: var(--color-link-hover) !important;
+          }
+        }
+      }
+      .password-field {
+        position: relative;
+        i {
+          position: absolute;
+          top: 14px;
+          right: 23px;
+          font-size: var(--font-size-icons);
+          cursor: pointer;
+          @media screen and (max-width: 373px) {
+            top: 10px;
+            right: 16px;
+          }
         }
       }
     }
   }
-  
+}

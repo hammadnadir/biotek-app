@@ -1,0 +1,10 @@
+@import url(./font.scss);
+@import url(./color.scss);
+
+a {
+  text-decoration: none;
+  color: var(--color-black) !important;
+  &:hover{
+    color: var(--color-heading) !important;
+  }
+}

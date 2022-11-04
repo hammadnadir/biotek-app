@@ -1,0 +1,49 @@
+.forget-page {
+    padding-top: 78px;
+    .main-form {
+      padding: 70px 0px;
+      text-align: center;
+      width: 70%;
+      margin: auto;
+      @media screen and (max-width: 575px) {
+        width: 100%;
+        padding: 40px 0px;
+      }
+      Button {
+        margin-top: 30px;
+        margin-bottom: 25px;
+        width: 200px !important;
+        font-size: clamp(13px, 2vw, 14px) !important;
+        height: 40px !important;
+      }
+      h2 {
+        margin-bottom: 18px;
+        font-size: var(--font-form-heading);
+        text-transform: uppercase;
+      }
+      .reset-password {
+        p {
+          font-size: clamp(12px, 2vw, 14px);
+          margin-bottom: 40px;
+        }
+      }
+      p {
+        a {
+          color: var(--color-form-links);
+          &:hover {
+            color: var(--color-form-links-hover) !important;
+          }
+        }
+      }
+      .errors {
+        text-align: left;
+        margin-bottom: 20px !important;
+        margin-top: -8px;
+        span {
+          color: var(--color-form-errors);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  

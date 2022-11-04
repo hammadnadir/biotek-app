@@ -4,6 +4,7 @@ import { Container, Form } from "react-bootstrap";
 // import { signupRequest } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import "./styles.scss"
+import { signUpRequest } from "../../../redux/auth";
 
 function Signup() {
   const [input, setInput] = useState({});
@@ -62,7 +63,7 @@ function Signup() {
     } else {
       setErr({});
       console.log(value);
-    //   dispatch(signupRequest(input));
+      dispatch(signUpRequest(value));
       // console.log(input);
     }
   };
@@ -75,7 +76,7 @@ function Signup() {
             label="First Name"
             name="first_name"
             type="input"
-            value={input.first_name}
+            value={input.first_name || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -85,7 +86,7 @@ function Signup() {
             label="Last Name"
             name="last_name"
             type="input"
-            value={input.last_name}
+            value={input.last_name || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -95,7 +96,7 @@ function Signup() {
             label="Email"
             name="email"
             type="text"
-            value={input.email}
+            value={input.email || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -106,7 +107,7 @@ function Signup() {
               label="Password"
               name="password"
               type={showPassword ? "input" : "password"}
-              value={input.password}
+              value={input.password || ""}
               onChange={handleChange}
             />
             {
@@ -120,7 +121,7 @@ function Signup() {
             label="phone"
             name="phone"
             type="input"
-            value={input.phone}
+            value={input.phone || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -130,7 +131,7 @@ function Signup() {
             label="City"
             name="city"
             type="input"
-            value={input.city}
+            value={input.city || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -140,7 +141,7 @@ function Signup() {
             label="Street"
             name="street"
             type="input"
-            value={input.street}
+            value={input.street || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -150,7 +151,7 @@ function Signup() {
             label="State"
             name="state"
             type="input"
-            value={input.state}
+            value={input.state || ""}
             onChange={handleChange}
           />
           <div className="errors">
@@ -160,7 +161,7 @@ function Signup() {
             label="zip code"
             name="zip"
             type="input"
-            value={input.zip}
+            value={input.zip || ""}
             onChange={handleChange}
           />
           <div className="errors">
