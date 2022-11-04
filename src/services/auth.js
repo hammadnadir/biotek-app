@@ -4,9 +4,9 @@ import { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}auth/login`, payload)
+      .post(`https://www.biotecherp.work/public/api/user/login`, payload)
       .then((response) => {
-        let authHeader = response.headers["authorization"];
+        let authHeader = response.session_id["authorization"];
         let token = authHeader.substring(7, authHeader.length);
         localStorage.setItem("biztek_token", token);
         localStorage.setItem("currentUser", JSON.stringify(response));

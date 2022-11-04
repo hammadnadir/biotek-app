@@ -20,15 +20,15 @@ function App() {
 
   return (
     <Routes>
-      {/* <Route
+      <Route
         path="/"
         element={
           <RequireAuth>
             <Header />
           </RequireAuth>
         }
-      ></Route> */}
-      <Route path='/' element={<Header />} />
+      ></Route>
+      {/* <Route path='/' element={<Header />} /> */}
       <Route path='/login' element={<Login />} />
       <Route path='/forgot-password' element={<Forgot />} />
       <Route path='/signup' element={<Signup />} />

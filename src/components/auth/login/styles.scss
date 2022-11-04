@@ -54,7 +54,9 @@
           position: absolute;
           color: var(--color-form-errors);
           font-size: 14px;
-          top: 0;
+          top: -3px;
+          font-weight: 500;
+          padding-left: 10px;
         }
       }
       small {

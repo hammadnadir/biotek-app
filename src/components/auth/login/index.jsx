@@ -31,18 +31,18 @@ function Login() {
     const valEmail =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!value.email) {
-      error.email = "Required field";
+      error.email = "Email required";
     } else if (!value.email.match(valEmail)) {
       error.email = "Invalid Email";
     }
     if (!value.password) {
-      error.password = "Required field";
+      error.password = "Password required";
     }
     if (Object.keys(error).length > 0) {
       setErr(error);
     } else {
       console.log(input);
-      dispatch(loginRequest(value));
+      dispatch(loginRequest({...value, "device_id": "KL7H438l8131", "device_type": "android", "device_token": "4gjh234g2j3l4lg2j3g42j3lhg4"}));
       // dispatch(loginForm(value))
       console.log(value);
       //   signIn("credentials", { ...input, redirect: false }).then((response) => {
@@ -80,10 +80,8 @@ function Login() {
                 onChange={handleChange}
               />
               {
-                showPassword ? <i className="bi bi-eye-fill" onClick={()=>setShowPassword(false)}></i> : <i class="bi bi-eye-slash-fill"  onClick={()=>setShowPassword(true)}></i>
+                showPassword ? <i className="bi bi-eye-fill" onClick={()=>setShowPassword(false)}></i> : <i className="bi bi-eye-slash-fill"  onClick={()=>setShowPassword(true)}></i>
               }
-              
-              
             </div>
            { err.password &&( 
            <div className="errors">
