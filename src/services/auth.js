@@ -4,7 +4,7 @@ import { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`https://www.biotecherp.work/public/api/user/login`, payload)
+      .post(`${baseURL}user/login`, payload)
       .then((response) => {
         let authHeader = response.session_id["authorization"];
         let token = authHeader.substring(7, authHeader.length);
@@ -19,7 +19,7 @@ export const login = (payload) => {
       })
       .catch((error) => {
         console.log("error", error);
-        reject(error.response.data.errors);
+        // reject(error.response.data.errors);
       });
   });
 };
@@ -47,7 +47,7 @@ export const signUp = (payload) => {
     axios
       .post(`${baseURL}auth/signup`, payload)
       .then((response) => {
-        resolve(response.data);
+        // resolve(response.data);
       })
       .catch((error) => {
         reject(error);
