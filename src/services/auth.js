@@ -6,10 +6,11 @@ export const login = (payload) => {
     axios
       .post(`${baseURL}user/login`, payload)
       .then((response) => {
-        let authHeader = response.session_id["authorization"];
-        let token = authHeader.substring(7, authHeader.length);
-        localStorage.setItem("biztek_token", token);
-        localStorage.setItem("currentUser", JSON.stringify(response));
+        console.log(response);
+        // let authHeader = response.session_id["authorization"];
+        // let token = authHeader.substring(7, authHeader.length);
+        // localStorage.setItem("biztek_token", token);
+        // localStorage.setItem("currentUser", JSON.stringify(response));
         // console.log(response.data);
 
         // let refreshHeader = response.headers['refresh'];
