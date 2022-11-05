@@ -7,11 +7,11 @@ export const login = (payload) => {
       .post(`${baseURL}user/login`, payload)
       .then((response) => {
         console.log(response);
-        // let authHeader = response.session_id["authorization"];
-        // let token = authHeader.substring(7, authHeader.length);
-        // localStorage.setItem("biztek_token", token);
-        // localStorage.setItem("currentUser", JSON.stringify(response));
-        // console.log(response.data);
+        let authHeader = response.session_id["authorization"];
+        let token = authHeader.substring(7, authHeader.length);
+        localStorage.setItem("biztek_token", token);
+        localStorage.setItem("currentUser", JSON.stringify(response));
+        console.log(response.data);
 
         // let refreshHeader = response.headers['refresh'];
         // let refreshToken = refreshHeader.substring(7, refreshHeader.length);

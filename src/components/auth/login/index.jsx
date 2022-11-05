@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Container, Form } from "react-bootstrap";
 import { TextField, Button } from "../../common";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import "./styles.scss";
 import { useDispatch } from "react-redux";
 // import { loginForm } from "../../../redux/auth";
@@ -14,7 +13,6 @@ function Login() {
   const [err, setErr] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
