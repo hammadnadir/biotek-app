@@ -9,7 +9,7 @@ const CreateStore = () => {
   const store = configureStore({
     reducer: combinedReducer(),
     middleware: [sagaMiddleware],
-    devTools: window.devToolsExtension ? window.devToolsExtension() : (f) => f,
+    // devTools: window.devToolsExtension ? window.devToolsExtension() : (f) => f,
   });
   sagaMiddleware.run(rootSaga);
   return store;
