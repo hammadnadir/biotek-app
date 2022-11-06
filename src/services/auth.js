@@ -4,7 +4,7 @@ import { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}user/login`, payload)
+      .post(`user/login`, payload)
       .then((response) => {
         console.log(response);
         let authHeader = response.session_id["authorization"];

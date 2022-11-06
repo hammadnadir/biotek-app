@@ -41,7 +41,7 @@ function Login() {
     } else {
       console.log(input);
       dispatch(loginRequest({...value, device_id: "KL7H438l8131", device_type: "android", device_token: "4gjh234g2j3l4lg2j3g42j3lhg4"}));
-      // dispatch(loginForm(value))
+      // dispatch(loginForm(value));
       console.log(value);
       //   signIn("credentials", { ...input, redirect: false }).then((response) => {
       //     if (response?.ok) {
