@@ -2,16 +2,16 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 
-function Header() {
+function Banner() {
   return (
-    <div className="main-data">
+    <div className="banner-page">
       <Container>
-        <div className="inner-data">
-          <div>Main Component</div>
+        <div className="banner-data">
+          
         </div>
       </Container>
     </div>
   );
 }
 
-export default Header;
+export default Banner;

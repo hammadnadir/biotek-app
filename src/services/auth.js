@@ -4,12 +4,12 @@ import { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`user/login`, payload)
+      .post(`api/user/login`, payload)
       .then((response) => {
-        console.log(response);
-        let authHeader = response.session_id["authorization"];
-        let token = authHeader.substring(7, authHeader.length);
-        localStorage.setItem("biztek_token", token);
+        console.log(response.data.data.session_id.session_id);
+        let authHeader = response.data.data.session_id.session_id;
+        // let token = authHeader.substring(7, authHeader.length);
+        localStorage.setItem("biztek_token", authHeader);
         localStorage.setItem("currentUser", JSON.stringify(response));
         console.log(response.data);
 

@@ -1,0 +1,32 @@
+.main-data {
+  padding-top: 60px;
+  .inner-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .main-icons {
+      display: flex;
+      .icons {
+        width: 25px;
+        height: 25px;
+        background-color: #fcfcfc;
+        box-shadow: 0.5px 0.5px 1px #000000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+      }
+    }
+  }
+  .logo-img {
+    text-align: center;
+    margin-top: -65px;
+    img {
+      width: 270px;
+    @media screen and (max-width:373px) {
+      width: 200px;
+    }
+    }
+  }
+}
