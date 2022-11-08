@@ -52,9 +52,9 @@ function App() {
         <Route
           path="/"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Home />
-            </RequireAuth>
+            // </RequireAuth>
           }
         ></Route>
         {/* <Route path='/' element={<Header />} /> */}
