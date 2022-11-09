@@ -1,0 +1,40 @@
+.modal-dialog {
+    justify-content: center;
+    z-index: 2222;
+  .modal-content {
+    border-radius: 0px;
+    max-width: 300px;
+    .modal-data {
+      padding: 25px;
+      padding-bottom: 5px !important;
+      h3 {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+      .delete-expense {
+        text-align: center;
+        p {
+          font-size: 12px;
+          width: 55%;
+          margin: auto;
+        }
+      }
+      .decesions {
+        display: flex;
+        justify-content: end;
+        padding-right: 20px;
+        padding-top: 35px;
+        p {
+          font-size: 14px;
+          font-weight: 700;
+          margin-left: 40px;
+          cursor: pointer;
+          &:nth-child(1){
+            color: #F90F0F;
+          }
+        }
+      }
+    }
+  }
+}

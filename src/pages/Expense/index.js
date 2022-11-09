@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Footer from "../../components/common/Footer";
+import { ListData, NavExpense } from "../../components/Expense";
 
 function Expense() {
   return (
-    <div>Expense</div>
-  )
+    <div>
+      <NavExpense />
+      <ListData />
+      <Footer />
+    </div>
+  );
 }
 
-export default Expense
+export default Expense;

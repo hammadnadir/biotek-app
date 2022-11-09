@@ -8,22 +8,15 @@ function Header() {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
-    setInput(e.target.value)
+    setInput(e.target.value);
   };
 
   return (
     <div className="main-data">
       <Container>
         <div className="inner-data">
-          <div>
-            <SearchField
-              type="input"
-              name="input"
-              placeholder="Search....."
-              icon="bi bi-search"
-              value={input || ""}
-              onChange={handleChange}
-            />
+          <div className="logo-img">
+            <img src={logo} alt="logo-img" />
           </div>
           <div className="main-icons">
             <div className="icons">
@@ -37,8 +30,16 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="logo-img">
-          <img src={logo} alt="logo-img" />
+
+        <div className="search-header">
+          <SearchField
+            type="input"
+            name="input"
+            placeholder="Search....."
+            icon="bi bi-search"
+            value={input || ""}
+            onChange={handleChange}
+          />
         </div>
       </Container>
     </div>

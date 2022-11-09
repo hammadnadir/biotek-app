@@ -52,18 +52,24 @@ function App() {
         <Route
           path="/"
           element={
-            // <RequireAuth>
+            <RequireAuth>
               <Home />
-            // </RequireAuth>
+            </RequireAuth>
           }
         ></Route>
+        <Route
+          path="/expense"
+          element={
+            <RequireAuth>
+              <Expense />
+            </RequireAuth>
+          }
+        />
         {/* <Route path='/' element={<Header />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/expense" element={<Expense />} />
       </Routes>
-      
     </div>
   );
 }

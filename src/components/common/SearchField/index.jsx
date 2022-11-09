@@ -12,6 +12,7 @@ function SearchField({ label, icon,...props }) {
       <label className="label-field" onClick={handleClick}>
         <i className={icon} />
       </label>
+      <p>Search For?</p>
       <input type="text" ref={reference} className="search-field" {...props} />
     </div>
   );

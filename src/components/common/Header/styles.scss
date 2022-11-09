@@ -1,5 +1,5 @@
 .main-data {
-  padding-top: 60px;
+  padding-top: 30px;
   .inner-data {
     display: flex;
     align-items: center;
@@ -19,11 +19,14 @@
       }
     }
   }
+  .search-header{
+    margin-top: 20px;
+  }
   .logo-img {
     text-align: center;
-    margin-top: -65px;
+    // margin-top: -65px;
     img {
-      width: 270px;
+      width: 185px;
     @media screen and (max-width:373px) {
       width: 200px;
     }
