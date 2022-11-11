@@ -6,6 +6,7 @@ import { aaa } from "../../../assets";
 // import { storage } from "../../../firebase";
 // import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // import { v4 } from "uuid";
 // import { useEffect } from "react";
 
@@ -53,8 +54,8 @@ function Options() {
           {cards.map((item, index) => {
             return (
               <div className="main-inner-data" key={index}>
-                <div className="cards"><img src={aaa} alt="logo"/></div>
-                <p>data1</p>
+                <Link to="/voucher"><div className="cards"><img src={aaa} alt="logo"/></div></Link>
+                <p>data</p>
               </div>
             );
           })}

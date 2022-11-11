@@ -1,6 +1,6 @@
 .options-page {
-  background: #fcfcfc;
-  box-shadow: 3px 3px 10px #fa3b3b;
+  background-color: #fcfcfc;
+  box-shadow: 4px 4px 10px #000000;
   border-radius: 20px 20px 0px 0px;
   // padding: 40px 0px;
   padding-top: 40px;
@@ -9,11 +9,11 @@
   .options-data {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    @media screen and (max-width:373px) {
-        grid-template-columns: auto auto auto;
+    @media screen and (max-width: 373px) {
+      grid-template-columns: auto auto auto;
     }
-    @media screen and (max-width:310px) {
-        grid-template-columns: auto auto;
+    @media screen and (max-width: 310px) {
+      grid-template-columns: auto auto;
     }
     .main-inner-data {
       margin: auto;
@@ -26,45 +26,45 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        img{
-            width: 55px;
+        img {
+          width: 55px;
         }
       }
       p {
         width: 68px;
         text-align: center;
-        padding-top: 30px;
+        padding-top: 10px;
       }
     }
   }
   .options-new-data {
     display: grid;
-    grid-template-columns: auto auto auto;
-    @media screen and (max-width:373px) {
-        grid-template-columns: auto auto ;
+    grid-template-columns: auto auto auto auto;
+    @media screen and (max-width: 373px) {
+      grid-template-columns: auto auto auto;
     }
-    @media screen and (max-width:310px) {
-        grid-template-columns: auto ;
+    @media screen and (max-width: 310px) {
+      grid-template-columns: auto auto;
     }
     .main-inner-data {
       margin: auto;
       .cards {
-        width: 110px;
-        height: 117.86px;
+        width: 68px;
+        height: 68px;
         filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        img{
-            width: 55px;
+        img {
+          width: 55px;
         }
       }
       p {
-        width: 110px;
+        width: 68px;
         text-align: center;
-        padding-top: 30px;
+        padding-top: 10px;
       }
     }
   }

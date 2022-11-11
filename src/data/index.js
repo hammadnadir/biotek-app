@@ -33,6 +33,19 @@ export const cards = [
     id: 8,
     image: logo,
   },
+  {
+    id: 9,
+    image: logo,
+  }, {
+    id: 10,
+    image: logo,
+  }, {
+    id: 11,
+    image: logo,
+  }, {
+    id: 12,
+    image: logo,
+  },
 ];
 
 export const cardsNew = [

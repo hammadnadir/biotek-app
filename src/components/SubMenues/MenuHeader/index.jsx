@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { logo } from "../../../assets";
-import SearchField from "../SearchField";
+import { SearchField } from "../../common";
 import "./styles.scss";
 
-function Header() {
+function MenuHeader() {
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -12,9 +12,9 @@ function Header() {
   };
 
   return (
-    <div className="main-data">
+    <div className="menu-header">
       <Container>
-        <div className="inner-data">
+        <div className="menu-data">
           <div className="top_field">
             <div className="icons">
               <i className="bi bi-person-fill"></i>
@@ -37,4 +37,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default MenuHeader;

@@ -1,11 +1,35 @@
 .list-data {
   padding-bottom: 130px;
+  .select-field {
+    width: 100% !important;
+    margin: 20px 0px;
+  }
   .top-data {
     padding-top: 40px;
     padding-bottom: 10px;
     background: rgba(243, 242, 242, 0.75);
     text-align: center;
     .main-data-lists {
+      .prices {
+        position: relative;
+        .new-icon {
+          position: absolute;
+          background-color: #0bca07;
+          border-radius: 8px;
+          width: 50px;
+          height: 50px;
+          top: 19px;
+          right: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 25px;
+          i{
+            color: #FCFCFC;
+            -webkit-text-stroke: 1px;
+          }
+        }
+      }
       .end-price {
         color: #f90f0f;
         h3 {
@@ -34,7 +58,7 @@
       .two-btns {
         display: flex;
         justify-content: space-between;
-        background-color: #EFE7E7;
+        background-color: #efe7e7;
         border-radius: 10px;
         .expenses {
           cursor: pointer;
@@ -84,7 +108,7 @@
           .dropdown-item {
             display: flex;
             align-items: center;
-            i{
+            i {
               padding-right: 10px;
             }
           }
@@ -99,7 +123,7 @@
             border: none;
             padding: 0px;
           }
-          .dropdown-menu{
+          .dropdown-menu {
             margin-left: 20px;
             margin-top: -5px;
           }
@@ -141,7 +165,7 @@
             height: 50px;
             border-radius: 10px;
             margin-right: 20px;
-            @media screen and (max-width:400px) {
+            @media screen and (max-width: 400px) {
               margin-right: 15px;
             }
           }
@@ -166,7 +190,7 @@
           .voucher-no {
             display: flex;
             justify-content: space-between;
-            @media screen and (max-width:400px) {
+            @media screen and (max-width: 400px) {
               flex-direction: column;
             }
           }
@@ -245,7 +269,7 @@
       select {
         width: 49%;
       }
-      input{
+      input {
         width: 49%;
       }
     }
@@ -256,7 +280,7 @@
       .input-data-section {
         width: 49%;
       }
-      select{
+      select {
         width: 100%;
       }
       // .select-fields {

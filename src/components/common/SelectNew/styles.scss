@@ -1,0 +1,38 @@
+.select-field-new {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin-top: -5px;
+    .label-field {
+        font-weight: 700;
+        font-size: 14px;
+        margin-left: 15px;
+        background-color: #FCFCFC;
+        // margin-bottom: -8px;
+        z-index: 3;
+        width: fit-content;
+    }
+    .select {
+      margin-bottom: 15px;
+      margin-top: -8px;
+      // padding: 4px 10px;
+      background-color: #fcfcfc;
+      box-shadow: 1px 1px 4px #f78142;
+      border-radius: 8px;
+      padding: 0px 15px;
+      height: 50px;
+      color: var(--color-form-inputs);
+      outline: none;
+      border: 1px solid var(--color-input-field);
+      font-size: clamp(13px, 2vw, 15px);
+      &:focus {
+        border: 1px solid var(--color-input-field-focus);
+      }
+      @media screen and (max-width: 375px) {
+        padding: 0px 13px;
+        height: 40px;
+      }
+    }
+  }
+  

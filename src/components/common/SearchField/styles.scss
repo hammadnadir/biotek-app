@@ -9,20 +9,21 @@
   .label-field {
     position: absolute;
     left: 20px;
-    top: 11px;
+    top: 13px;
     padding-bottom: 5px;
     text-align: left;
     cursor: pointer;
     // font-size: 10px;
     // color: var(--color-select-label);
     i {
-      font-size: 20px;
+      font-size: 18px;
+      -webkit-text-stroke: 1px;
     }
   }
   p{
     position: absolute;
     left: 60px;
-    top: 10px;
+    top: 13px;
     font-size: 10px;
     color: #000000;
     font-weight: 700;
@@ -37,7 +38,7 @@
     color: var(--color-form-inputs);
     outline: none;
     border: none;
-    font-size: clamp(13px, 2vw, 15px);
+    font-size: clamp(11px, 2vw, 13px);
     background-color: #fcfcfc;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
     border-radius: 30px;

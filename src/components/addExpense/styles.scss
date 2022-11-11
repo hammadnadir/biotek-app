@@ -1,0 +1,40 @@
+.add_expense {
+  .add_expense_data {
+    .expense_button {
+      margin: 20px 0px;
+      display: flex;
+      justify-content: end;
+      Button {
+        height: 50px;
+        background-color: #fcfcfc;
+        border-radius: 8px;
+        border: none;
+        font-size: 18px;
+        font-weight: 700;
+        &:nth-child(1) {
+          width: 103px;
+          color: #0bca07;
+          box-shadow: 1px 1px 4px #0bca07;
+        }
+        &:nth-child(2) {
+          box-shadow: 1px 1px 4px #f90f0f;
+          border-radius: 8px;
+          width: 125px;
+          margin-left: 15px;
+          color: #f90f0f;
+        }
+      }
+    }
+    .voucher_field{
+        input{
+            width: 100%;
+        }
+    }
+    .two_inputs{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0px;
+    }
+  }
+}

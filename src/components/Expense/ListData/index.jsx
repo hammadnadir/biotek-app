@@ -9,6 +9,11 @@ import { storage } from "../../../firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Dropdown } from "react-bootstrap";
 import ModalPage from "./Modal";
+import { SearchField } from "../../common";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getExpenseRequest } from "../../../redux/expense";
+import axios from "axios";
 
 function ListData() {
   const [showData, setShowData] = useState(true);
@@ -17,9 +22,12 @@ function ListData() {
   const [imagesupload, setImagesupload] = useState([]);
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [responseData, setResponseData] = useState({});
 
   const reference = useRef();
+  const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
+  const { expense } = useSelector((state) => state);
 
   //   const uploadPic = () => {
   //     if (imagesupload) {
@@ -31,9 +39,19 @@ function ListData() {
   //       });
   //     }
   //   };
-  useEffect(()=>{
-    setVouchersData(vouchers)
-  },[])
+
+  useEffect(() => {
+    setVouchersData(vouchers);
+  }, []);
+
+  useEffect(() => {
+    dispatch(getExpenseRequest({ unit_expense: "1" }));
+    axios.get('http://192.168.10.189:8000/api/add_expense?unit_expense=1')
+    .then(function (response) {
+      console.log(response);
+      setResponseData(response?.data)
+    })
+  }, []);
 
   const monthsName = [
     "January",
@@ -55,10 +73,10 @@ function ListData() {
   const year = date.getFullYear();
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-  
+
   const handleExpenseDelete = (item) => {
     vouchersData.map((data) => {
-      return item.id === data.id 
+      return item.id === data.id;
     });
   };
 
@@ -121,6 +139,7 @@ function ListData() {
   const handleInputChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
+  const sum= responseData?.balance - responseData?.in[0].total_in
 
   return (
     <div className="list-data">
@@ -128,16 +147,25 @@ function ListData() {
         <Container>
           <div className="main-data-lists">
             <div className="hand-cash">
-              <h3>Remaining Cash in Hand</h3>
+              <h3 >Remaining Cash in Hand</h3>
             </div>
-            <div className="total-amount">
-              <h2>Rs. 1949131.00</h2>
+            <div className="prices">
+              <div>
+                <div className="total-amount">
+                  <h2>Rs. {responseData?.balance}</h2>
+                </div>
+                <h4>Today Total Expanses</h4>
+                <div className="end-price">
+                  <h3>Rs. {sum && sum}</h3>
+                </div>
+              </div>
+              <Link to="/new-expense">
+                <div className="new-icon">
+                  <i className="bi bi-plus"></i>
+                </div>
+              </Link>
             </div>
-            <h4>Today Total Expanses</h4>
-            <div className="end-price">
-              <h3>Rs. 1949131.00</h3>
-            </div>
-            <div className="two-btns">
+            {/* <div className="two-btns">
               <div
                 className={`expenses ${showData ? "selected" : ""}`}
                 onClick={() => setShowData(true)}
@@ -150,7 +178,11 @@ function ListData() {
               >
                 <h2>New Expense</h2>
               </div>
-            </div>
+            </div> */}
+            <SearchField
+              icon="bi bi-search"
+              placeholder="Company, Report, Labels etc...."
+            />
           </div>
         </Container>
       </div>
@@ -214,9 +246,7 @@ function ListData() {
                               handleShowModal={handleShowModal}
                               showModal={showModal}
                               handleCloseModal={handleCloseModal}
-                              ExpenseDelete={() =>
-                                handleExpenseDelete(item)
-                              }
+                              ExpenseDelete={() => handleExpenseDelete(item)}
                             />
                           </Dropdown.Menu>
                         </Dropdown>

@@ -109,7 +109,8 @@ function Login() {
             </p>
             <Button name="Sign In" type="submit" />
             <small>
-              Don’t Have An Account.?<Link to="/login"> Sign Up</Link>
+              {/* Don’t Have An Account.?<Link to="/login"> Sign Up</Link> */}
+              Biotech Packages (Pvt) LTD.
             </small>
           </Form>
         </div>

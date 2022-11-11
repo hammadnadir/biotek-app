@@ -16,6 +16,9 @@ import { useEffect } from "react";
 import { setLoading } from "./redux/global";
 import { Expense } from "./pages";
 import Home from "./pages/Home";
+import SubMenu from "./pages/SubMenu"
+import Voucher from "./pages/vocher";
+import NewExpense from "./pages/New-Expense";
 
 function App() {
   // const dispatch = useDispatch();
@@ -69,6 +72,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/sub-menu" element={<SubMenu />} />
+        <Route path="/voucher" element={<Voucher />} />
+        <Route path="/new-expense" element={<NewExpense />} />
       </Routes>
     </div>
   );

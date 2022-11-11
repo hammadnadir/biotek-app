@@ -2,34 +2,29 @@
   padding-top: 30px;
   .inner-data {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .main-icons {
+    flex-direction: column;
+    img {
+      height: 92px;
       display: flex;
+      width: fit-content;
+      margin: auto;
+      margin-bottom: 15px !important;
+    }
+    .top_field {
+      position: relative;
       .icons {
-        width: 25px;
-        height: 25px;
+        position: absolute;
+        right: 30px !important;
+        top: 10px !important;
         background-color: #fcfcfc;
         box-shadow: 0.5px 0.5px 1px #000000;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 8px;
       }
-    }
-  }
-  .search-header{
-    margin-top: 20px;
-  }
-  .logo-img {
-    text-align: center;
-    // margin-top: -65px;
-    img {
-      width: 185px;
-    @media screen and (max-width:373px) {
-      width: 200px;
-    }
     }
   }
 }
