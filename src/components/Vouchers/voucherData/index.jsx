@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Dropdown } from "react-bootstrap";
 import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
@@ -70,6 +70,48 @@ function VoucherData() {
           {data.map((item, index) => {
             return (
               <div className="main_vouchers" key={index}>
+                <div
+                        className="dot-icon"
+                        // onClick={() => handleShow(item)}
+                      >
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant="success"
+                            id="dropdown-basic"
+                          >
+                            <i className="bi bi-three-dots new_icon"></i>
+                          </Dropdown.Toggle>
+                          <Dropdown.Menu>
+                            {/* {list.map((data, index) => { */}
+                            {/* return ( */}
+                            {/* <div className="opened-cruds" key={index}>
+                              <i className={data.icon} />
+                               <p>{data.name}</p>
+                            </div> */}
+                            <Dropdown.Item >
+                              <i className="bi bi-eye-fill" />
+                              <p>View</p>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                              <i className="bi bi-pencil-square" />
+                              <p>Edit</p>
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              // onClick={handleShowModal}
+                            >
+                              <i className="bi bi-trash-fill" />
+                              <p>Delete</p>
+                            </Dropdown.Item>
+                            {/* <ModalPage
+                              setShowModal={setShowModal}
+                              handleShowModal={handleShowModal}
+                              showModal={showModal}
+                              handleCloseModal={handleCloseModal}
+                              ExpenseDelete={() => handleExpenseDelete(item)}
+                            /> */}
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </div>
                 <div className="inner_main_data">
                   <p>
                     Voucher ID # <span>LFE-892{item.voucher_id}</span>

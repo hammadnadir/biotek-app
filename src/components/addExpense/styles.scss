@@ -1,5 +1,14 @@
 .add_expense {
+  padding-bottom: 100px;
   .add_expense_data {
+    p{
+      font-size: 12px;
+      padding: 15px 0px;
+      padding-left: 20px !important;
+      span{
+        font-weight: 600;
+      }
+    }
     .expense_button {
       margin: 20px 0px;
       display: flex;
@@ -25,16 +34,79 @@
         }
       }
     }
-    .voucher_field{
-        input{
-            width: 100%;
-        }
+    .voucher_field {
+      input {
+        width: 100%;
+      }
     }
-    .two_inputs{
+    .two_inputs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0px;
+      @media screen and (max-width:375px) {
+        flex-direction: column;
+      }
+      .text-field{
+        width: 48.5%;
+        @media screen and (max-width:375px) {
+          width: 100%;
+        }
+      }
+      .text-field-new{
+        width: 48.5%;
+        @media screen and (max-width:375px) {
+          width: 100%;
+        }
+
+      }
+    }
+    .select-field-new {
+      select {
+        width: 100%;
+      }
+    }
+    .expense_total_images {
+      display: flex;
+      .expense_images {
+        position: relative;
+        width: fit-content;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 10px;
+          margin-right: 20px;
+        }
+        i {
+          width: fit-content;
+          color: #ec1c24;
+          top: -7px;
+          font-size: 24px;
+          position: absolute;
+          right: 20px;
+        }
+      }
+    }
+    .upload_btn {
+      margin-top: 20px;
+      Button {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin-bottom: 0px;
+        justify-content: center;
+        background-color: #F90F0F;
+        border: none;
+        display: flex;
+        margin: auto;
+        height: 50px;
+        width: 194px;
+        color: #FCFCFC;
+        font-weight: 700;
+        i{
+          font-size: 16px;
+          padding-right: 12px;
+          color: #FCFCFC;
+        }
+      }
     }
   }
 }

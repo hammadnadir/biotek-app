@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Form } from "react-bootstrap";
-import { book } from "../../../assets";
 import "./styles.scss";
 import { vouchers } from "../../../data";
 import { Button } from "react-bootstrap";
@@ -13,7 +12,6 @@ import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getExpenseRequest } from "../../../redux/expense";
-import axios from "axios";
 
 function ListData() {
   const [showData, setShowData] = useState(true);
@@ -22,12 +20,12 @@ function ListData() {
   const [imagesupload, setImagesupload] = useState([]);
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [responseData, setResponseData] = useState({});
 
   const reference = useRef();
   const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
-  const { expense } = useSelector((state) => state);
+  const { expense } = useSelector((state) => state.expense);
+  console.log(expense?.data?.lfe_daywise)
 
   //   const uploadPic = () => {
   //     if (imagesupload) {
@@ -46,11 +44,6 @@ function ListData() {
 
   useEffect(() => {
     dispatch(getExpenseRequest({ unit_expense: "1" }));
-    axios.get('http://192.168.10.189:8000/api/add_expense?unit_expense=1')
-    .then(function (response) {
-      console.log(response);
-      setResponseData(response?.data)
-    })
   }, []);
 
   const monthsName = [
@@ -139,7 +132,7 @@ function ListData() {
   const handleInputChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
-  const sum= responseData?.balance - responseData?.in[0].total_in
+  const sum = expense?.data?.balance - expense?.data?.in[0].total_in || "";
 
   return (
     <div className="list-data">
@@ -147,16 +140,16 @@ function ListData() {
         <Container>
           <div className="main-data-lists">
             <div className="hand-cash">
-              <h3 >Remaining Cash in Hand</h3>
+              <h3>Remaining Cash in Hand</h3>
             </div>
             <div className="prices">
               <div>
                 <div className="total-amount">
-                  <h2>Rs. {responseData?.balance}</h2>
+                  <h2>Rs. {expense?.data?.balance}</h2>
                 </div>
                 <h4>Today Total Expanses</h4>
                 <div className="end-price">
-                  <h3>Rs. {sum && sum}</h3>
+                  <h3>Rs. {sum}</h3>
                 </div>
               </div>
               <Link to="/new-expense">
@@ -191,9 +184,10 @@ function ListData() {
           <Container>
             <div className="section2-data">
               <h2>Expenses Info.</h2>
-              {vouchersData &&
-                vouchersData.length > 0 &&
-                vouchersData.map((item, index) => {
+              {expense &&
+                // expense.data.length > 0 &&
+                // expense.data.lfe_daywise.length > 0 &&
+                expense?.data?.lfe_daywise?.map((item, index) => {
                   return (
                     <div className="voucher-lists" key={index}>
                       {/* {show && (
@@ -226,16 +220,15 @@ function ListData() {
                               <i className={data.icon} />
                                <p>{data.name}</p>
                             </div> */}
-                            <Dropdown.Item key={index}>
+                            <Dropdown.Item >
                               <i className="bi bi-eye-fill" />
                               <p>View</p>
                             </Dropdown.Item>
-                            <Dropdown.Item key={index}>
+                            <Dropdown.Item>
                               <i className="bi bi-pencil-square" />
                               <p>Edit</p>
                             </Dropdown.Item>
                             <Dropdown.Item
-                              key={index}
                               onClick={handleShowModal}
                             >
                               <i className="bi bi-trash-fill" />
@@ -257,18 +250,18 @@ function ListData() {
                       <div className="voucher-data">
                         <div className="voucher-no">
                           <div className="menus">
-                            Voucher # <span>{item.voucher}LFE-452</span>
+                            Voucher # <span>&nbsp;{item.liberty_factory_exp_id}</span>
                           </div>
                           <div className="menus">
-                            Account # <span>{item.voucher}</span>
+                            Account # <span> &nbsp;{item.expense_head?.account_no}</span>
                           </div>
                         </div>
                         <div className="menus">
-                          Expense Head :<span>{item.head}</span>
+                          Expense Head :<span>&nbsp;{item.lf_expense_name}</span>
                         </div>
                         <div className="menus">
                           Narrations:
-                          <span>{item.narration}</span>
+                          <span>&nbsp;{item.lfe_narration}</span>
                         </div>
                       </div>
                     </div>
