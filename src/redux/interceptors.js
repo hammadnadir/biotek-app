@@ -2,7 +2,7 @@ import { history } from "./history";
 
 export const requestInterceptor = async (config) => {
   try {
-    config.headers.common.Authorization = "Bearer " + localStorage.getItem("biztek_token");
+    config.headers.common.Authorization = localStorage.getItem("biztek_token");
   } catch (e) {
     console.log(e);
   }
