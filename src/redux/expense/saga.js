@@ -3,8 +3,11 @@ import {
   getExpenseRequest,
   getExpenseSuccess,
   getExpenseFailure,
+  createExpenseRequest,
+  createExpenseSuccess,
+  createExpenseFailure,
 } from "./index";
-import { createExpense } from "../../services/expense";
+import { createExpense, getExpense } from "../../services/expense";
 import { setLoading } from "../global";
 
 export function* handleGetExpense() {
@@ -12,12 +15,28 @@ export function* handleGetExpense() {
     try {
       const { payload } = yield take(getExpenseRequest.type);
       yield put(setLoading(true));
-      const response = yield call(createExpense, payload);
+      const response = yield call(getExpense, payload);
       yield put(setLoading(false));
       yield put(getExpenseSuccess(response));
     } catch (error) {
       yield put(setLoading(false));
       yield put(getExpenseFailure(error));
+    }
+  }
+}
+
+
+export function* handleCreateExpense() {
+  while (true) {
+    try {
+      const { payload } = yield take(createExpenseRequest.type);
+      yield put(setLoading(true));
+      const response = yield call(createExpense, payload);
+      yield put(setLoading(false));
+      yield put(createExpenseSuccess(response));
+    } catch (error) {
+      yield put(setLoading(false));
+      yield put(createExpenseFailure(error));
     }
   }
 }

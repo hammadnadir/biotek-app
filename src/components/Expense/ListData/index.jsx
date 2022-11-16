@@ -245,8 +245,9 @@ function ListData() {
                         </Dropdown>
                       </div>
                       <div className="list-img">
-                        <img src={item.image} alt="bbok-img" />
+                        <img src={item.image[1]} alt="bbok-img" />
                       </div>
+                      {/* {item.image=='no_image.jpg' ? "" : JSON.parse(item.image)} */}
                       <div className="voucher-data">
                         <div className="voucher-no">
                           <div className="menus">

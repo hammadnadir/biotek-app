@@ -72,9 +72,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/sub-menu" element={<SubMenu />} />
-        <Route path="/voucher" element={<Voucher />} />
-        <Route path="/new-expense" element={<NewExpense />} />
+        <Route path="/sub-menu" element={<RequireAuth><SubMenu /></RequireAuth>} />
+        <Route path="/voucher" element={<RequireAuth><Voucher /></RequireAuth>} />
+        <Route path="/new-expense" element={<RequireAuth><NewExpense /></RequireAuth>} />
       </Routes>
     </div>
   );

@@ -3,30 +3,32 @@ import React from "react";
 import { Container, Form } from "react-bootstrap";
 import "./styles.scss";
 import { SelectForm, TextFieldForm, TextFieldNew } from "../common";
-import { Link } from "react-router-dom";
-import { books } from "../../assets";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getExpenseRequest } from "../../redux/expense";
+import { createExpenseRequest, getExpenseRequest } from "../../redux/expense";
 import { useState } from "react";
 import { storage } from "../../firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  getDownloadURL,
+  ref,
+  uploadBytes,
+  deleteObject,
+} from "firebase/storage";
 import { v4 } from "uuid";
+import axios from "axios";
 
 function AddExpense() {
-  const [optionData, setOptionData] = useState([]);
   const [imageUpload, setImageUpload] = useState([]);
   const [formData, setFormData] = useState({});
   const [inputList, setInputList] = useState([]);
   const [allImages, setAllImages] = useState([]);
-  const [narrationsData, setNarrationData] = useState([]);
-  const [addAmount, setAddAmount] = useState([]);
+  const [arrayIndex, setArrayIndex] = useState(0);
+  const [narrationData, setNarrationData] = useState([]);
+  const [amountData, setAmountData] = useState([]);
 
   const dispatch = useDispatch();
   const { expense } = useSelector((state) => state.expense);
-
-  //   console.log(expense.data.expense_heads.account_title);
 
   const reference = useRef();
   let newDate = new Date();
@@ -47,50 +49,86 @@ function AddExpense() {
     "November",
     "December",
   ];
+
   const monthAlphabet = monthName[newDate.getMonth()];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(formData);
-    validateData(formData);
-    // .then((snapshot)=>{
-    //   getDownloadURL(snapshot.ref).then((url)=>{
-    //     setImageList((prev)=> [...prev, url])
+    console.log("aaaaaaaa");
+    const allFieldData = {
+      lfe_narration: narrationData,
+      lfe_amount: amountData,
+      liberty_factory_exp_id: expense.data.lfe_id,
+      expense_head: formData.expense_head,
+      images: allImages,
+    };
+    dispatch(createExpenseRequest(allFieldData));
+    // axios
+    //   .post("http://192.168.10.189:8000/api/store_expense", allFieldData)
+    //   .then(function (response) {
+    //     console.log(response);
     //   })
-  };
-  const validateData = (data) => {
-    // let error = {};
-    // const newArray = [];
-    console.log(imageUpload[0].name);
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    console.log(allFieldData);
   };
 
-  const handleUpload = (e, val, index) => {
-    // const indexValue=index;
-    console.log(val);
+  const handleNarrationChange = (val, index) => {
+    let temp = [...narrationData];
+    temp[index] = val.target.value;
+    setNarrationData(temp);
+    console.log(temp);
+  };
+
+  const handleAmountChange = (val, index) => {
+    let damp = [...amountData];
+    damp[index] = val.target.value;
+    setAmountData(damp);
+    console.log(damp);
+  };
+
+  const handleUpload = (e, index) => {
+    console.log(arrayIndex);
     const data = [];
+    const urls = [];
     for (let x = 0; x < e.target.files.length; x++) {
       data.push(e.target.files[x]);
       const imageRef = ref(
         storage,
-        `images/${month}_${year}/${data[x].name + v4()}`
+        `images/${monthAlphabet}_${year}/${data[x].name + v4()}`
       );
       uploadBytes(imageRef, data[x]).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          setAllImages((prev) => [...prev, url]);
+          if (url) {
+            urls.push(url);
+            if (urls.length === e.target.files.length) {
+              console.log(urls);
+              const firebaseArray = [...allImages];
+              firebaseArray[arrayIndex] =
+                firebaseArray[arrayIndex] &&
+                firebaseArray[arrayIndex].length > 0
+                  ? [...firebaseArray[arrayIndex], ...urls]
+                  : [...urls];
+              setAllImages(firebaseArray);
+              console.log(allImages);
+            }
+          }
         });
       });
     }
-    // setImageUpload([...imageUpload,[...data]]);
-    // console.log("no");
     console.log([...data]);
-    // setImageUpload([[...data]]);
-    const mainData = [...data];
-    imageUpload[index] = mainData;
-    // console.log([...imageUpload,[...data]])
-    // setAllImages([]);
-    console.log(imageUpload);
+    const arrayabc = [...imageUpload];
+    arrayabc[arrayIndex] =
+      arrayabc[arrayIndex].length > 0
+        ? [...arrayabc[arrayIndex], ...data]
+        : [...data];
+    setImageUpload(arrayabc);
+    if (urls.length > 0) {
+      allImages[arrayIndex] = [...urls];
+      console.log(allImages);
+    }
   };
-  // console.log(imageUpload);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -112,68 +150,68 @@ function AddExpense() {
   };
 
   useEffect(() => {
+    setFormData({
+      expense_account: expense?.data?.expense_heads[0].account_no,
+      expense_head: expense?.data?.expense_heads[0].account_no,
+    });
+    console.log(expense?.data?.expense_heads[0].account_no);
+  }, [expense]);
+
+  const handleDeleteFirbase = (val, index, item) => {
+    const data = item;
+    console.log(index);
+    const desertRef = ref(storage, data);
+    deleteObject(desertRef)
+      // const PicRef = storage.refFromURL(item);
+      // PicRef.delete();
+      // deleteObject(desertRef)
+      .then(() => {
+        // setAllImages(allImages.filter((item) => item !== url));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // console.log(data);
+
+    // console.loog()
+    storage
+      .ref(`/images/November_2022/${item}`)
+      .delete()
+      .then(() => {
+        // setAllImages(allImages.filter((item) => item !== url));
+        alert("Picture is deleted successfully!");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
     dispatch(getExpenseRequest());
-    setOptionData(
-      expense?.data?.expense_heads.map((item) => item.account_title)
-    );
+    // axios
+    //   .get("http://192.168.10.189:8000/api/add_expense?unit_expense=1" 
+    //   )
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }, []);
-  // useEffect(() => {
-  //   setInputList(
-  //     inputList.concat(
-  //       <div key={inputList.length}>
-  //         <p>
-  //           Sr. # <span>{inputList.length + 1}</span>
-  //         </p>
-  //         <TextFieldNew
-  //           label="Narrations:"
-  //           name="lfe_narration"
-  //           onChange={handleChange}
-  //           value={narrationsData.narrations}
-  //         />
-  //         <TextFieldNew
-  //           label="Add Amount:"
-  //           type="number"
-  //           name="lfe_amount"
-  //           onChange={handleChange}
-  //           value={formData.add_amount}
-  //         />
-  //         <div className="expense_total_images">
-  //           {imageUpload[0]?.map((item, index) => {
-  //             return (
-  //               <div className="expense_images" key={index}>
-  //                 <img src={URL.createObjectURL(item)} alt="upload-images" />
-  //                 <i className="bi bi-x" onClick={() => handleDelete(item)}></i>
-  //               </div>
-  //             );
-  //           })}
-  //         </div>
-  //         <div className="upload_btn">
-  //           <Button onClick={() => reference.current.click()}>
-  //             <i className="bi bi-upload"></i>Upload More
-  //           </Button>
-  //         </div>
-  //         <input
-  //           type="file"
-  //           style={{ display: "none" }}
-  //           ref={reference}
-  //           multiple
-  //           // value={inputList?.length}
-  //           onChange={(e) => handleUpload(e,inputList.length)}
-  //         />
-  //       </div>
-  //     )
-  //   );
-  // }, []);
 
   const handleAdd = () => {
-    console.log(inputList.length + 1);
+    // console.log(inputList.length + 1);
     const abc = [...inputList, []];
     setInputList(abc);
   };
+
   useEffect(() => {
     document.getElementById("addnew").click();
   }, []);
-  // console.log(inputList.length);
+
+  const handleBthClick = (index) => {
+    reference.current.click();
+    setArrayIndex(index);
+    // console.log(arrayIndex);
+  };
 
   return (
     <div className="add_expense">
@@ -193,8 +231,8 @@ function AddExpense() {
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
-                name="liberty_factory_exp_id"
-                value={expense?.data?.lfe_id}
+                name="lfe_id"
+                value={formData.expense?.data?.lfe_id}
                 hidden
               />
             </div>
@@ -213,54 +251,9 @@ function AddExpense() {
                 optionsData={expense?.data?.expense_heads}
                 name="expense_head"
                 onChange={handleHeadChange}
+                value={formData.expense_head}
               />
             </div>
-            {/* <div>
-              <p>
-                Sr. # <span>1</span>
-              </p>
-              <TextFieldNew
-                label="Narrations:"
-                name="lfe_narration"
-                onChange={handleChange}
-                value={formData.narrations}
-              />
-              <TextFieldNew
-                label="Add Amount:"
-                type="number"
-                name="lfe_amount"
-                onChange={handleChange}
-                value={formData.add_amount}
-              />
-              <div className="expense_total_images">
-                {imageUpload[0]?.map((item, index) => {
-                  return (
-                    <div className="expense_images" key={index}>
-                      <img
-                        src={URL.createObjectURL(item)}
-                        alt="upload-images"
-                      />
-                      <i
-                        className="bi bi-x"
-                        onClick={() => handleDelete(item)}
-                      ></i>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="upload_btn">
-                <Button onClick={() => reference.current.click()}>
-                  <i className="bi bi-upload"></i>Upload More
-                </Button>
-              </div>
-              <input
-                type="file"
-                style={{ display: "none" }}
-                ref={reference}
-                multiple
-                onChange={(e) => handleUpload(e,index)}
-              />
-            </div> */}
             {inputList.map((item, index) => {
               return (
                 <div key={index}>
@@ -270,34 +263,34 @@ function AddExpense() {
                   <TextFieldNew
                     label="Narrations:"
                     name="lfe_narration"
-                    onChange={handleChange}
-                    value={formData.narrations}
+                    required
+                    onChange={(val) => handleNarrationChange(val, index)}
                   />
                   <TextFieldNew
                     label="Add Amount:"
                     type="number"
+                    required
                     name="lfe_amount"
-                    onChange={handleChange}
-                    value={formData.add_amount}
+                    onChange={(val) => handleAmountChange(val, index)}
                   />
                   <div className="expense_total_images">
-                    {imageUpload[index]?.map((item, index) => {
-                      return (
-                        <div className="expense_images" key={index}>
-                          <img
-                            src={URL.createObjectURL(item)}
-                            alt="upload-images"
-                          />
-                          <i
-                            className="bi bi-x"
-                            onClick={() => handleDelete(item, index)}
-                          ></i>
-                        </div>
-                      );
-                    })}
+                    {allImages[index] &&
+                      allImages[index].map((item, index) => {
+                        return (
+                          <div className="expense_images" key={index}>
+                            <img src={item} alt="upload-images" />
+                            <i
+                              className="bi bi-x"
+                              onClick={(val) =>
+                                handleDeleteFirbase(val, index, item)
+                              }
+                            ></i>
+                          </div>
+                        );
+                      })}
                   </div>
                   <div className="upload_btn">
-                    <Button onClick={() => reference.current.click()}>
+                    <Button onClick={() => handleBthClick(index)}>
                       <i className="bi bi-upload"></i>Upload More
                     </Button>
                   </div>
@@ -306,16 +299,12 @@ function AddExpense() {
                     style={{ display: "none" }}
                     ref={reference}
                     multiple
-                    onChange={(e, item) => handleUpload(e, item, index)}
+                    onChange={(e) => handleUpload(e, index)}
+                    accept="image/jpg, image/jpeg, image/png"
                   />
                 </div>
               );
             })}
-            {/* {inputList?.map((item)=>{
-              return(
-                {item}
-              )
-            })} */}
           </div>
         </Form>
       </Container>
