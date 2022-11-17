@@ -26,14 +26,15 @@ function AddExpense() {
   const [arrayIndex, setArrayIndex] = useState(0);
   const [narrationData, setNarrationData] = useState([]);
   const [amountData, setAmountData] = useState([]);
+  const [expense ,setExpense] = useState({})
 
   const dispatch = useDispatch();
-  const { expense } = useSelector((state) => state.expense);
+  // const { expense } = useSelector((state) => state.expense);
 
   useEffect(() => {
     console.log(expense);
   }, [expense]);
-  
+
   console.log(expense);
   const reference = useRef();
   let newDate = new Date();
@@ -154,10 +155,11 @@ function AddExpense() {
   };
 
   useEffect(() => {
-    dispatch(getExpenseRequest());
+    // dispatch(getExpenseRequest());
     console.log("HI");
-    // axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
-    // });
+    axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
+      setExpense(response)
+    });
   }, []);
 
   const handleAdd = () => {
