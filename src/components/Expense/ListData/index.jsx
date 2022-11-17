@@ -12,6 +12,7 @@ import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getExpenseRequest } from "../../../redux/expense";
+import { noimg } from "../../../assets";
 
 function ListData() {
   const [showData, setShowData] = useState(true);
@@ -43,7 +44,8 @@ function ListData() {
   }, []);
 
   useEffect(() => {
-    dispatch(getExpenseRequest({ unit_expense: "1" }));
+    dispatch(getExpenseRequest());
+    console.log("get it")
   }, []);
 
   const monthsName = [
@@ -132,7 +134,7 @@ function ListData() {
   const handleInputChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
-  const sum = expense?.data?.balance - expense?.data?.in[0].total_in || "";
+  const sum = expense?.data?.balance - expense?.data?.in[0]?.total_in || expense?.data?.balance;
 
   return (
     <div className="list-data">
@@ -190,21 +192,8 @@ function ListData() {
                 expense?.data?.lfe_daywise?.map((item, index) => {
                   return (
                     <div className="voucher-lists" key={index}>
-                      {/* {show && (
-                        <div className="side-menues">
-                          {list.map((data, index) => {
-                            return (
-                              <div className="opened-cruds" key={index}>
-                                <i className={data.icon} />
-                                <p>{data.name}</p>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      )} */}
                       <div
                         className="dot-icon"
-                        // onClick={() => handleShow(item)}
                       >
                         <Dropdown>
                           <Dropdown.Toggle
@@ -214,12 +203,6 @@ function ListData() {
                             <i className="bi bi-three-dots"></i>
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
-                            {/* {list.map((data, index) => { */}
-                            {/* return ( */}
-                            {/* <div className="opened-cruds" key={index}>
-                              <i className={data.icon} />
-                               <p>{data.name}</p>
-                            </div> */}
                             <Dropdown.Item >
                               <i className="bi bi-eye-fill" />
                               <p>View</p>
@@ -245,9 +228,8 @@ function ListData() {
                         </Dropdown>
                       </div>
                       <div className="list-img">
-                        <img src={item.image[1]} alt="bbok-img" />
+                        {item.image[0] === "no_image.jpg" ? <img src={noimg} alt="book-img" /> : <img src={item.image[0]} alt="book-img" />}
                       </div>
-                      {/* {item.image=='no_image.jpg' ? "" : JSON.parse(item.image)} */}
                       <div className="voucher-data">
                         <div className="voucher-no">
                           <div className="menus">
@@ -258,7 +240,7 @@ function ListData() {
                           </div>
                         </div>
                         <div className="menus">
-                          Expense Head :<span>&nbsp;{item.lf_expense_name}</span>
+                          Expense Head: <span>&nbsp;{item.lf_expense_name}</span>
                         </div>
                         <div className="menus">
                           Narrations:

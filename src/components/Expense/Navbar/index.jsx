@@ -7,7 +7,7 @@ function NavExpense() {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate("/");
+    navigate("/expense");
   };
   return (
     <div className="expense-navbar">
@@ -17,7 +17,7 @@ function NavExpense() {
             <i className="bi bi-arrow-left-short"></i>
           </div>
           <div className="main-heading">
-            <h1>Expense</h1>
+            <h1>New Expense</h1>
           </div>
           <div className="user-icon">
             <i className="bi bi-person-fill"></i>

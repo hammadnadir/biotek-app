@@ -9,6 +9,7 @@ import {
 } from "./index";
 import { createExpense, getExpense } from "../../services/expense";
 import { setLoading } from "../global";
+import { history } from "../history";
 
 export function* handleGetExpense() {
   while (true) {
@@ -34,6 +35,7 @@ export function* handleCreateExpense() {
       const response = yield call(createExpense, payload);
       yield put(setLoading(false));
       yield put(createExpenseSuccess(response));
+      history.push("/expense");
     } catch (error) {
       yield put(setLoading(false));
       yield put(createExpenseFailure(error));

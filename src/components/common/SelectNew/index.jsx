@@ -9,10 +9,12 @@ function SelectForm({ label, optionsData ,handleHeadChange,...props }) {
 
   return (
     <div className="select-field-new">
-      <label className="label-field" onClick={handleClick}>
+      {/* <label className="label-field" onClick={handleClick}>
         {label}
-      </label>
+      </label> */}
+      {/* <i className="bi bi-caret-down-fill"></i> */}
       {/* <input type="text" ref={reference} className="input-field" {...props} /> */}
+      <div className="icon"></div>
       <select {...props}>
         {
           optionsData?.map((item,index)=>{

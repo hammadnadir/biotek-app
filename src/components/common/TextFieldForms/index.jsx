@@ -9,7 +9,7 @@ function TextFieldForm({label ,...props}) {
 
   return (
     <div className="text-field">
-        <label className='label-field' onClick={handleClick}>{label}</label>
+        {/* <label className='label-field' onClick={handleClick}>{label}</label> */}
         <input type="text" ref={reference} className='input-field' {...props}/>
     </div>
   )

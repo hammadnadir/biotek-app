@@ -76,8 +76,11 @@
         padding-bottom: 5px !important;
         padding-top: 18px !important;
         padding-right: 50px;
+        @media screen and (max-width:350px) {
+          flex-direction: column;
+        }
         p{
-            font-size: 10px;
+            font-size: clamp(8px,2vw,10px);
             font-weight: 700;
             color: #FFFFFF;
         }
@@ -89,13 +92,28 @@
         .sub_menues {
           display: flex;
           align-items: center;
+          .approved{
+            color: green;
+          }
+          .recheck{
+           color: orange;
+          }
+          .pending{
+          color: orange;
+          }
+          .disagree{
+          color: red;
+          }
+          .all_rounder{
+          color: red;
+          }
           h3{
             color:#000000;
-            font-size: 12px;
+            font-size: clamp(9px,2vw,12px);
           }
           p{
             color:#000000;
-            font-size: 12px;
+            font-size: clamp(9px,2vw,12px);
           }
         }
       }

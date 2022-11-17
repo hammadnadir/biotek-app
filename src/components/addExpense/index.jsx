@@ -30,6 +30,11 @@ function AddExpense() {
   const dispatch = useDispatch();
   const { expense } = useSelector((state) => state.expense);
 
+  useEffect(() => {
+    console.log(expense);
+  }, [expense]);
+  
+  console.log(expense);
   const reference = useRef();
   let newDate = new Date();
   let date = newDate.getDate();
@@ -58,19 +63,11 @@ function AddExpense() {
     const allFieldData = {
       lfe_narration: narrationData,
       lfe_amount: amountData,
-      liberty_factory_exp_id: expense.data.lfe_id,
+      liberty_factory_exp_id: expense?.data?.lfe_id,
       expense_head: formData.expense_head,
       images: allImages,
     };
     dispatch(createExpenseRequest(allFieldData));
-    // axios
-    //   .post("http://192.168.10.189:8000/api/store_expense", allFieldData)
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
     console.log(allFieldData);
   };
 
@@ -130,17 +127,6 @@ function AddExpense() {
     }
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleDelete = (item, index) => {
-    const filterArray = imageUpload[index].filter((data) => {
-      return data !== item;
-    });
-    setImageUpload([...filterArray]);
-  };
-
   const handleHeadChange = (e) => {
     setFormData({
       ...formData,
@@ -157,48 +143,24 @@ function AddExpense() {
     console.log(expense?.data?.expense_heads[0].account_no);
   }, [expense]);
 
-  const handleDeleteFirbase = (val, index, item) => {
-    const data = item;
-    console.log(index);
-    const desertRef = ref(storage, data);
-    deleteObject(desertRef)
-      // const PicRef = storage.refFromURL(item);
-      // PicRef.delete();
-      // deleteObject(desertRef)
-      .then(() => {
-        // setAllImages(allImages.filter((item) => item !== url));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // console.log(data);
-
-    // console.loog()
-    storage
-      .ref(`/images/November_2022/${item}`)
-      .delete()
-      .then(() => {
-        // setAllImages(allImages.filter((item) => item !== url));
-        alert("Picture is deleted successfully!");
-      })
-      .catch((err) => console.log(err));
+  const handleDeleteFirbase = (e, index, key, item) => {
+    const filtered = allImages[key].filter((img) => {
+      return img !== item;
+    });
+    console.log(filtered);
+    const data = [...allImages];
+    data[key] = filtered;
+    setAllImages(data);
   };
 
   useEffect(() => {
     dispatch(getExpenseRequest());
-    // axios
-    //   .get("http://192.168.10.189:8000/api/add_expense?unit_expense=1" 
-    //   )
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    console.log("HI");
+    // axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
+    // });
   }, []);
 
   const handleAdd = () => {
-    // console.log(inputList.length + 1);
     const abc = [...inputList, []];
     setInputList(abc);
   };
@@ -210,24 +172,25 @@ function AddExpense() {
   const handleBthClick = (index) => {
     reference.current.click();
     setArrayIndex(index);
-    // console.log(arrayIndex);
   };
 
   return (
     <div className="add_expense">
-      <Container>
-        <Form className="add_expense_data" onSubmit={handleSubmit}>
+      <Form className="add_expense_data" onSubmit={handleSubmit}>
+        <Container>
           <div className="expense_button">
             <Button type="submit">Save</Button>
             <Button id="addnew" onClick={handleAdd}>
-              Add Line
+              <i className="bi bi-plus"></i>Add Line
             </Button>
           </div>
-          <div>
+        </Container>
+        <div>
+          <Container>
             <div className="voucher_field">
               <TextFieldForm
                 placeholder="Expense Voucher # "
-                value={`LFE-${expense?.data?.lfe_id}`}
+                value={`Expense Voucher # LFE-${expense?.data?.lfe_id}`}
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
@@ -237,13 +200,16 @@ function AddExpense() {
               />
             </div>
             <div className="two_inputs">
-              <TextFieldForm value={`Date ${date}-${month}-${year}`} />
-              <TextFieldNew
+              <TextFieldForm value={`Date : ${date}-${month}-${year}`} />
+              <TextFieldForm
+                value={`Expense Account : ${formData.expense_account}`}
+              />
+              {/* <TextFieldNew
                 label="Expense Account:"
                 type="number"
                 value={formData.expense_account}
                 onChange={handleChange}
-              />
+              /> */}
             </div>
             <div>
               <SelectForm
@@ -254,60 +220,77 @@ function AddExpense() {
                 value={formData.expense_head}
               />
             </div>
-            {inputList.map((item, index) => {
-              return (
-                <div key={index}>
-                  <p>
-                    Sr. # <span>{index + 1}</span>
-                  </p>
-                  <TextFieldNew
-                    label="Narrations:"
-                    name="lfe_narration"
-                    required
-                    onChange={(val) => handleNarrationChange(val, index)}
-                  />
-                  <TextFieldNew
-                    label="Add Amount:"
-                    type="number"
-                    required
-                    name="lfe_amount"
-                    onChange={(val) => handleAmountChange(val, index)}
-                  />
-                  <div className="expense_total_images">
-                    {allImages[index] &&
-                      allImages[index].map((item, index) => {
-                        return (
-                          <div className="expense_images" key={index}>
-                            <img src={item} alt="upload-images" />
-                            <i
-                              className="bi bi-x"
-                              onClick={(val) =>
-                                handleDeleteFirbase(val, index, item)
-                              }
-                            ></i>
-                          </div>
-                        );
-                      })}
-                  </div>
-                  <div className="upload_btn">
-                    <Button onClick={() => handleBthClick(index)}>
-                      <i className="bi bi-upload"></i>Upload More
-                    </Button>
-                  </div>
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                    ref={reference}
-                    multiple
-                    onChange={(e) => handleUpload(e, index)}
-                    accept="image/jpg, image/jpeg, image/png"
-                  />
+          </Container>
+          {inputList.map((item, index) => {
+            return (
+              <div key={index} className="main_narrations">
+                <div className="expense-count">
+                  <h2>
+                    Expense # <span>{index + 1}</span>
+                  </h2>
                 </div>
-              );
-            })}
-          </div>
-        </Form>
-      </Container>
+                <Container>
+                  <div className="expense_fields">
+                    <div className="attachment_fields">
+                      <TextFieldNew
+                        // label="Narrations:"
+                        name="lfe_narration"
+                        required
+                        placeholder="Narration"
+                        onChange={(val) => handleNarrationChange(val, index)}
+                      />
+                      <div className="attachment_file">
+                        <TextFieldNew
+                          // label="Add Amount:"
+                          type="number"
+                          required
+                          name="lfe_amount"
+                          placeholder="Amount"
+                          onChange={(val) => handleAmountChange(val, index)}
+                        />
+                        <div className="upload_btn">
+                          <Button onClick={() => handleBthClick(index)}>
+                            <i className="bi bi-paperclip"></i>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      ref={reference}
+                      multiple
+                      onChange={(e) => handleUpload(e, index)}
+                      accept="image/jpg, image/jpeg, image/png"
+                    />
+                    {allImages[index] && allImages[index].length > 0 && (
+                      <div className="attachments">
+                        <h3>Attachments :</h3>
+                        <div className="expense_total_images">
+                          {allImages[index] &&
+                            allImages[index].map((item, key) => {
+                              return (
+                                <div className="expense_images" key={key}>
+                                  <img src={item} alt="upload-images" />
+                                  <i
+                                    className="bi bi-x"
+                                    onClick={(e) =>
+                                      handleDeleteFirbase(e, key, index, item)
+                                    }
+                                  ></i>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Container>
+              </div>
+            );
+          })}
+        </div>
+      </Form>
     </div>
   );
 }

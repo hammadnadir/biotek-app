@@ -24,7 +24,7 @@ function App() {
   // const dispatch = useDispatch();
   // const router = useLocation();
 
-  // const { loading } = useSelector((state) => state.global);
+  const { loading } = useSelector((state) => state.global);
 
   // useEffect(() => {
   //   const handleStart = (url) => {
@@ -40,17 +40,20 @@ function App() {
   // }, [router]);
 
   const RequireAuth = ({ children }) => {
-    let auth = getCurrentUser();
-    let location = useLocation();
+    // let auth = getCurrentUser();
+    // let location = useLocation();
 
-    if (!auth) {
-      return <Navigate to="/login" state={{ from: location }} replace />;
-    }
+    // if (!auth) {
+    //   return <Navigate to="/login" state={{ from: location }} replace />;
+    // }
     return children;
   };
 
   return (
     <div>
+      {/* <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+          <Spinner animation="grow" />
+        </div> */}
       <Routes>
         <Route
           path="/"

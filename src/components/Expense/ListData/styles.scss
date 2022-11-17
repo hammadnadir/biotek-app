@@ -23,7 +23,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 25px;
+          font-size: clamp(22px,2vw,25px);
           i{
             color: #FCFCFC;
             -webkit-text-stroke: 1px;
@@ -33,25 +33,25 @@
       .end-price {
         color: #f90f0f;
         h3 {
-          font-size: 19px;
+          font-size: clamp(17px,2vw,19px);
           margin-bottom: 10px;
         }
       }
       .hand-cash {
         h3 {
-          font-size: 16px;
+          font-size: clamp(13px,2vw,16px);
           font-weight: 600;
         }
       }
       h4 {
-        font-size: 14px;
+        font-size: clamp(12px,2vw,14px);
         font-weight: 500;
       }
       .total-amount {
-        font-size: 20px;
+        font-size: clamp(16px,2vw,20px);
         font-weight: 700;
         h2 {
-          font-size: 20px;
+          font-size: clamp(16px,2vw,20px);
           font-weight: 700;
         }
       }
@@ -78,7 +78,7 @@
           h2 {
             margin-bottom: 0px;
             color: #f90f0f;
-            font-size: 18px;
+            font-size: clamp(15px,2vw,18px);
             font-weight: 00;
             color: #000000;
           }
@@ -101,9 +101,13 @@
         display: flex;
         align-items: center;
         padding: 8px;
-        padding-right: 40px !important;
+        padding-right: 35px !important;
         margin-bottom: 20px;
         position: relative;
+        @media screen and (max-width:350px) {
+          flex-direction: column;
+          padding: 10px 20px !important;
+        }
         .dropdown {
           .dropdown-item {
             display: flex;
@@ -152,11 +156,11 @@
         }
         p {
           margin-bottom: 0px;
-          font-size: 12px;
+          font-size: clamp(10px,2vw,12px);
           font-weight: 700;
           span {
             font-weight: 500;
-            font-size: 10px;
+            font-size: clamp(9px,2vw,10px);
           }
         }
         .list-img {
@@ -168,23 +172,28 @@
             @media screen and (max-width: 400px) {
               margin-right: 15px;
             }
+            @media screen and (max-width:350px) {
+              margin-right: 0px !important;
+            }
           }
         }
         .voucher-data {
           width: 100%;
           .menus {
             margin-bottom: 0px;
-            font-size: 12px;
+            font-size: clamp(10px,2vw,12px);
             font-weight: 700;
             display: flex;
             align-items: center;
+            width: max-content;
+            overflow-x: hidden;
             span {
               font-weight: 700;
-              font-size: 10px;
+              font-size: clamp(8px,2vw,10px);
               margin-top: 2px;
               overflow: hidden;
               display: -webkit-box;
-              -webkit-line-clamp: 1;
+              -webkit-line-clamp: 2;
               -webkit-box-orient: vertical;
             }
           }
@@ -231,7 +240,7 @@
         border-radius: 8px;
         i {
           color: #0bca07;
-          font-size: 35px;
+          font-size: clamp(32px,2vw,35px);
         }
       }
       .btn_cross {
@@ -248,7 +257,7 @@
         box-shadow: 1px 1px 4px #f78142;
         i {
           color: #f90f0f;
-          font-size: 35px;
+          font-size: clamp(32px,2vw,35px);
         }
       }
       .end-data {

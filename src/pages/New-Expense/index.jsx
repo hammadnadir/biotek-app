@@ -1,12 +1,12 @@
 import React from "react";
 import AddExpense from "../../components/addExpense";
 import { Footer } from "../../components/common";
-import {  VoucherHeader } from "../../components/Vouchers";
+import { NavExpense } from "../../components/Expense";
 
 function NewExpense() {
   return (
     <div>
-      <VoucherHeader />
+      <NavExpense />
       <AddExpense />
       <Footer />
     </div>

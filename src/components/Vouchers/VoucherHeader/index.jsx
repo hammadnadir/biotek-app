@@ -9,6 +9,7 @@ function VoucherHeader() {
   const handleBack = () => {
     navigate("/");
   };
+
   return (
     <div className="voucher-navbar">
       <Container>

@@ -22,12 +22,12 @@ function Options() {
   //     uploadBytes(imageRef, imagesupload).then((snapshot) => {
   //       // alert("Image Uploaded");
   //       getDownloadURL(snapshot.ref).then((url)=>{
-  //         setImagesList([...imagesList,url])            
+  //         setImagesList([...imagesList,url])
   //       })
   //     });
   //   }
   // };
-  
+
   // useEffect(() => {
   //   listAll(imageListRef).then((response) => {
   //     // console.log(response)
@@ -51,11 +51,23 @@ function Options() {
           return <img src={item} />;
         })} */}
         <div className="options-data">
+          <div className="main-inner-data">
+            <Link to="/voucher">
+              <div className="cards">
+                <img src={aaa} alt="logo" />
+              </div>
+            </Link>
+            <p>Expense</p>
+          </div>
           {cards.map((item, index) => {
             return (
               <div className="main-inner-data" key={index}>
-                <Link to="/voucher"><div className="cards"><img src={aaa} alt="logo"/></div></Link>
-                <p>data</p>
+                <Link to="/">
+                  <div className="cards">
+                    <img src={aaa} alt="logo" />
+                  </div>
+                </Link>
+                <p>Data</p>
               </div>
             );
           })}
@@ -66,7 +78,9 @@ function Options() {
             {cardsNew.map((item, index) => {
               return (
                 <div className="main-inner-data" key={index}>
-                  <div className="cards"><img src={aaa} alt="logo"/></div>
+                  <div className="cards">
+                    <img src={aaa} alt="logo" />
+                  </div>
                   <p>data</p>
                 </div>
               );
