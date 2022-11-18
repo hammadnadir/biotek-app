@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./styles.scss";
 
 function SearchField({ label, icon,...props }) {
+
   const reference = useRef();
+
   const handleClick = () => {
     reference.current.focus();
   };

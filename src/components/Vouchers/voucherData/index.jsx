@@ -15,7 +15,7 @@ function VoucherData() {
   const { voucher } = useSelector((state) => state.voucher);
 
   useEffect(() => {
-    dispatch(getVoucherRequest());
+    // dispatch(getVoucherRequest());
     // axios
     //   .get("http://192.168.10.189:8000/api/expense")
     //   .then(function (response) {

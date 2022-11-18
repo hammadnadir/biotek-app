@@ -1,6 +1,6 @@
 import { fork, all } from "redux-saga/effects";
 import { handleLogin, handleLogout, handleSignUp, handleForgotPassword, handleChangePassword } from "./auth/saga";
-import { handleCreateExpense, handleGetExpense } from "./expense/saga";
+import { handleCreateExpense, handleDeleteExpense, handleEditExpense, handleGetExpense } from "./expense/saga";
 import { handleGetVoucher } from "./voucher/saga";
 export default function* rootSaga() {
   yield all([
@@ -12,5 +12,7 @@ export default function* rootSaga() {
     fork(handleGetExpense),
     fork(handleCreateExpense),
     fork(handleGetVoucher),
+    fork(handleEditExpense),
+    fork(handleDeleteExpense),
   ]);
 }

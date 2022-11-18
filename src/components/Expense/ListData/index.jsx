@@ -13,20 +13,26 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getExpenseRequest } from "../../../redux/expense";
 import { noimg } from "../../../assets";
+import EditModal from "./EditModal";
+import ViewModal from "./ViewModal";
+import { editExpenseRequest } from "../../../redux/expense";
+import { deleteExpenseRequest } from "../../../redux/expense";
 
-function ListData() {
+function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
   const [showData, setShowData] = useState(true);
   const [vouchersData, setVouchersData] = useState([]);
   const [inputData, setInputData] = useState({});
   const [imagesupload, setImagesupload] = useState([]);
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [viewModal, setShowViewModal] = useState(false);
 
   const reference = useRef();
   const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
   const { expense } = useSelector((state) => state.expense);
-  console.log(expense?.data?.lfe_daywise)
+  console.log(expense?.data?.lfe_daywise);
 
   //   const uploadPic = () => {
   //     if (imagesupload) {
@@ -44,8 +50,7 @@ function ListData() {
   }, []);
 
   useEffect(() => {
-    dispatch(getExpenseRequest());
-    console.log("get it")
+    // dispatch(getExpenseRequest());
   }, []);
 
   const monthsName = [
@@ -66,8 +71,34 @@ function ListData() {
   const date = new Date();
   const month = monthsName[date.getMonth()];
   const year = date.getFullYear();
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => {
+    setShowEditModal(false);
+    setShowViewModal(false);
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleShowEditModal = () => {
+    setShowEditModal(true);
+    setShowViewModal(false);
+    setShowModal(false);
+  };
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+  const ExpenseEdit = () => {};
+
+  const handleShowViewModal = () => {
+    setShowEditModal(false);
+    setShowViewModal(true);
+    setShowModal(false);
+  };
+  const handleCloseViewModal = () => {
+    setShowViewModal(false);
+  };
+  const ExpenseView = () => {};
 
   const handleExpenseDelete = (item) => {
     vouchersData.map((data) => {
@@ -134,7 +165,9 @@ function ListData() {
   const handleInputChange = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
-  const sum = expense?.data?.balance - expense?.data?.in[0]?.total_in || expense?.data?.balance;
+  const sum =
+    expense?.data?.balance - expense?.data?.in[0]?.total_in ||
+    expense?.data?.balance;
 
   return (
     <div className="list-data">
@@ -177,6 +210,7 @@ function ListData() {
             <SearchField
               icon="bi bi-search"
               placeholder="Company, Report, Labels etc...."
+              onChange={handleSearchVal}
             />
           </div>
         </Container>
@@ -189,12 +223,10 @@ function ListData() {
               {expense &&
                 // expense.data.length > 0 &&
                 // expense.data.lfe_daywise.length > 0 &&
-                expense?.data?.lfe_daywise?.map((item, index) => {
+                expense?.data?.lfe_daywise?.filter(data=>data.lfe_narration.includes(searchVal)).map((item, index) => {
                   return (
                     <div className="voucher-lists" key={index}>
-                      <div
-                        className="dot-icon"
-                      >
+                      <div className="dot-icon">
                         <Dropdown>
                           <Dropdown.Toggle
                             variant="success"
@@ -203,17 +235,15 @@ function ListData() {
                             <i className="bi bi-three-dots"></i>
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
-                            <Dropdown.Item >
+                            <Dropdown.Item onClick={handleShowViewModal}>
                               <i className="bi bi-eye-fill" />
                               <p>View</p>
                             </Dropdown.Item>
-                            <Dropdown.Item>
+                            <Dropdown.Item onClick={handleShowEditModal}>
                               <i className="bi bi-pencil-square" />
                               <p>Edit</p>
                             </Dropdown.Item>
-                            <Dropdown.Item
-                              onClick={handleShowModal}
-                            >
+                            <Dropdown.Item onClick={handleShowModal}>
                               <i className="bi bi-trash-fill" />
                               <p>Delete</p>
                             </Dropdown.Item>
@@ -223,24 +253,50 @@ function ListData() {
                               showModal={showModal}
                               handleCloseModal={handleCloseModal}
                               ExpenseDelete={() => handleExpenseDelete(item)}
+                              id={item}
+                            />
+                            <EditModal
+                              setShowEditModal={setShowEditModal}
+                              handleShowEditModal={handleShowEditModal}
+                              showEditModal={showEditModal}
+                              handleCloseEditModal={handleCloseEditModal}
+                              ExpenseEdit={() => ExpenseEdit(item)}
+                              id={item}
+                            />
+                            <ViewModal
+                              setShowViewModal={setShowViewModal}
+                              handleShowViewModal={handleShowViewModal}
+                              viewModal={viewModal}
+                              handleCloseViewModal={handleCloseViewModal}
+                              ExpenseView={() => ExpenseView(item)}
                             />
                           </Dropdown.Menu>
                         </Dropdown>
                       </div>
                       <div className="list-img">
-                        {item.image[0] === "no_image.jpg" ? <img src={noimg} alt="book-img" /> : <img src={item.image[0]} alt="book-img" />}
+                        {item.image[0] === "no_image.jpg" ? (
+                          <img src={noimg} alt="book-img" />
+                        ) : (
+                          <img src={item.image[0]} alt="book-img" />
+                        )}
                       </div>
-                      <div className="voucher-data">
+                      <div
+                        className="voucher-data"
+                        onClick={handleShowViewModal}
+                      >
                         <div className="voucher-no">
                           <div className="menus">
-                            Voucher # <span>&nbsp;{item.liberty_factory_exp_id}</span>
+                            Voucher #{" "}
+                            <span>&nbsp;{item.liberty_factory_exp_id}</span>
                           </div>
                           <div className="menus">
-                            Account # <span> &nbsp;{item.expense_head?.account_no}</span>
+                            Account #{" "}
+                            <span> &nbsp;{item.expense_head?.account_no}</span>
                           </div>
                         </div>
                         <div className="menus">
-                          Expense Head: <span>&nbsp;{item.lf_expense_name}</span>
+                          Expense Head:{" "}
+                          <span>&nbsp;{item.lf_expense_name}</span>
                         </div>
                         <div className="menus">
                           Narrations:

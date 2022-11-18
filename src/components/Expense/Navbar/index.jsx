@@ -2,8 +2,9 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
-function NavExpense() {
+function NavExpense({searchVal, setSearchVal}) {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -13,9 +14,11 @@ function NavExpense() {
     <div className="expense-navbar">
       <Container>
         <div className="nav-data">
-          <div className="back-btn" onClick={handleBack}>
-            <i className="bi bi-arrow-left-short"></i>
-          </div>
+          <Link to="/voucher">
+            <div className="back-btn">
+              <i className="bi bi-arrow-left-short"></i>
+            </div>
+          </Link>
           <div className="main-heading">
             <h1>New Expense</h1>
           </div>

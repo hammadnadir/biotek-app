@@ -1,18 +1,46 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import "./styles.scss"
+import { useDispatch, useSelector } from "react-redux";
+import { deleteExpenseRequest } from "../../../../redux/expense";
+import "./styles.scss";
 
-const ModalPage = ({handleShowModal,setShowModal,showModal ,handleCloseModal ,ExpenseDelete}) => {
+const ModalPage = ({
+  handleShowModal,
+  setShowModal,
+  showModal,
+  handleCloseModal,
+  ExpenseDelete,
+  id
+}) => {
 
+  const dispatch = useDispatch();
+
+  const handleExpenseDel = (id) => {
+    dispatch(deleteExpenseRequest(id));
+  }
+  const { expense } = useSelector((state) => state.expense);
+  
   return (
     <>
-      <Modal show={showModal} onHide={handleCloseModal} animation={false} centered>
-        <div className="modal-data">
-          <h3>Delete</h3>
-          <div className="delete-expense"><p>Do You Want to Delete This expense.?</p></div>
-          <div className="decesions">
-            <p onClick={ExpenseDelete}>Yes</p>
-            <p onClick={handleCloseModal}>No</p>
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        animation={false}
+        centered
+      >
+        <div className="new_modal_data">
+          <div className="warning_icon">
+            <i className="bi bi-trash3-fill delete_it" />
+            <h2>WARNING.!</h2>
+          </div>
+          <div className="data">
+            <p>
+              Deleting the expense will permanently remove it from your list.
+            </p>
+          </div>
+          <div className="btns_two">
+            <Button onClick={() => setShowModal(false)}>No</Button>
+            <Button  onClick={() => handleExpenseDel(id)}>Yes</Button>
           </div>
         </div>
       </Modal>

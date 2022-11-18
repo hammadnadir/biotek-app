@@ -32,6 +32,28 @@ export const expenseSlice = createSlice({
       state.isLoadingExpense = false;
       console.log("Error:", { message: action.payload.message });
     },
+    editExpenseRequest: (state) => {
+      state.isLoadingExpense = true;
+    },
+    editExpenseSuccess: (state, action) => {
+      state.createExpense = action.payload;
+      state.isLoadingExpense = false;
+    },
+    editExpenseFailure: (state, action) => {
+      state.isLoadingExpense = false;
+      console.log("Error:", { message: action.payload.message });
+    },
+    deleteExpenseRequest: (state) => {
+      state.isLoadingExpense = true;
+    },
+    deleteExpenseSuccess: (state, action) => {
+      state.createExpense = action.payload;
+      state.isLoadingExpense = false;
+    },
+    deleteExpenseFailure: (state, action) => {
+      state.isLoadingExpense = false;
+      console.log("Error:", { message: action.payload.message });
+    },
   },
 });
 
@@ -42,6 +64,12 @@ export const {
   createExpenseRequest,
   createExpenseSuccess,
   createExpenseFailure,
+  editExpenseRequest,
+  editExpenseSuccess,
+  editExpenseFailure,
+  deleteExpenseRequest,
+  deleteExpenseSuccess,
+  deleteExpenseFailure,
 } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

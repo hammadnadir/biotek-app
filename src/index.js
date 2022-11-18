@@ -5,18 +5,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import CreateStore from "./store";
-import {unstable_HistoryRouter as HistoryRouter} from "react-router-dom";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { history } from "./redux/history";
-import "./styles/global.scss"
+import "./styles/global.scss";
+import "react-alice-carousel/lib/alice-carousel.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 const store = CreateStore();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider  store={store}>
+  <Provider store={store}>
     <React.StrictMode>
       <HistoryRouter history={history}>
-          <App />
+        <App />
       </HistoryRouter>
     </React.StrictMode>
   </Provider>

@@ -16,15 +16,23 @@ import { useEffect } from "react";
 import { setLoading } from "./redux/global";
 import { Expense } from "./pages";
 import Home from "./pages/Home";
-import SubMenu from "./pages/SubMenu"
+import SubMenu from "./pages/SubMenu";
 import Voucher from "./pages/vocher";
 import NewExpense from "./pages/New-Expense";
+import { Spinner } from "react-bootstrap";
+import { getExpenseRequest } from "./redux/expense";
+import { getVoucherRequest } from "./redux/voucher";
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const router = useLocation();
 
   const { loading } = useSelector((state) => state.global);
+
+  useEffect(() => {
+    dispatch(getVoucherRequest());
+    dispatch(getExpenseRequest());
+  }, []);
 
   // useEffect(() => {
   //   const handleStart = (url) => {
@@ -51,9 +59,9 @@ function App() {
 
   return (
     <div>
-      {/* <div className={`${loading ? "spinner" : "spinner-hide"}`}>
-          <Spinner animation="grow" />
-        </div> */}
+      <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+        <Spinner animation="grow" />
+      </div>
       <Routes>
         <Route
           path="/"
@@ -75,9 +83,30 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/sub-menu" element={<RequireAuth><SubMenu /></RequireAuth>} />
-        <Route path="/voucher" element={<RequireAuth><Voucher /></RequireAuth>} />
-        <Route path="/new-expense" element={<RequireAuth><NewExpense /></RequireAuth>} />
+        <Route
+          path="/sub-menu"
+          element={
+            <RequireAuth>
+              <SubMenu />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/voucher"
+          element={
+            <RequireAuth>
+              <Voucher />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/new-expense"
+          element={
+            <RequireAuth>
+              <NewExpense />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </div>
   );

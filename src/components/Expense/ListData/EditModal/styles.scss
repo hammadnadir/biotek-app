@@ -1,0 +1,134 @@
+.edit_modal {
+  .modal-dialog {
+    justify-content: center;
+    z-index: 2222;
+  }
+}
+.modal-content {
+  border-radius: 20px !important;
+  max-width: 353px !important;
+  position: relative;
+  i {
+    position: absolute;
+    right: 9%;
+    top: 14%;
+    font-size: clamp(20px, 2vw, 24px);
+    color: #f90f0f;
+  }
+}
+.expense_total_images {
+  overflow: auto;
+  display: flex;
+  width: 85%;
+  margin: auto;
+  margin-bottom: 20px !important;
+  &::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .expense_images {
+    position: relative;
+    width: fit-content;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+    i {
+      width: fit-content;
+      color: #ec1c24;
+      top: -7px;
+      font-size: 24px;
+      position: absolute;
+      right: 20px;
+    }
+  }
+}
+.edit_data {
+  margin-bottom: 10px;
+  h1 {
+    font-size: 25px;
+    color: #000000;
+    justify-content: center;
+    margin-bottom: 0px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background: rgba(243, 242, 242, 0.75);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 0px 0px;
+  }
+  .images_carousel {
+    margin: 30px auto 10px;
+    width: 60%;
+    button {
+      background-color: transparent;
+    }
+    .slider-wrapper {
+      border-radius: 20px;
+    }
+    .thumbs-wrapper {
+      display: none;
+    }
+    .control-dots {
+      display: none;
+    }
+    .carousel-status {
+      display: none;
+    }
+    .legend {
+      display: none;
+    }
+  }
+  .form_fields {
+    padding: 0px 10px;
+    padding-top: 0px !important;
+    .voucher_field {
+      input {
+        width: 100%;
+      }
+    }
+    .two_inputs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      @media screen and (max-width: 375px) {
+        flex-direction: column;
+      }
+      .text-field {
+        &:nth-child(1) {
+          width: 39%;
+          @media screen and (max-width: 375px) {
+            width: 100%;
+          }
+        }
+        &:nth-child(2) {
+          width: 58% !important;
+          @media screen and (max-width: 375px) {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+    .select-field-new {
+      select {
+        width: 100%;
+      }
+    }
+  }
+  .update_btn {
+    text-align: center;
+    margin: 20px 0px;
+    Button {
+      width: 103px;
+      height: 40px;
+      background: #179814;
+      box-shadow: 1px 1px 4px #179814;
+      border-radius: 8px;
+      border: none;
+    }
+  }
+}

@@ -1,0 +1,96 @@
+.view_modal {
+  .modal-dialog {
+    justify-content: center;
+    z-index: 2222;
+  }
+}
+.modal-content {
+  border-radius: 20px;
+  max-width: 353px !important;
+  position: relative;
+  i{
+    position: absolute;
+    right: 9%;
+    top: 14%;
+    font-size: clamp(20px,2vw,24px);
+    color: #f90f0f;
+  }
+}
+.view_data {
+  margin-bottom: 10px;
+  h1 {
+    font-size: 25px;
+    color: #000000;
+    justify-content: center;
+    margin-bottom: 0px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background: rgba(243, 242, 242, 0.75);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 0px 0px;
+    span {
+      font-size: 20px;
+      color: #f90f0f;
+    }
+  }
+  .images_carousel {
+    margin: 30px auto;
+    width: 60%;
+    button {
+      background-color: transparent;
+    }
+    .slider-wrapper {
+      border-radius: 20px;
+    }
+    .thumbs-wrapper {
+      display: none;
+    }
+    .control-dots {
+      display: none;
+    }
+    .carousel-status {
+      display: none;
+    }
+    .legend {
+      display: none;
+    }
+  }
+  .form_fields {
+    padding: 30px 10px;
+    padding-top: 0px !important;
+    .voucher_field {
+      input {
+        width: 100%;
+      }
+    }
+    .two_inputs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      @media screen and (max-width: 375px) {
+        flex-direction: column;
+      }
+      .text-field {
+        &:nth-child(1) {
+          width: 39%;
+          @media screen and (max-width: 375px) {
+            width: 100%;
+          }
+        }
+        &:nth-child(2) {
+          width: 58% !important;
+          @media screen and (max-width: 375px) {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+    .select-field-new {
+      select {
+        width: 100%;
+      }
+    }
+  }
+}

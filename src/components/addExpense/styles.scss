@@ -99,6 +99,16 @@
       padding-bottom: 30px;
       background: #edeef3;
       border-radius: 20px;
+      position: relative;
+      .delete_icon{
+       position: absolute;
+       right: 10%;
+       top: 1px;
+       i{
+        font-size: 25px;
+        color: white;
+       } 
+      }
       .expense-count {
         margin-top: 15px;
         margin-bottom: 15px;

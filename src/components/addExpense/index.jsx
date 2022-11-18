@@ -26,10 +26,10 @@ function AddExpense() {
   const [arrayIndex, setArrayIndex] = useState(0);
   const [narrationData, setNarrationData] = useState([]);
   const [amountData, setAmountData] = useState([]);
-  const [expense ,setExpense] = useState({})
+  // const [expense ,setExpense] = useState({})
 
   const dispatch = useDispatch();
-  // const { expense } = useSelector((state) => state.expense);
+  const { expense } = useSelector((state) => state.expense);
 
   useEffect(() => {
     console.log(expense);
@@ -156,10 +156,10 @@ function AddExpense() {
 
   useEffect(() => {
     // dispatch(getExpenseRequest());
-    console.log("HI");
-    axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
-      setExpense(response)
-    });
+    // console.log("HI");
+    // axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
+    //   setExpense(response)
+    // });
   }, []);
 
   const handleAdd = () => {
@@ -175,6 +175,12 @@ function AddExpense() {
     reference.current.click();
     setArrayIndex(index);
   };
+  const handleExpenseDelete=(e,index,item)=>{
+   console.log(index);
+   const abcdd = [...inputList];
+   const filterData = abcdd.filter((data)=>data !== item);
+   setInputList(filterData);
+  }
 
   return (
     <div className="add_expense">
@@ -226,6 +232,7 @@ function AddExpense() {
           {inputList.map((item, index) => {
             return (
               <div key={index} className="main_narrations">
+                {index > 0 && <div className="delete_icon" onClick={(e)=>handleExpenseDelete(e,index,item)}><i className="bi bi-x"></i></div>}
                 <div className="expense-count">
                   <h2>
                     Expense # <span>{index + 1}</span>
