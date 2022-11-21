@@ -8,8 +8,7 @@ import CreateStore from "./store";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { history } from "./redux/history";
 import "./styles/global.scss";
-import "react-alice-carousel/lib/alice-carousel.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const store = CreateStore();
 

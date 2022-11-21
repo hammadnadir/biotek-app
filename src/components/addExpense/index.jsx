@@ -145,17 +145,30 @@ function AddExpense() {
   }, [expense]);
 
   const handleDeleteFirbase = (e, index, key, item) => {
-    const filtered = allImages[key].filter((img) => {
-      return img !== item;
+    const desertRef = ref(storage, item);
+    deleteObject(desertRef).then(() => {
+      const filtered = allImages[key].filter((img) => {
+        return img !== item;
+      });
+      console.log(filtered);
+      const data = [...allImages];
+      data[key] = filtered;
+      setAllImages(data);
+    }).catch((error) => {
+      console.log(error)
     });
-    console.log(filtered);
-    const data = [...allImages];
-    data[key] = filtered;
-    setAllImages(data);
+    // const filtered = allImages[key].filter((img) => {
+    //   return img !== item;
+    // });
+    // console.log(filtered);
+    // const data = [...allImages];
+    // data[key] = filtered;
+    // setAllImages(data);
   };
 
   useEffect(() => {
     // dispatch(getExpenseRequest());
+    console.log("hi")
     // console.log("HI");
     // axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
     //   setExpense(response)

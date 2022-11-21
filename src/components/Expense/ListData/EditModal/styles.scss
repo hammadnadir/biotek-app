@@ -63,6 +63,9 @@
   .images_carousel {
     margin: 30px auto 10px;
     width: 60%;
+    height: 190px;
+    display: flex;
+    align-items: center;
     button {
       background-color: transparent;
     }

@@ -76,7 +76,7 @@ export function* handleDeleteExpense() {
       // );
       // yield put(updateShipping({ data: filterShipping }));
       yield put(setLoading(false));
-
+      yield put(getExpenseRequest());
       yield put(deleteExpenseSuccess(response));
     } catch (error) {
       yield put(deleteExpenseFailure(error));

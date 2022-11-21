@@ -5,15 +5,31 @@ import "./styles.scss";
 import { Carousel } from "react-responsive-carousel";
 import { book } from "../../../../assets";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
-function ViewModal({ viewModal, handleCloseViewModal, ExpenseView }) {
+function ViewModal({ viewModal, handleCloseViewModal, ExpenseView, item ,index,data}) {
+  const [boxOpen, setBoxOpen] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+  // const [data, setData] = useState({});
+  let newDate = new Date();
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
 
-    let newDate = new Date();
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
+  const { expense } = useSelector((state) => state.expense);
 
-    const { expense } = useSelector((state) => state.expense);
+  // console.log(index);
+
+  useEffect(()=>{
+    if (expense){
+      // setData(expense?.data?.lfe_daywise[0])
+    }
+  },[expense])
+  // useEffect(()=>{
+  // setData(expense?.data?.lfe_daywise[index])
+  // },[index])
+
 
   return (
     <div className="view_modal">
@@ -29,58 +45,65 @@ function ViewModal({ viewModal, handleCloseViewModal, ExpenseView }) {
           </h1>
           <i className="bi bi-pencil-square"></i>
           <div className="images_carousel">
-            <Carousel>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 1</p>
-              </div>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 2</p>
-              </div>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 3</p>
-              </div>
-            </Carousel>
+            {data.image === "no_image.jpg" && (
+              <p className="no_image">No Image Avalible</p>
+            )}
+            {data && data.image && data.image !== "no_image.jpg" && (
+              <Carousel>
+                {data.image.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <img
+                        src={item}
+                        onClick={() => setBoxOpen(true)}
+                        alt="img"
+                      />
+                    </div>
+                  );
+                })}
+              </Carousel>
+            )}
           </div>
           <div className="form_fields">
             <div className="voucher_field">
               <TextFieldForm
                 placeholder="Expense Voucher # "
-                // value={`Expense Voucher # LFE-${expense?.data?.lfe_id}`}
+                // value={`Expense Voucher # LFE-${expense.data.lfe_id}`}
+                value={`Expense Voucher # ${data.liberty_factory_exp_id}`}
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
                 name="lfe_id"
-                // value={formData.expense?.data?.lfe_id}
+                // value={formData.expense.data.lfe_id}
                 hidden
               />
             </div>
             <div className="two_inputs">
+              <TextFieldForm value={`Date : ${date}-${month}-${year}`} />
               <TextFieldForm
-                value={`Date : ${date}-${month}-${year}`}
-              />
-              <TextFieldForm
-              // value={`Expense Account : ${formData.expense_account}`}
+                value={`Expense Account : ${data.expense_head.account_no}`}
               />
             </div>
             <div>
-              <SelectForm
+              <TextFieldForm
                 label="Expense Head:"
-                optionsData={expense?.data?.expense_heads}
+                value={`${data.lf_expense_name}`}
+                // selected={data.lf_expense_name}
+                // optionsData={expense.data.expense_heads}
                 // name="expense_head"
                 // onChange={handleHeadChange}
                 // value={formData.expense_head}
               />
             </div>
             <TextFieldForm
-            //   value={`Date : ${date}-${month}-${year}`}
-            placeholder="Narration"
+              //   value={`Date : ${date}-${month}-${year}`}
+              value={`Narration : ${data.lfe_narration}`}
+              placeholder="Narration"
             />
             <TextFieldForm
-            placeholder="Amount"
-            //   value={`Date : ${date}-${month}-${year}`}
+              placeholder="Amount"
+              //   value={`Date : ${date}-${month}-${year}`}
+              value={`Amount : ${data.lfe_amount}`}
             />
           </div>
         </div>

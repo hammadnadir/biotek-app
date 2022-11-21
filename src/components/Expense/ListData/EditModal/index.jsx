@@ -6,39 +6,22 @@ import { Carousel } from "react-responsive-carousel";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { editExpenseRequest } from "../../../../redux/expense";
+import { useState } from "react";
+import { useEffect } from "react";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../../../../firebase";
+ 
 
-function EditModal({
-  handleShowEditModal,
-  setShowEditModal,
-  showEditModal,
-  handleCloseEditModal,
-  ExpenseEdit,
-  id,
-}) {
-  const images = [
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-    {
-      img: book,
-    },
-  ];
+function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleCloseEditModal,ExpenseEdit,id,data}) {
+
+  // const [data , setEditData] = useState({})
   const dispatch = useDispatch();
+
+  // useEffect(()=>{
+  //   if (data){
+  //     setEditData(data)
+  //   }
+  // },[data])
 
   const handleEdit = (id) => {
     dispatch(editExpenseRequest(id));
@@ -50,6 +33,22 @@ function EditModal({
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
+
+  const handleDeleteFirbase = (item) => {
+    const desertRef = ref(storage, item);
+    deleteObject(desertRef).then(() => {
+      const filtered = data.image.filter((img) => {
+        return img !== item;
+      });
+      console.log(filtered);
+      const allData = [...data];
+      allData.image = filtered;
+      // setEditData(data);
+    }).catch((error) => {
+      console.log(error)
+    });
+  };
+
 
   return (
     <div className="edit_modal">
@@ -63,31 +62,31 @@ function EditModal({
           <h1>Edit</h1>
           <i className="bi bi-pencil-square delete_icon"></i>
           <div className="images_carousel">
-            <Carousel>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 1</p>
-              </div>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 2</p>
-              </div>
-              <div>
-                <img src={book} alt="img" />
-                <p className="legend">Legend 3</p>
-              </div>
-            </Carousel>
+            {/* {data.image === "no_image.jpg" && (
+              <p className="no_image">No Image Avalible</p>
+            )} */}
+            {/* {data.image !== "no_image.jpg" && ( */}
+              <Carousel>
+                {data.image.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <img src={item} alt="img" />
+                    </div>
+                  );
+                })}
+              </Carousel>
+            {/* )} */}
           </div>
           <div className="expense_total_images">
-            {images.map((item, key) => {
+            {data?.image.map((item,index) => {
               return (
-                <div className="expense_images" key={key}>
-                  <img src={book} alt="upload-images" />
+                <div className="expense_images" key={index}>
+                  <img src={item} alt="upload-images" />
                   <i
                     className="bi bi-x"
-                    // onClick={(e) =>
-                    //   handleDeleteFirbase(e, key, index, item)
-                    // }
+                    onClick={(e) =>
+                      handleDeleteFirbase(item)
+                    }
                   ></i>
                 </div>
               );
@@ -96,8 +95,8 @@ function EditModal({
           <div className="form_fields">
             <div className="voucher_field">
               <TextFieldForm
-                placeholder="Expense Voucher # "
-                // value={`Expense Voucher # LFE-${expense?.data?.lfe_id}`}
+                // placeholder="Expense Voucher # "
+                value={`Expense Voucher # LFE-${data.liberty_factory_exp_id}`}
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
@@ -109,9 +108,7 @@ function EditModal({
             <div className="two_inputs">
               <TextFieldForm value={`Date : ${date}-${month}-${year}`} />
               <TextFieldForm
-              value={`Expense Account : 
-            
-              `}
+              value={`Expense Account : ${data.expense_head.account_no}`}
             //   ${formData.expense_account}
               />
             </div>
@@ -121,15 +118,17 @@ function EditModal({
                 optionsData={expense?.data?.expense_heads}
                 // name="expense_head"
                 // onChange={handleHeadChange}
-                // value={formData.expense_head}
+                value={data.expense_head}
               />
             </div>
             <TextFieldForm
             //   value={`Date : ${date}-${month}-${year}`}
+            value={`Narration : ${data.lfe_narration}`}
             placeholder="Narration"
             />
             <TextFieldForm
             //   value={`Date : ${date}-${month}-${year}`}
+            value={`Amount : ${data.lfe_amount}`}
             placeholder="Amount"
             />
           </div>

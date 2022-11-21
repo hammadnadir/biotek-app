@@ -37,6 +37,14 @@
   .images_carousel {
     margin: 30px auto;
     width: 60%;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    .no_image{
+      text-align: center;
+      padding-top: 20px;
+      color: #000000;
+    }
     button {
       background-color: transparent;
     }
@@ -68,7 +76,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 15px;
+      // margin-bottom: 15px;
       @media screen and (max-width: 375px) {
         flex-direction: column;
       }

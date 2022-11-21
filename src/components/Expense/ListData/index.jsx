@@ -18,11 +18,11 @@ import ViewModal from "./ViewModal";
 import { editExpenseRequest } from "../../../redux/expense";
 import { deleteExpenseRequest } from "../../../redux/expense";
 
-function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
-  const [showData, setShowData] = useState(true);
+function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   const [vouchersData, setVouchersData] = useState([]);
   const [inputData, setInputData] = useState({});
   const [imagesupload, setImagesupload] = useState([]);
+  const [itemData, setItemData] = useState({});
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -32,18 +32,7 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
   const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
   const { expense } = useSelector((state) => state.expense);
-  console.log(expense?.data?.lfe_daywise);
-
-  //   const uploadPic = () => {
-  //     if (imagesupload) {
-  //       const imageRef = ref(storage, `images/${imagesupload.name + v4()}`);
-  //       uploadBytes(imageRef, imagesupload).then((snapshot) => {
-  //         getDownloadURL(snapshot.ref).then((url) => {
-  //           setImagesList([...imagesList, url]);
-  //         });
-  //       });
-  //     }
-  //   };
+  // console.log(expense?.data?.lfe_daywise);
 
   useEffect(() => {
     setVouchersData(vouchers);
@@ -71,34 +60,40 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
   const date = new Date();
   const month = monthsName[date.getMonth()];
   const year = date.getFullYear();
-  const handleShowModal = () => {
+
+  const handleShowModal = (item) => {
     setShowEditModal(false);
     setShowViewModal(false);
     setShowModal(true);
+    setItemData(item)
   };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  const handleShowEditModal = () => {
+  const handleShowEditModal = (item) => {
     setShowEditModal(true);
     setShowViewModal(false);
     setShowModal(false);
+    setItemData(item)
   };
   const handleCloseEditModal = () => {
     setShowEditModal(false);
   };
   const ExpenseEdit = () => {};
 
-  const handleShowViewModal = () => {
+  const handleShowViewModal = (item) => {
     setShowEditModal(false);
     setShowViewModal(true);
     setShowModal(false);
+    setItemData(item)
   };
+
   const handleCloseViewModal = () => {
     setShowViewModal(false);
   };
-  const ExpenseView = () => {};
+  const ExpenseView = (item) => {};
 
   const handleExpenseDelete = (item) => {
     vouchersData.map((data) => {
@@ -215,17 +210,45 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
           </div>
         </Container>
       </div>
-      {showData && (
-        <div className="section2">
-          <Container>
-            <div className="section2-data">
-              <h2>Expenses Info.</h2>
-              {expense &&
-                // expense.data.length > 0 &&
-                // expense.data.lfe_daywise.length > 0 &&
-                expense?.data?.lfe_daywise?.filter(data=>data.lfe_narration.includes(searchVal)).map((item, index) => {
+      <div className="section2">
+        <Container>
+          <div className="section2-data">
+            <h2>Expenses Info.</h2>
+            {expense &&
+              // expense.data.length > 0 &&
+              // expense.data.lfe_daywise.length > 0 &&
+              expense?.data?.lfe_daywise
+                ?.filter((data) => data.lfe_narration.includes(searchVal))
+                .map((item, index) => {
                   return (
                     <div className="voucher-lists" key={index}>
+                      <ModalPage
+                        setShowModal={setShowModal}
+                        handleShowModal={handleShowModal}
+                        showModal={showModal}
+                        handleCloseModal={handleCloseModal}
+                        ExpenseDelete={() => handleExpenseDelete(item)}
+                        id={item.id}
+                        index={index}
+                      />
+                      <EditModal
+                        setShowEditModal={setShowEditModal}
+                        handleShowEditModal={handleShowEditModal}
+                        showEditModal={showEditModal}
+                        handleCloseEditModal={handleCloseEditModal}
+                        ExpenseEdit={() => ExpenseEdit(item)}
+                        data={item}
+                        index={index}
+                      />
+                      <ViewModal
+                        setShowViewModal={setShowViewModal}
+                        handleShowViewModal={()=>handleShowViewModal(index)}
+                        viewModal={viewModal}
+                        handleCloseViewModal={handleCloseViewModal}
+                        ExpenseView={() => ExpenseView(item)}
+                        index={itemData}
+                        data={item}
+                      />
                       <div className="dot-icon">
                         <Dropdown>
                           <Dropdown.Toggle
@@ -235,41 +258,18 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
                             <i className="bi bi-three-dots"></i>
                           </Dropdown.Toggle>
                           <Dropdown.Menu>
-                            <Dropdown.Item onClick={handleShowViewModal}>
+                            <Dropdown.Item onClick={()=>handleShowViewModal(item)}>
                               <i className="bi bi-eye-fill" />
                               <p>View</p>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={handleShowEditModal}>
+                            <Dropdown.Item onClick={()=>handleShowEditModal(item)}>
                               <i className="bi bi-pencil-square" />
                               <p>Edit</p>
                             </Dropdown.Item>
-                            <Dropdown.Item onClick={handleShowModal}>
+                            <Dropdown.Item onClick={()=>handleShowModal(item)}>
                               <i className="bi bi-trash-fill" />
                               <p>Delete</p>
                             </Dropdown.Item>
-                            <ModalPage
-                              setShowModal={setShowModal}
-                              handleShowModal={handleShowModal}
-                              showModal={showModal}
-                              handleCloseModal={handleCloseModal}
-                              ExpenseDelete={() => handleExpenseDelete(item)}
-                              id={item}
-                            />
-                            <EditModal
-                              setShowEditModal={setShowEditModal}
-                              handleShowEditModal={handleShowEditModal}
-                              showEditModal={showEditModal}
-                              handleCloseEditModal={handleCloseEditModal}
-                              ExpenseEdit={() => ExpenseEdit(item)}
-                              id={item}
-                            />
-                            <ViewModal
-                              setShowViewModal={setShowViewModal}
-                              handleShowViewModal={handleShowViewModal}
-                              viewModal={viewModal}
-                              handleCloseViewModal={handleCloseViewModal}
-                              ExpenseView={() => ExpenseView(item)}
-                            />
                           </Dropdown.Menu>
                         </Dropdown>
                       </div>
@@ -282,7 +282,7 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
                       </div>
                       <div
                         className="voucher-data"
-                        onClick={handleShowViewModal}
+                        onClick={()=>handleShowViewModal(index)}
                       >
                         <div className="voucher-no">
                           <div className="menus">
@@ -306,11 +306,11 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
                     </div>
                   );
                 })}
-            </div>
-          </Container>
-        </div>
-      )}
-      {!showData && (
+          </div>
+        </Container>
+      </div>
+
+      {/* {!showData && (
         <div className="new-section">
           <Container>
             <Form className="new-section-data" onSubmit={handleSubmit}>
@@ -334,12 +334,6 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
                   <option>aa</option>
                   <option>aa</option>
                 </select>
-                {/* <select>
-                  <option>aa</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                </select> */}
                 <input
                   type="text"
                   name="expense-account "
@@ -347,17 +341,12 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
                 />
               </div>
               <div className="new-fields-data">
-                {/* <div className="input-data-section">
-                  <input type="text" />
-                </div> */}
-                {/* <div className="select-fields"> */}
                 <select name="expense-head">
                   <option>Select One</option>
                   <option>aa</option>
                   <option>aa</option>
                   <option>aa</option>
                 </select>
-                {/* </div> */}
               </div>
               <div className="input-data">
                 <input type="text" placeholder="Narrations:" />
@@ -379,7 +368,7 @@ function ListData({ searchVal, setSearchVal ,handleSearchVal}) {
             </Form>
           </Container>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./styles.scss";
 
-function SelectForm({ label, optionsData ,handleHeadChange,...props }) {
+function SelectForm({ label, optionsData ,handleHeadChange, selected,...props }) {
   const reference = useRef();
   const handleClick = () => {
     reference.current.focus();
@@ -15,7 +15,7 @@ function SelectForm({ label, optionsData ,handleHeadChange,...props }) {
       {/* <i className="bi bi-caret-down-fill"></i> */}
       {/* <input type="text" ref={reference} className="input-field" {...props} /> */}
       <div className="icon"></div>
-      <select {...props}>
+      <select selected={selected} {...props}>
         {
           optionsData?.map((item,index)=>{
             return(

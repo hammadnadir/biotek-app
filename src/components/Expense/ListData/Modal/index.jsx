@@ -16,7 +16,7 @@ const ModalPage = ({
   const dispatch = useDispatch();
 
   const handleExpenseDel = (id) => {
-    dispatch(deleteExpenseRequest(id));
+    dispatch(deleteExpenseRequest({deleteid: id }));
   }
   const { expense } = useSelector((state) => state.expense);
   

@@ -45,7 +45,7 @@ export const editExpense = (payload) => {
 export const deleteExpense = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(``)
+      .post(`api/delete_expense`,payload)
       .then((response) => {
         resolve(response);
       })
