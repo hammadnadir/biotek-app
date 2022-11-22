@@ -32,7 +32,7 @@ export const createExpense = (payload) => {
 export const editExpense = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .put(``, payload)
+      .post(`api/update_expense`, payload)
       .then((response) => {
         resolve(response.data);
       })

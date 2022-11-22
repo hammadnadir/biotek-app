@@ -57,6 +57,7 @@ export function* handleEditExpense() {
       const response = yield call(editExpense, payload);
       yield put(setLoading(false));
       yield put(editExpenseSuccess(response));
+      yield put(getExpenseRequest());
     } catch (error) {
       yield put(editExpenseFailure(error));
     }

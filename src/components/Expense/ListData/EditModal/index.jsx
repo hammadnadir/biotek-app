@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { book } from "../../../../assets";
 import { SelectForm, TextFieldForm } from "../../../common";
 import { Carousel } from "react-responsive-carousel";
@@ -14,18 +14,25 @@ import { storage } from "../../../../firebase";
 
 function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleCloseEditModal,ExpenseEdit,id,data}) {
 
-  // const [data , setEditData] = useState({})
+  const [editData , setEditData] = useState({})
   const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //   if (data){
-  //     setEditData(data)
-  //   }
-  // },[data])
+  useEffect(()=>{
+    if (data){
+      setEditData({...data})
+    }
+  },[data])
 
-  const handleEdit = (id) => {
-    dispatch(editExpenseRequest(id));
-  };
+  const handleFormSubmit = (e) => {
+   e.preventDefault();
+   console.log("HI")
+   const editFormData = { lfe_id: editData.id,expense_head:editData.expense_head.account_no ,lfe_narration: editData.lfe_narration ,lfe_amount: editData.lfe_amount ,images: editData.image }
+   dispatch(editExpenseRequest(editFormData));
+  }
+  const handleChange = (e) => {
+    setEditData({...editData,[e.target.name]:e.target.value});
+  }
+  console.log(data)
 
   const { expense } = useSelector((state) => state.expense);
 
@@ -35,20 +42,28 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
   let year = newDate.getFullYear();
 
   const handleDeleteFirbase = (item) => {
-    const desertRef = ref(storage, item);
-    deleteObject(desertRef).then(() => {
-      const filtered = data.image.filter((img) => {
+    // const desertRef = ref(storage, item);
+    // deleteObject(desertRef).then(() => {
+      const filtered = editData.image.filter((img) => {
         return img !== item;
       });
-      console.log(filtered);
-      const allData = [...data];
-      allData.image = filtered;
-      // setEditData(data);
-    }).catch((error) => {
-      console.log(error)
+      setEditData({...editData ,image: filtered});
+    //   console.log(editData)
+    // }).catch((error) => {
+    //   console.log(error)
+    // });
+  };
+
+  const handleHeadChange = (e) => {
+    // alert(e.target.value)
+    setEditData({
+      ...editData,
+      [e.target.name]: e.target.value,
+      expense_account: e.target.value
     });
   };
 
+  console.log(editData?.expense_head?.account_title)
 
   return (
     <div className="edit_modal">
@@ -58,16 +73,16 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
         animation={false}
         centered
       >
-        <div className="edit_data">
+        <Form  onSubmit={handleFormSubmit} className="edit_data">
           <h1>Edit</h1>
           <i className="bi bi-pencil-square delete_icon"></i>
           <div className="images_carousel">
-            {/* {data.image === "no_image.jpg" && (
+            {editData.image === "no_image.jpg" && (
               <p className="no_image">No Image Avalible</p>
-            )} */}
-            {/* {data.image !== "no_image.jpg" && ( */}
+            )}
+            {editData.image !== "no_image.jpg" && (
               <Carousel>
-                {data.image.map((item, index) => {
+                {editData && editData.image && editData.image.map((item, index) => {
                   return (
                     <div key={index}>
                       <img src={item} alt="img" />
@@ -75,10 +90,10 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
                   );
                 })}
               </Carousel>
-            {/* )} */}
+            )}
           </div>
           <div className="expense_total_images">
-            {data?.image.map((item,index) => {
+            {editData && editData.image && editData?.image.map((item,index) => {
               return (
                 <div className="expense_images" key={index}>
                   <img src={item} alt="upload-images" />
@@ -96,46 +111,62 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
             <div className="voucher_field">
               <TextFieldForm
                 // placeholder="Expense Voucher # "
-                value={`Expense Voucher # LFE-${data.liberty_factory_exp_id}`}
+                // value={`Expense Voucher # LFE-${editData && editData.liberty_factory_exp_id && editData.liberty_factory_exp_id}`}
+                name="liberty_factory_exp_id"
+                value={`Expense Voucher # LFE-${editData.liberty_factory_exp_id}`}
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
                 name="lfe_id"
-                // value={formData.expense?.data?.lfe_id}
+                // value={formData.expense?.editData?.lfe_id}
                 hidden
               />
             </div>
             <div className="two_inputs">
               <TextFieldForm value={`Date : ${date}-${month}-${year}`} />
               <TextFieldForm
-              value={`Expense Account : ${data.expense_head.account_no}`}
+              name="expense_head.account_no"
+              // defaultValue={`Expense Account : ${editData && editData?.expense_head?.account_no}`}
+              value={`Expense Account : ${editData.expense_account}`}
+              id="exp_acc"
+              // value={`Expense Account : ${editData && editData?.expense_head?.account_no}`}
             //   ${formData.expense_account}
               />
             </div>
+            <TextFieldForm
+                placeholder="Expense Voucher # "
+                name="lfe_id"
+                value={editData?.lfe_id}
+                hidden
+              />
             <div>
               <SelectForm
                 label="Expense Head:"
                 optionsData={expense?.data?.expense_heads}
-                // name="expense_head"
-                // onChange={handleHeadChange}
-                value={data.expense_head}
+                name="account_title"
+                onChange={handleHeadChange}
+                value={editData?.account_title}
               />
             </div>
             <TextFieldForm
             //   value={`Date : ${date}-${month}-${year}`}
-            value={`Narration : ${data.lfe_narration}`}
+            value={`${editData?.lfe_narration}`}
             placeholder="Narration"
+            name="lfe_narration"
+            onChange={handleChange}
             />
             <TextFieldForm
             //   value={`Date : ${date}-${month}-${year}`}
-            value={`Amount : ${data.lfe_amount}`}
+            value={`${editData?.lfe_amount}`}
             placeholder="Amount"
+            name="lfe_amount"
+            onChange={handleChange}
             />
           </div>
           <div className="update_btn">
-            <Button onClick={() => handleEdit(id)}>Update</Button>
+            <Button type="submit">Update</Button>
           </div>
-        </div>
+        </Form>
       </Modal>
     </div>
   );

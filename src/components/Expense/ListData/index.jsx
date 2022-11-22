@@ -27,6 +27,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [viewModal, setShowViewModal] = useState(false);
+  const [itemId, setItemId] = useState(0);
 
   const reference = useRef();
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
     setShowViewModal(false);
     setShowModal(true);
     setItemData(item)
+    setItemId(item.id)
   };
 
   const handleCloseModal = () => {
@@ -228,8 +230,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
                         showModal={showModal}
                         handleCloseModal={handleCloseModal}
                         ExpenseDelete={() => handleExpenseDelete(item)}
-                        id={item.id}
-                        index={index}
+                        id={itemId}
                       />
                       <EditModal
                         setShowEditModal={setShowEditModal}
@@ -237,17 +238,16 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
                         showEditModal={showEditModal}
                         handleCloseEditModal={handleCloseEditModal}
                         ExpenseEdit={() => ExpenseEdit(item)}
-                        data={item}
-                        index={index}
+                        data={itemData}
+                        id={itemId}
                       />
                       <ViewModal
                         setShowViewModal={setShowViewModal}
-                        handleShowViewModal={()=>handleShowViewModal(index)}
+                        handleShowViewModal={handleShowViewModal}
                         viewModal={viewModal}
                         handleCloseViewModal={handleCloseViewModal}
                         ExpenseView={() => ExpenseView(item)}
-                        index={itemData}
-                        data={item}
+                        data={itemData}
                       />
                       <div className="dot-icon">
                         <Dropdown>
@@ -282,7 +282,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
                       </div>
                       <div
                         className="voucher-data"
-                        onClick={()=>handleShowViewModal(index)}
+                        onClick={()=>handleShowViewModal(item)}
                       >
                         <div className="voucher-no">
                           <div className="menus">
