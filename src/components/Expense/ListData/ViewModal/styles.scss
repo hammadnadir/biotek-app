@@ -40,10 +40,14 @@
     height: 190px;
     display: flex;
     align-items: center;
+    justify-content: center;
     .no_image{
       text-align: center;
       padding-top: 20px;
       color: #000000;
+    }
+    p{
+      color: #f90f0f !important;
     }
     button {
       background-color: transparent;

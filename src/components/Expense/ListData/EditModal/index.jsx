@@ -10,29 +10,29 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../../../firebase";
+import { useRef } from "react";
  
 
 function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleCloseEditModal,ExpenseEdit,id,data}) {
 
   const [editData , setEditData] = useState({})
   const dispatch = useDispatch();
+  const reference = useRef();
 
   useEffect(()=>{
     if (data){
-      setEditData({...data})
+      setEditData({...data,expense_account: data?.expense_head?.account_no})
     }
   },[data])
 
   const handleFormSubmit = (e) => {
    e.preventDefault();
-   console.log("HI")
    const editFormData = { lfe_id: editData.id,expense_head:editData.expense_head.account_no ,lfe_narration: editData.lfe_narration ,lfe_amount: editData.lfe_amount ,images: editData.image }
    dispatch(editExpenseRequest(editFormData));
   }
   const handleChange = (e) => {
     setEditData({...editData,[e.target.name]:e.target.value});
   }
-  console.log(data)
 
   const { expense } = useSelector((state) => state.expense);
 
@@ -47,7 +47,9 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
       const filtered = editData.image.filter((img) => {
         return img !== item;
       });
+      console.log(filtered)
       setEditData({...editData ,image: filtered});
+      console.log({...editData ,image: filtered})
     //   console.log(editData)
     // }).catch((error) => {
     //   console.log(error)
@@ -62,8 +64,13 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
       expense_account: e.target.value
     });
   };
-
-  console.log(editData?.expense_head?.account_title)
+  const handleImageUpload = (e) => {
+    const data = [];
+    for (let x = 0; x < e.target.files.length; x++) {
+      data.push(URL.createObjectURL(e.target.files[x]));
+    }
+    setEditData({...editData,image: [...editData.image,...data]})
+  }
 
   return (
     <div className="edit_modal">
@@ -75,12 +82,13 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
       >
         <Form  onSubmit={handleFormSubmit} className="edit_data">
           <h1>Edit</h1>
-          <i className="bi bi-pencil-square delete_icon"></i>
+          <i className="bi bi-paperclip delete_icon" onClick={()=>reference.current.click()}></i>
+          <input type="file" multiple ref={reference} onChange={handleImageUpload} style={{display: "none"}}/>
           <div className="images_carousel">
-            {editData.image === "no_image.jpg" && (
+            {editData.image == "no_image.jpg" && (
               <p className="no_image">No Image Avalible</p>
             )}
-            {editData.image !== "no_image.jpg" && (
+            {editData.image != "no_image.jpg" && (
               <Carousel>
                 {editData && editData.image && editData.image.map((item, index) => {
                   return (
@@ -93,7 +101,7 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
             )}
           </div>
           <div className="expense_total_images">
-            {editData && editData.image && editData?.image.map((item,index) => {
+            {editData && editData.image && editData.image != "no_image.jpg" && editData?.image.map((item,index) => {
               return (
                 <div className="expense_images" key={index}>
                   <img src={item} alt="upload-images" />
@@ -126,7 +134,6 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
               <TextFieldForm value={`Date : ${date}-${month}-${year}`} />
               <TextFieldForm
               name="expense_head.account_no"
-              // defaultValue={`Expense Account : ${editData && editData?.expense_head?.account_no}`}
               value={`Expense Account : ${editData.expense_account}`}
               id="exp_acc"
               // value={`Expense Account : ${editData && editData?.expense_head?.account_no}`}
@@ -146,6 +153,8 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
                 name="account_title"
                 onChange={handleHeadChange}
                 value={editData?.account_title}
+                id="abcd"
+                selectField={editData && editData?.expense_head && editData?.expense_head?.account_no && editData?.expense_head?.account_no}
               />
             </div>
             <TextFieldForm
@@ -154,6 +163,7 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
             placeholder="Narration"
             name="lfe_narration"
             onChange={handleChange}
+            // required
             />
             <TextFieldForm
             //   value={`Date : ${date}-${month}-${year}`}
@@ -161,6 +171,7 @@ function EditModal({handleShowEditModal,setShowEditModal,showEditModal,handleClo
             placeholder="Amount"
             name="lfe_amount"
             onChange={handleChange}
+            // required
             />
           </div>
           <div className="update_btn">

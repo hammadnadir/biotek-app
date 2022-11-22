@@ -247,6 +247,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
                         viewModal={viewModal}
                         handleCloseViewModal={handleCloseViewModal}
                         ExpenseView={() => ExpenseView(item)}
+                        setShowEditModal={setShowEditModal}
                         data={itemData}
                       />
                       <div className="dot-icon">
@@ -301,6 +302,10 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
                         <div className="menus">
                           Narrations:
                           <span>&nbsp;{item.lfe_narration}</span>
+                        </div>
+                        <div className="menus">
+                          Amount:
+                          <span>&nbsp;{item.lfe_amount}</span>
                         </div>
                       </div>
                     </div>

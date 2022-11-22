@@ -15,6 +15,7 @@ function ViewModal({
   item,
   index,
   data,
+  setShowEditModal
 }) {
   const [boxOpen, setBoxOpen] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
@@ -34,6 +35,10 @@ function ViewModal({
   // useEffect(()=>{
   // setData(expense?.data?.lfe_daywise[index])
   // },[index])
+  const showEditModals=()=>{
+    handleCloseViewModal(true)
+    setShowEditModal(true)
+  }
 
   return (
     <div className="view_modal">
@@ -47,12 +52,12 @@ function ViewModal({
             <h1>
               Expense <span>(LFE-345)</span>
             </h1>
-            <i className="bi bi-pencil-square"></i>
+            <i className="bi bi-pencil-square" onClick={showEditModals}></i>
             <div className="images_carousel">
-              {data.image === "no_image.jpg" && (
+              {data.image == "no_image.jpg" && (
                 <p className="no_image">No Image Avalible</p>
               )}
-              {data && data.image && data.image !== "no_image.jpg" && (
+              {data && data.image && data.image != "no_image.jpg" && (
                 <Carousel>
                   {data.image.map((item, index) => {
                     return (

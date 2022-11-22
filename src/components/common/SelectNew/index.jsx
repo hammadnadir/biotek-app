@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
+import { PageItem } from "react-bootstrap";
 import "./styles.scss";
 
-function SelectForm({ label, optionsData ,handleHeadChange,selected,...props }) {
+function SelectForm({ label, optionsData ,handleHeadChange,value,selectField,...props }) {
   const reference = useRef();
   const handleClick = () => {
     reference.current.focus();
@@ -15,11 +16,11 @@ function SelectForm({ label, optionsData ,handleHeadChange,selected,...props }) 
       {/* <i className="bi bi-caret-down-fill"></i> */}
       {/* <input type="text" ref={reference} className="input-field" {...props} /> */}
       <div className="icon"></div>
-      <select defaultValue="" {...props}>
+      <select {...props}>
         {
           optionsData?.map((item,index)=>{
             return(
-              <option key={index} value={item.account_no}>{item.account_title}</option>
+              <option key={index}  selected={selectField && selectField === item.account_no ? true : false} value={item.account_no}>{item.account_title}</option>
             )
           })
         }

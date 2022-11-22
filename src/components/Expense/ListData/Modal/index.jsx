@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteExpenseRequest } from "../../../../redux/expense";
 import "./styles.scss";
 
@@ -18,7 +18,6 @@ const ModalPage = ({
   const handleExpenseDel = (id) => {
     dispatch(deleteExpenseRequest({deleteid: id }));
   }
-  const { expense } = useSelector((state) => state.expense);
   
   return (
     <>
