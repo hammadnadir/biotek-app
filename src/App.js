@@ -14,7 +14,7 @@ import { Header } from "./components/common";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setLoading } from "./redux/global";
-import { Expense } from "./pages";
+import { Chats, Expense, Notification, Settings } from "./pages";
 import Home from "./pages/Home";
 import SubMenu from "./pages/SubMenu";
 import Voucher from "./pages/vocher";
@@ -104,6 +104,30 @@ function App() {
           element={
             <RequireAuth>
               <NewExpense />
+            </RequireAuth>
+          }
+        />
+         <Route
+          path="/notification"
+          element={
+            <RequireAuth>
+              <Notification />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/chats"
+          element={
+            <RequireAuth>
+              <Chats />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <RequireAuth>
+              <Settings />
             </RequireAuth>
           }
         />

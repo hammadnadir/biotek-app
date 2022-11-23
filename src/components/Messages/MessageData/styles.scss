@@ -1,0 +1,97 @@
+.message_data {
+  .message_main {
+    height: 78vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      //   width: 100%;
+    }
+    .main_headings {
+      text-align: center;
+      width: 85%;
+    }
+    h1 {
+      font-size: 25px;
+      color: #f90f0f;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    h2 {
+      margin-bottom: 30px;
+      font-weight: 300;
+      font-size: 16px;
+      color: #000000;
+    }
+    Button {
+      width: 150px;
+      height: 40px;
+      color: #ffffff;
+      font-weight: 700;
+      background: #179814;
+      box-shadow: 1px 1px 4px #179814;
+      border-radius: 8px;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      i{
+        padding-right: 8px;
+        -webkit-text-stroke: 1px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+.all_chats {
+    padding: 30px 0px 70px 0px;
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .main_cards {
+    .cards_data {
+      height: 60px;
+      padding: 0px 30px 0px 10px;
+      background: #fcfcfc;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      small {
+        position: absolute;
+        bottom: 5px;
+        right: 30px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .inner_card {
+        display: flex;
+        align-items: center;
+        .chat_img {
+          margin-right: 5px;
+          width: 30px;
+          height: 30px;
+          background: #ffd1d1;
+          box-shadow: 1px 1px 5px #ffd1d1;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 70%;
+            // margin: 0px !important;
+          }
+        }
+        p {
+          color: #000000;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

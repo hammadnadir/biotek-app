@@ -57,6 +57,9 @@ function ViewModal({
               {data.image == "no_image.jpg" && (
                 <p className="no_image">No Image Avalible</p>
               )}
+              {/* {data?.image.length == 0 && (
+                <p className="no_image">No Image Avalible</p>
+              )} */}
               {data && data.image && data.image != "no_image.jpg" && (
                 <Carousel>
                   {data.image.map((item, index) => {

@@ -36,6 +36,7 @@ export function* handleLogin() {
       history.push("/");
     } catch (error) {
       yield put(loginFailure(error));
+      yield put(setLoading(false));
     }
   }
 }

@@ -60,6 +60,7 @@ export function* handleEditExpense() {
       yield put(getExpenseRequest());
     } catch (error) {
       yield put(editExpenseFailure(error));
+      yield put(setLoading(false));
     }
   }
 }
@@ -81,6 +82,7 @@ export function* handleDeleteExpense() {
       yield put(deleteExpenseSuccess(response));
     } catch (error) {
       yield put(deleteExpenseFailure(error));
+      yield put(setLoading(false));
     }
   }
 }

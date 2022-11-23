@@ -1,0 +1,67 @@
+.chats_data {
+  padding: 30px 0px 70px 0px;
+  .chats_main {
+    h1 {
+      padding-left: 10px;
+      font-size: 25px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 30px;
+    }
+    .chat_card {
+      position: relative;
+      padding: 10px 15px;
+      background: #ececec;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+      margin-bottom: 8px;
+      .image_section {
+        img {
+          width: 41.2px;
+          border-radius: 50%;
+          height: 40px;
+        }
+      }
+    }
+    .card_sub_data {
+      display: flex;
+      width: 100%;
+
+      .lists_data {
+        padding-left: 12px;
+        .name_section {
+          display: flex;
+          align-items: center;
+          p {
+            margin-right: 5px;
+            font-size: 12px;
+            font-weight: 700;
+          }
+          span {
+            font-size: clamp(8px,2vw,12px);
+            background-color: #179814;
+            color: #ffffff;
+            padding: 0px 2px;
+            min-width: 11.3px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+        .text {
+          font-size: 12px;
+        }
+      }
+    }
+    .time_zone {
+      small {
+        position: absolute;
+        right: 15px;
+        color: #777777;
+        font-size: 10px;
+        top: 50%;
+        transform: translate(0%, -50%);
+      }
+    }
+  }
+}

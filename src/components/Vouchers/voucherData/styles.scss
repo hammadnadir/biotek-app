@@ -85,6 +85,7 @@
             color: #FFFFFF;
         }
       }
+      
       .bottom-data {
         padding: 15px 25px;
         background-color: #d9e7cb;
@@ -117,6 +118,36 @@
           }
         }
       }
+      .dropdown {
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          i {
+            padding-right: 10px;
+          }
+        }
+        p{
+          font-size: 12px;
+          margin-bottom: 0px
+        }
+        .dropdown-toggle {
+          &::after {
+            content: none;
+          }
+        }
+        button {
+          background-color: transparent;
+          color: black;
+          border: none;
+          padding: 0px;
+        }
+        .dropdown-menu {
+          margin-left: 20px;
+          margin-top: -5px;
+        }
+      }
     }
   }
 }
+
+

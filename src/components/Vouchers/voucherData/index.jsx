@@ -70,7 +70,7 @@ function VoucherData() {
                             </div> */}
                         <Dropdown.Item>
                           <i className="bi bi-eye-fill" />
-                          <p>View</p>
+                          <Link to="/expense"><p>View</p></Link>
                         </Dropdown.Item>
                         <Dropdown.Item>
                           <i className="bi bi-pencil-square" />
