@@ -17,6 +17,13 @@
   }
 }
 .view_data {
+  .close_icon{
+    i{
+      position: absolute;
+      top: 1.8%;
+      font-size: 30px;
+    }
+  }
   margin-bottom: 10px;
   h1 {
     font-size: 25px;

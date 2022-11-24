@@ -48,6 +48,13 @@
 }
 .edit_data {
   margin-bottom: 10px;
+  .close_icon {
+    i {
+      position: absolute;
+      top: 1.6%;
+      font-size: 30px;
+    }
+  }
   h1 {
     font-size: 25px;
     color: #000000;
@@ -70,7 +77,7 @@
     button {
       background-color: transparent;
     }
-    p{
+    p {
       color: #ec1c24;
       display: flex;
       justify-content: center;

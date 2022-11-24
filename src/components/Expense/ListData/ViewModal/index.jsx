@@ -49,6 +49,7 @@ function ViewModal({
           centered
         >
           <div className="view_data">
+            <div className="close_icon" onClick={handleCloseViewModal}><i className="bi bi-x"></i></div>
             <h1>
               Expense <span>(LFE-345)</span>
             </h1>
