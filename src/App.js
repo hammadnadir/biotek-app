@@ -14,7 +14,7 @@ import { Header } from "./components/common";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setLoading } from "./redux/global";
-import { Chats, Expense, Notification, Settings } from "./pages";
+import { Chats, Expense, Ledger, Notification, Settings } from "./pages";
 import Home from "./pages/Home";
 import SubMenu from "./pages/SubMenu";
 import Voucher from "./pages/vocher";
@@ -128,6 +128,14 @@ function App() {
           element={
             <RequireAuth>
               <Settings />
+            </RequireAuth>
+          }
+        />
+         <Route
+          path="/ledger"
+          element={
+            <RequireAuth>
+              <Ledger />
             </RequireAuth>
           }
         />
