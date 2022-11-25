@@ -1,5 +1,5 @@
 import { Button, Dropdown } from "react-bootstrap";
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { SearchField } from "../../common";
@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVoucherRequest } from "../../../redux/voucher";
 import { getExpenseRequest } from "../../../redux/expense";
 import axios from "axios";
+import VoucherDeleteModal from "../DeleteModal";
 
 function VoucherData() {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const dispatch = useDispatch();
   const { voucher } = useSelector((state) => state.voucher);
 
@@ -24,6 +26,44 @@ function VoucherData() {
     // console.log("Hi");
   }, []);
   console.log(voucher);
+
+  // const handleShowDeleteModal = (item) => {
+  //   // setItemData(item)
+  //   setShowDeleteModal(item.id);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
+
+  // const handleShowEditModal = (item) => {
+  //   setShowEditModal(true);
+  //   setShowViewModal(false);
+  //   setShowModal(false);
+  //   setItemData(item);
+  // };
+  // const handleCloseEditModal = () => {
+  //   setShowEditModal(false);
+  // };
+  // const ExpenseEdit = () => {};
+
+  // const handleShowViewModal = (item) => {
+  //   setShowEditModal(false);
+  //   setShowViewModal(true);
+  //   setShowModal(false);
+  //   setItemData(item);
+  // };
+
+  // const handleCloseViewModal = () => {
+  //   setShowViewModal(false);
+  // };
+  // const ExpenseView = (item) => {};
+
+  // const handleExpenseDelete = (item) => {
+  //   vouchersData.map((data) => {
+  //     return item.id === data.id;
+  //   });
+  // };
 
   return (
     <div className="main_voucher_page">
@@ -70,25 +110,25 @@ function VoucherData() {
                             </div> */}
                         <Dropdown.Item>
                           <i className="bi bi-eye-fill" />
-                          <Link to="/expense"><p>View</p></Link>
+                          <Link to="/expense">
+                            <p>View</p>
+                          </Link>
                         </Dropdown.Item>
                         <Dropdown.Item>
                           <i className="bi bi-pencil-square" />
                           <p>Edit</p>
                         </Dropdown.Item>
-                        <Dropdown.Item
-                        // onClick={handleShowModal}
-                        >
+                        <Dropdown.Item >
                           <i className="bi bi-trash-fill" />
                           <p>Delete</p>
                         </Dropdown.Item>
-                        {/* <ModalPage
-                              setShowModal={setShowModal}
-                              handleShowModal={handleShowModal}
-                              showModal={showModal}
-                              handleCloseModal={handleCloseModal}
-                              ExpenseDelete={() => handleExpenseDelete(item)}
-                            /> */}
+                        {/* <VoucherDeleteModal
+                          setShowModal={setShowModal}
+                          handleShowModal={handleShowModal}
+                          showModal={showModal}
+                          handleCloseModal={handleCloseModal}
+                          ExpenseDelete={() => handleExpenseDelete(item)}
+                        /> */}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
