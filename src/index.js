@@ -9,6 +9,7 @@ import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 import { history } from "./redux/history";
 import "./styles/global.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = CreateStore();
 

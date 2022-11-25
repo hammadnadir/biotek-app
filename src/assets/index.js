@@ -9,4 +9,5 @@ export { default as message } from "./message.png";
 export { default as search } from "./search.png";
 export { default as vdots } from "./vdots.png";
 export { default as backarrow } from "./backarrow.png";
-
+export { default as filter } from "./filter.png";
+export { default as Vector } from "./Vector.png";

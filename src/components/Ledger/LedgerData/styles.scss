@@ -1,0 +1,184 @@
+.amount {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    background-color: #F3F2F2BF;
+    align-items: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: small;
+}
+
+.expense {
+    font-weight: bolder;
+    color: black;
+}
+
+.balance {
+    font-weight: bolder;
+    color: black;
+}
+
+// ################# Search Bar Styling ################
+
+.search-bar {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    padding: 30px 20px 10px 57px;
+    padding-left: 60px;
+    width: 350px;
+    margin-top: 10px;
+    border-radius: 50px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+    border: none;
+    text-decoration: none;
+    outline: none;
+}
+
+.search-bar i{
+    position: absolute;
+    margin-top: 32px;
+    margin-right: 275px;
+}
+
+.search-bar img{
+    position: absolute;
+    margin-left: 127px;
+    margin-top: 23px;
+}
+
+.search-bar p{
+    position: absolute;
+    padding-right: 144px;
+    font-weight: bolder;
+    font-size: 700;
+    padding-top: 18px;
+}
+
+// .search-bar input {
+//     position: absolute;
+//     width: 353px;
+//     height: 50px;
+//     left: 20px;
+//     top: 176px;
+//     background: #FCFCFC;
+//     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+//     border-radius: 30px;
+// }
+
+// #################### Total Expense Styling #################
+
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+    background-color: #F3F2F2BF;
+    align-items: center;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.total-expense {
+    font-weight: bolder;
+    color: #F90F0F;
+}
+
+.total-balance {
+    font-weight: bolder;
+    color: #179814;
+
+}
+
+.exp p {
+    font-size: 200;
+    color: #F90F0F;
+}
+
+.bal p {
+    font-size: 200;
+    color: #179814;
+}
+
+.exp-table {
+    width: 100%;
+}
+
+// ################### Table Styling #################
+
+table,
+thead,
+tbody {
+    // border: 1px solid black;
+}
+
+tr,
+td {
+    // border: 1px solid black;
+    border-bottom: 1px solid;
+    padding: 10px;  
+}
+
+.descript {
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+}
+
+td {
+    font-size: small;
+}
+
+.exp-table th{
+    // margin: 6px;
+    // padding-left: 24px;
+    padding: 20px 24px
+}
+
+.exp-table{
+    // padding-bottom: 80px;
+    margin-bottom: 140px;
+}
+
+span {
+    font-weight: bolder;
+}
+
+.grid-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.green-color-custom {
+    color: #179814;
+    background-color: #FFDFDF;
+    border-bottom-color: black
+}
+
+.grey-color-custom{
+    background-color: #F7F7F7;
+    border-bottom-color: black
+}
+
+.red-color-custom {
+    color: #F90F0F;
+    background-color: #F7F7F7;
+    border-bottom-color: black
+}
+
+.bg-red{
+    background-color: #FFDFDF; 
+    border-bottom-color: black
+}
