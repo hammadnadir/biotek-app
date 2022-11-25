@@ -1,5 +1,5 @@
 import React from "react";
-import { filter } from "../../../assets";
+import { filter, Vector } from "../../../assets";
 import "./styles.scss";
 
 function LedgerData() {
@@ -16,7 +16,8 @@ function LedgerData() {
         </div>
 
         <div className="search-bar" >
-          <i class="bi bi-search"></i>
+          {/* <i class="bi bi-search"></i> */}
+          <img className="vector" src={Vector} alt="search image" />
           <img src={filter} alt="filter image" />
           <p>Search For?</p> 
           <input type="search" placeholder="Voucher, Expense, Labels etc...." />
@@ -32,8 +33,8 @@ function LedgerData() {
           </div>
         </div>
 
-        <div>
-          <table class="exp-table">
+        <div className="table-width">
+          <table className="exp-table ">
             <thead>
               <tr>
                 <th scope="col">Description</th>
@@ -205,7 +206,6 @@ function LedgerData() {
                 <td className="green-color-custom"> Rs. 1,256,897.00</td>
                 <td className="grey-color-custom"></td>
               </tr>
-
 
             </tbody>
           </table>

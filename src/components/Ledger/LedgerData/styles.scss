@@ -26,9 +26,12 @@
 
 .search-bar {
     padding: 10px;
-    width: 100%;
+    // width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+    width: fit-content;
+    margin: auto;
 }
 
 .search-bar input {
@@ -43,24 +46,43 @@
     outline: none;
 }
 
-.search-bar i{
+.search-bar .vector{
     position: absolute;
-    margin-top: 32px;
-    margin-right: 275px;
-}
+    top: 45px;
+    left: 33px;
+}    
 
 .search-bar img{
     position: absolute;
-    margin-left: 127px;
-    margin-top: 23px;
+    right: 39px;
+    top: 35px;
 }
 
 .search-bar p{
-    position: absolute;
-    padding-right: 144px;
-    font-weight: bolder;
-    font-size: 700;
-    padding-top: 18px;
+position: absolute;
+/* padding-right: 144px; */
+font-weight: bolder;
+font-size: 700;
+/* padding-top: 18px; */
+/* top: 0; */
+text-align: 0;
+top: 31px;
+font-size: 14px;
+left: 71px;
+}
+
+// .search-bar p{
+//     position: absolute;
+//     padding-right: 144px;
+//     font-weight: bolder;
+//     font-size: 700;
+//     padding-top: 18px;
+// }
+@media (max-width: 325px) {
+   
+    .search-bar p {
+        padding-right: 95px;
+    }
 }
 
 // .search-bar input {
@@ -144,7 +166,8 @@ td {
 .exp-table th{
     // margin: 6px;
     // padding-left: 24px;
-    padding: 20px 24px
+    padding: 20px 24px;
+    white-space: nowrap;
 }
 
 .exp-table{
@@ -169,7 +192,8 @@ span {
 
 .grey-color-custom{
     background-color: #F7F7F7;
-    border-bottom-color: black
+    border-bottom-color: black;
+    min-width: 13rem;
 }
 
 .red-color-custom {
@@ -181,4 +205,24 @@ span {
 .bg-red{
     background-color: #FFDFDF; 
     border-bottom-color: black
+}
+
+// ########################## Responsive ######################
+
+@media (max-width: 455px) {
+    .amount{
+        font-size: 12px;
+    };
+}
+
+@media (max-width: 1100px) {
+        .table-width {
+            overflow-x: scroll;
+        };
+}
+
+@media (max-width: 320px) {
+    .search-bar .vector {
+        left: 35px
+    };
 }
