@@ -1,0 +1,32 @@
+.inventory_page {
+  .inventory_data {
+    .data_head {
+      margin: 10px 0px;
+      padding: 10px 0px;
+      background: #eeeeee;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          font-size: 15px;
+          font-weight: 500;
+        }
+        Button {
+          width: 115px;
+          background-color: #179814;
+          border: none;
+          font-size: 15px;
+          color: #fcfcfc;
+          height: 40px;
+          border-radius: 8px;
+        }
+      }
+    }
+    .bottom_data {
+      background: #e2e2e2;
+    //   filter: blur(2px);
+    }
+  }
+}
