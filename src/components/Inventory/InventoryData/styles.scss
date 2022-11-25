@@ -1,5 +1,6 @@
 .inventory_page {
   .inventory_data {
+   
     .data_head {
       margin: 10px 0px;
       padding: 10px 0px;
@@ -24,9 +25,43 @@
         }
       }
     }
-    .bottom_data {
+    .main_inventory{
       background: #e2e2e2;
-    //   filter: blur(2px);
+    .bottom_data {
+      
+      padding-bottom: 12px;
+      h4 {
+        margin: 0px;
+        text-align: center;
+        font-size: 15px;
+        padding: 10px 0px;
+      }
+      .three_btns {
+        border-radius: 10px;
+        background-color: #EEEEEE; 
+        Button {
+          font-size: 12px;
+          color: #9c9a9a;
+          background-color: #eeeeee;
+          margin: 5px 15px;
+          &:nth-child(1) {
+            background-color: #126cb5;
+            color: #f7f7f7;
+          }
+        }
+      }
     }
+    .main_head{
+      padding: 10px;
+        p{
+          font-size: clamp(10px,2vw,15px);
+          font-weight: 700;
+        }
+        .head{
+          padding: 10px;
+          border: 0.3px solid #EDEEF3;
+        }
+      }
+  }
   }
 }

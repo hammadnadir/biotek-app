@@ -45,6 +45,10 @@ h3{
   }
 }
 
+Button{
+border: none !important;
+}
+
 .spinner {
   transition: opacity 0.3s ease-in;
   position: fixed;
