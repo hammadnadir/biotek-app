@@ -59,9 +59,9 @@ function App() {
 
   return (
     <div>
-      {/* <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+      <div className={`${loading ? "spinner" : "spinner-hide"}`}>
         <Spinner animation="grow" />
-      </div> */}
+      </div>
       <Routes>
         <Route
           path="/"

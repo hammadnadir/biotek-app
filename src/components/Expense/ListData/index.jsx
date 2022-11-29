@@ -11,12 +11,14 @@ import ModalPage from "./Modal";
 import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getExpenseRequest } from "../../../redux/expense";
+import { getExpenseRequest, setExpencesData } from "../../../redux/expense";
 import { noimg } from "../../../assets";
 import EditModal from "./EditModal";
 import ViewModal from "./ViewModal";
 import { editExpenseRequest } from "../../../redux/expense";
 import { deleteExpenseRequest } from "../../../redux/expense";
+import { history } from "../../../redux/history";
+import { useLocation } from "react-router-dom";
 
 function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   const [vouchersData, setVouchersData] = useState([]);
@@ -28,20 +30,34 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [viewModal, setShowViewModal] = useState(false);
   const [itemId, setItemId] = useState(0);
+  const [showMain, setShowMain] = useState(false);
 
   const reference = useRef();
+  const navigate = useLocation();
   const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
   const { expense } = useSelector((state) => state.expense);
-  // console.log(expense?.data?.lfe_daywise);
+  const { editVoucher } = useSelector((state) => state.voucher);
+  const { setExpense } = useSelector((state) => state.expense);
 
+  console.log(editVoucher);
+  console.log(navigate.pathname)
   useEffect(() => {
     setVouchersData(vouchers);
   }, []);
 
   useEffect(() => {
-    // dispatch(getExpenseRequest());
-  }, []);
+    if (setExpense){
+      dispatch(setExpencesData(true));
+    }
+    return () => {
+      dispatch(setExpencesData(false));
+    };
+  }, [navigate.pathname]);
+
+  useEffect(()=>{
+    console.log("ABCD",setExpense)
+  },[setExpense])
 
   const monthsName = [
     "January",
@@ -66,8 +82,8 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
     setShowEditModal(false);
     setShowViewModal(false);
     setShowModal(true);
-    setItemData(item)
-    setItemId(item.id)
+    setItemData(item);
+    setItemId(item.id);
   };
 
   const handleCloseModal = () => {
@@ -78,7 +94,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
     setShowEditModal(true);
     setShowViewModal(false);
     setShowModal(false);
-    setItemData(item)
+    setItemData(item);
   };
   const handleCloseEditModal = () => {
     setShowEditModal(false);
@@ -89,7 +105,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
     setShowEditModal(false);
     setShowViewModal(true);
     setShowModal(false);
-    setItemData(item)
+    setItemData(item);
   };
 
   const handleCloseViewModal = () => {
@@ -216,101 +232,211 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
         <Container>
           <div className="section2-data">
             <h2>Expenses Info.</h2>
-            {expense &&
-              // expense.data.length > 0 &&
-              // expense.data.lfe_daywise.length > 0 &&
-              expense?.data?.lfe_daywise
-                ?.filter((data) => data.lfe_narration.includes(searchVal))
-                .map((item, index) => {
-                  return (
-                    <div className="voucher-lists" key={index}>
-                      <ModalPage
-                        setShowModal={setShowModal}
-                        handleShowModal={handleShowModal}
-                        showModal={showModal}
-                        handleCloseModal={handleCloseModal}
-                        ExpenseDelete={() => handleExpenseDelete(item)}
-                        id={itemId}
-                      />
-                      <EditModal
-                        setShowEditModal={setShowEditModal}
-                        handleShowEditModal={handleShowEditModal}
-                        showEditModal={showEditModal}
-                        handleCloseEditModal={handleCloseEditModal}
-                        ExpenseEdit={() => ExpenseEdit(item)}
-                        data={itemData}
-                        id={itemId}
-                      />
-                      <ViewModal
-                        setShowViewModal={setShowViewModal}
-                        handleShowViewModal={handleShowViewModal}
-                        viewModal={viewModal}
-                        handleCloseViewModal={handleCloseViewModal}
-                        ExpenseView={() => ExpenseView(item)}
-                        setShowEditModal={setShowEditModal}
-                        data={itemData}
-                      />
-                      <div className="dot-icon">
-                        <Dropdown>
-                          <Dropdown.Toggle
-                            variant="success"
-                            id="dropdown-basic"
-                          >
-                            <i className="bi bi-three-dots"></i>
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item onClick={()=>handleShowViewModal(item)}>
-                              <i className="bi bi-eye-fill" />
-                              <p>View</p>
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={()=>handleShowEditModal(item)}>
-                              <i className="bi bi-pencil-square" />
-                              <p>Edit</p>
-                            </Dropdown.Item>
-                            <Dropdown.Item onClick={()=>handleShowModal(item)}>
-                              <i className="bi bi-trash-fill" />
-                              <p>Delete</p>
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                      <div className="list-img">
-                        {item.image[0] === "no_image.jpg" ? (
-                          <img src={noimg} alt="book-img" />
-                        ) : (
-                          <img src={item.image[0]} alt="book-img" />
-                        )}
-                      </div>
-                      <div
-                        className="voucher-data"
-                        onClick={()=>handleShowViewModal(item)}
-                      >
-                        <div className="voucher-no">
-                          <div className="menus">
-                            Voucher #{" "}
-                            <span>&nbsp;{item.liberty_factory_exp_id}</span>
+            {setExpense
+              ? editVoucher &&
+                editVoucher.daywise
+                  ?.filter((data) => data.lfe_narration.includes(searchVal))
+                  .map((item, index) => {
+                    return (
+                      <div className="voucher-lists" key={index}>
+                        <ModalPage
+                          setShowModal={setShowModal}
+                          handleShowModal={handleShowModal}
+                          showModal={showModal}
+                          handleCloseModal={handleCloseModal}
+                          ExpenseDelete={() => handleExpenseDelete(item)}
+                          id={itemId}
+                        />
+                        <EditModal
+                          setShowEditModal={setShowEditModal}
+                          handleShowEditModal={handleShowEditModal}
+                          showEditModal={showEditModal}
+                          handleCloseEditModal={handleCloseEditModal}
+                          ExpenseEdit={() => ExpenseEdit(item)}
+                          data={itemData}
+                          id={itemId}
+                        />
+                        <ViewModal
+                          setShowViewModal={setShowViewModal}
+                          handleShowViewModal={handleShowViewModal}
+                          viewModal={viewModal}
+                          handleCloseViewModal={handleCloseViewModal}
+                          ExpenseView={() => ExpenseView(item)}
+                          setShowEditModal={setShowEditModal}
+                          data={itemData}
+                        />
+                        <div className="dot-icon">
+                          <Dropdown>
+                            <Dropdown.Toggle
+                              variant="success"
+                              id="dropdown-basic"
+                            >
+                              <i className="bi bi-three-dots"></i>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                              <Dropdown.Item
+                                onClick={() => handleShowViewModal(item)}
+                              >
+                                <i className="bi bi-eye-fill" />
+                                <p>View</p>
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => handleShowEditModal(item)}
+                              >
+                                <i className="bi bi-pencil-square" />
+                                <p>Edit</p>
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => handleShowModal(item)}
+                              >
+                                <i className="bi bi-trash-fill" />
+                                <p>Delete</p>
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </div>
+                        <div className="list-img">
+                          {item.image[0] === "no_image.jpg" ? (
+                            <img src={noimg} alt="book-img" />
+                          ) : (
+                            <img src={item.image[0]} alt="book-img" />
+                          )}
+                        </div>
+                        <div
+                          className="voucher-data"
+                          onClick={() => handleShowViewModal(item)}
+                        >
+                          <div className="voucher-no">
+                            <div className="menus">
+                              Voucher #{" "}
+                              <span>&nbsp;{item.liberty_factory_exp_id}</span>
+                            </div>
+                            <div className="menus">
+                              Account #{" "}
+                              <span>
+                                {" "}
+                                &nbsp;{item.expense_head?.account_no}
+                              </span>
+                            </div>
                           </div>
                           <div className="menus">
-                            Account #{" "}
-                            <span> &nbsp;{item.expense_head?.account_no}</span>
+                            Expense Head:{" "}
+                            <span>&nbsp;{item.lf_expense_name}</span>
+                          </div>
+                          <div className="menus">
+                            Narrations:
+                            <span>&nbsp;{item.lfe_narration}</span>
+                          </div>
+                          <div className="menus">
+                            Amount:
+                            <span>&nbsp;{item.lfe_amount}</span>
                           </div>
                         </div>
-                        <div className="menus">
-                          Expense Head:{" "}
-                          <span>&nbsp;{item.lf_expense_name}</span>
+                      </div>
+                    );
+                  })
+              : expense &&
+                expense?.data?.lfe_daywise
+                  ?.filter((data) => data.lfe_narration.includes(searchVal))
+                  .map((item, index) => {
+                    return (
+                      <div className="voucher-lists" key={index}>
+                        <ModalPage
+                          setShowModal={setShowModal}
+                          handleShowModal={handleShowModal}
+                          showModal={showModal}
+                          handleCloseModal={handleCloseModal}
+                          ExpenseDelete={() => handleExpenseDelete(item)}
+                          id={itemId}
+                        />
+                        <EditModal
+                          setShowEditModal={setShowEditModal}
+                          handleShowEditModal={handleShowEditModal}
+                          showEditModal={showEditModal}
+                          handleCloseEditModal={handleCloseEditModal}
+                          ExpenseEdit={() => ExpenseEdit(item)}
+                          data={itemData}
+                          id={itemId}
+                        />
+                        <ViewModal
+                          setShowViewModal={setShowViewModal}
+                          handleShowViewModal={handleShowViewModal}
+                          viewModal={viewModal}
+                          handleCloseViewModal={handleCloseViewModal}
+                          ExpenseView={() => ExpenseView(item)}
+                          setShowEditModal={setShowEditModal}
+                          data={itemData}
+                        />
+                        <div className="dot-icon">
+                          <Dropdown>
+                            <Dropdown.Toggle
+                              variant="success"
+                              id="dropdown-basic"
+                            >
+                              <i className="bi bi-three-dots"></i>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                              <Dropdown.Item
+                                onClick={() => handleShowViewModal(item)}
+                              >
+                                <i className="bi bi-eye-fill" />
+                                <p>View</p>
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => handleShowEditModal(item)}
+                              >
+                                <i className="bi bi-pencil-square" />
+                                <p>Edit</p>
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                onClick={() => handleShowModal(item)}
+                              >
+                                <i className="bi bi-trash-fill" />
+                                <p>Delete</p>
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
                         </div>
-                        <div className="menus">
-                          Narrations:
-                          <span>&nbsp;{item.lfe_narration}</span>
+                        <div className="list-img">
+                          {item.image[0] === "no_image.jpg" ? (
+                            <img src={noimg} alt="book-img" />
+                          ) : (
+                            <img src={item.image[0]} alt="book-img" />
+                          )}
                         </div>
-                        <div className="menus">
-                          Amount:
-                          <span>&nbsp;{item.lfe_amount}</span>
+                        <div
+                          className="voucher-data"
+                          onClick={() => handleShowViewModal(item)}
+                        >
+                          <div className="voucher-no">
+                            <div className="menus">
+                              Voucher #{" "}
+                              <span>&nbsp;{item.liberty_factory_exp_id}</span>
+                            </div>
+                            <div className="menus">
+                              Account #{" "}
+                              <span>
+                                {" "}
+                                &nbsp;{item.expense_head?.account_no}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="menus">
+                            Expense Head:{" "}
+                            <span>&nbsp;{item.lf_expense_name}</span>
+                          </div>
+                          <div className="menus">
+                            Narrations:
+                            <span>&nbsp;{item.lfe_narration}</span>
+                          </div>
+                          <div className="menus">
+                            Amount:
+                            <span>&nbsp;{item.lfe_amount}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
           </div>
         </Container>
       </div>

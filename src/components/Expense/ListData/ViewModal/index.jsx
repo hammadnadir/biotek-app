@@ -61,11 +61,11 @@ function ViewModal({
               {/* {data?.image.length == 0 && (
                 <p className="no_image">No Image Avalible</p>
               )} */}
-              {data && data.image && data.image != "no_image.jpg" && (
+              {/* {data && data.image && data.image != "no_image.jpg" && ( */}
                 <Carousel>
-                  {data.image.map((item, index) => {
+                  {data && data.image && data.image.length > 0 && data.image.map((item, index) => {
                     return (
-                      <div key={index}>
+                      <div key={index} className="main_data_img">
                         <img
                           src={item}
                           onClick={() => setBoxOpen(true)}
@@ -75,7 +75,7 @@ function ViewModal({
                     );
                   })}
                 </Carousel>
-              )}
+              {/* )} */}
             </div>
             <div className="form_fields">
               <div className="voucher_field">

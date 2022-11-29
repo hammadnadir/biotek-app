@@ -14,3 +14,16 @@ export const getVoucher = (payload) => {
       });
   });
 };
+
+export const editVoucher = (payload) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`api/edit_expense/?id=${payload}`, payload)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};

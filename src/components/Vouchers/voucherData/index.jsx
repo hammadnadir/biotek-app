@@ -3,16 +3,21 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { SearchField } from "../../common";
-import { Link } from "react-router-dom";
+import { Link, Router, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVoucherRequest } from "../../../redux/voucher";
+import {
+  getVoucherEditRequest,
+  getVoucherRequest,
+} from "../../../redux/voucher";
 import { getExpenseRequest } from "../../../redux/expense";
 import axios from "axios";
 import VoucherDeleteModal from "../DeleteModal";
 
 function VoucherData() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { voucher } = useSelector((state) => state.voucher);
 
@@ -64,6 +69,9 @@ function VoucherData() {
   //     return item.id === data.id;
   //   });
   // };
+  const handleEditVoucher = (item) => {
+    dispatch(getVoucherEditRequest(item.id));
+  };
 
   return (
     <div className="main_voucher_page">
@@ -108,20 +116,20 @@ function VoucherData() {
                               <i className={data.icon} />
                                <p>{data.name}</p>
                             </div> */}
-                        <Dropdown.Item>
+                        <Dropdown.Item onClick={()=>handleEditVoucher(item)}>
                           <i className="bi bi-eye-fill" />
-                          <Link to="/expense">
+                          {/* <Link to="/expense"> */}
                             <p>View</p>
-                          </Link>
+                          {/* </Link> */}
                         </Dropdown.Item>
-                        <Dropdown.Item>
+                        <Dropdown.Item onClick={()=>handleEditVoucher(item)}>
                           <i className="bi bi-pencil-square" />
                           <p>Edit</p>
                         </Dropdown.Item>
-                        <Dropdown.Item >
+                        {/* <Dropdown.Item>
                           <i className="bi bi-trash-fill" />
                           <p>Delete</p>
-                        </Dropdown.Item>
+                        </Dropdown.Item> */}
                         {/* <VoucherDeleteModal
                           setShowModal={setShowModal}
                           handleShowModal={handleShowModal}

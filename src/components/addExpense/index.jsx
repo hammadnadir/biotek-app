@@ -146,17 +146,19 @@ function AddExpense() {
 
   const handleDeleteFirbase = (e, index, key, item) => {
     const desertRef = ref(storage, item);
-    deleteObject(desertRef).then(() => {
-      const filtered = allImages[key].filter((img) => {
-        return img !== item;
+    deleteObject(desertRef)
+      .then(() => {
+        const filtered = allImages[key].filter((img) => {
+          return img !== item;
+        });
+        console.log(filtered);
+        const data = [...allImages];
+        data[key] = filtered;
+        setAllImages(data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      console.log(filtered);
-      const data = [...allImages];
-      data[key] = filtered;
-      setAllImages(data);
-    }).catch((error) => {
-      console.log(error)
-    });
     // const filtered = allImages[key].filter((img) => {
     //   return img !== item;
     // });
@@ -165,15 +167,6 @@ function AddExpense() {
     // data[key] = filtered;
     // setAllImages(data);
   };
-
-  useEffect(() => {
-    // dispatch(getExpenseRequest());
-    console.log("hi")
-    // console.log("HI");
-    // axios.get("http://192.168.10.189:8000/api/add_expense?unit_expense=1").then((response) => {
-    //   setExpense(response)
-    // });
-  }, []);
 
   const handleAdd = () => {
     const abc = [...inputList, []];
@@ -185,15 +178,43 @@ function AddExpense() {
   }, []);
 
   const handleBthClick = (index) => {
-    reference.current.click();
+    console.log(index)
     setArrayIndex(index);
+    reference.current.click();
   };
-  const handleExpenseDelete=(e,index,item)=>{
-   console.log(index);
-   const abcdd = [...inputList];
-   const filterData = abcdd.filter((data)=>data !== item);
-   setInputList(filterData);
-  }
+  const handleExpenseDelete = (e, index, item) => {
+    console.log(index);
+    const abcdd = [...inputList];
+    const filterData = abcdd.filter((data) => data !== item);
+    setInputList(filterData);
+    const narr = [...narrationData];
+    const data = narr[index];
+    const filtered = narrationData.filter((item) => {
+      return item !== data;
+    });
+    setNarrationData(filtered);
+    const amou = [...amountData];
+    const dataAmount = amou[index];
+    const filteredNew = amou.filter((item) => {
+      return item !== dataAmount;
+    });
+    setAmountData(filteredNew);
+    // for (let x = 0; x < item.image.length; x++) {
+    //   const desertRef = ref(storage, item.image[x]);
+    //   deleteObject(desertRef)
+    //   .then(() => {
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // }
+    const images = [...allImages];
+    const specific = images[index];
+    const filteredImg = images[index]?.filter((img) => {
+      return img !== specific;
+    });
+    setAllImages([filteredImg]);
+  };
 
   return (
     <div className="add_expense">
@@ -245,10 +266,17 @@ function AddExpense() {
           {inputList.map((item, index) => {
             return (
               <div key={index} className="main_narrations">
-                {index > 0 && <div className="delete_icon" onClick={(e)=>handleExpenseDelete(e,index,item)}><i className="bi bi-x"></i></div>}
+                {index > 0 && (
+                  <div
+                    className="delete_icon"
+                    onClick={(e) => handleExpenseDelete(e, index, item)}
+                  >
+                    <i className="bi bi-x"></i>
+                  </div>
+                )}
                 <div className="expense-count">
                   <h2>
-                    Expense # <span>{index + 1}</span>
+                    Expense # <span>&nbsp;{index + 1}</span>
                   </h2>
                 </div>
                 <Container>
@@ -277,19 +305,13 @@ function AddExpense() {
                         </div>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      ref={reference}
-                      multiple
-                      onChange={(e) => handleUpload(e, index)}
-                      accept="image/jpg, image/jpeg, image/png"
-                    />
-                    {allImages[index] && allImages[index].length > 0 && (
+                    {allImages[index]  && (
                       <div className="attachments">
                         <h3>Attachments :</h3>
                         <div className="expense_total_images">
                           {allImages[index] &&
+                          allImages[index].length > 0 &&
+                          // allImages[index].length > 0 &&
                             allImages[index].map((item, key) => {
                               return (
                                 <div className="expense_images" key={key}>
@@ -306,6 +328,14 @@ function AddExpense() {
                         </div>
                       </div>
                     )}
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      ref={reference}
+                      multiple
+                      onChange={(e) => handleUpload(e, index)}
+                      accept="image/jpg, image/jpeg, image/png"
+                    />
                   </div>
                 </Container>
               </div>

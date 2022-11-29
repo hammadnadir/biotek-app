@@ -4,6 +4,7 @@ const initialState = {
   expense: {},
   isLoadingExpense: false,
   createExpense: {},
+  setExpense: false,
 };
 
 export const expenseSlice = createSlice({
@@ -54,6 +55,9 @@ export const expenseSlice = createSlice({
       state.isLoadingExpense = false;
       console.log("Error:", { message: action.payload.message });
     },
+    setExpencesData: (state, action) => {
+      state.setExpense = action.payload;
+    },
   },
 });
 
@@ -70,6 +74,7 @@ export const {
   deleteExpenseRequest,
   deleteExpenseSuccess,
   deleteExpenseFailure,
+  setExpencesData
 } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../../../firebase";
 import { useRef } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { getVoucherEditRequest } from "../../../../redux/voucher";
 
 function EditModal({
   handleShowEditModal,
@@ -22,14 +24,19 @@ function EditModal({
   data,
 }) {
   const [editData, setEditData] = useState({});
+  const { editVoucher } = useSelector((state) => state.voucher);
+  const { setExpense } = useSelector((state) => state.expense);
+
   const dispatch = useDispatch();
   const reference = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
       setEditData({ ...data, expense_account: data?.expense_head?.account_no });
     }
   }, [data]);
+  console.log("Okkkk",setExpense)
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -39,9 +46,14 @@ function EditModal({
       lfe_narration: editData.lfe_narration,
       lfe_amount: editData.lfe_amount,
       images: editData.image,
+      // id: editVoucher?.in[0]?.liberty_factory_exp_id
     };
     dispatch(editExpenseRequest(editFormData));
+    if (setExpense){
+      navigate("/voucher");
+    }
   };
+  
   const handleChange = (e) => {
     setEditData({ ...editData, [e.target.name]: e.target.value });
   };
@@ -116,9 +128,10 @@ function EditModal({
               <Carousel>
                 {editData &&
                   editData.image &&
+                  editData.image.length > 0 &&
                   editData.image.map((item, index) => {
                     return (
-                      <div key={index}>
+                      <div key={index} className="main_data_img">
                         <img src={item} alt="img" />
                       </div>
                     );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { deleteExpenseRequest } from "../../../../redux/expense";
 import "./styles.scss";
 
@@ -14,9 +15,14 @@ const ModalPage = ({
 }) => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const { setExpense } = useSelector((state) => state.expense);
 
   const handleExpenseDel = (id) => {
     dispatch(deleteExpenseRequest({deleteid: id }));
+    if (setExpense){
+      navigate("/voucher");
+    }
   }
   
   return (
