@@ -20,7 +20,7 @@ function LedgerData() {
           <img className="vector" src={Vector} alt="search image" />
           <img src={filter} alt="filter image" />
           <p>Search For?</p> 
-          <input type="search" placeholder="Voucher, Expense, Labels etc...." />
+          <input type="search" placeholder="Voucher, Expense, Labels etc" />
         </div>
 
         <div className="total-amount">

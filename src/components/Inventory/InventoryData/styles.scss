@@ -1,67 +1,126 @@
 .inventory_page {
   .inventory_data {
-   
+
     .data_head {
       margin: 10px 0px;
       padding: 10px 0px;
       background: #eeeeee;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
       .container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         p {
           font-size: 15px;
           font-weight: 500;
         }
+
         Button {
           width: 115px;
           background-color: #179814;
           border: none;
-          font-size: 15px;
+          font-size: 14px;
           color: #fcfcfc;
           height: 40px;
           border-radius: 8px;
+          padding: 2px;
         }
       }
     }
-    .main_inventory{
+
+    .main_inventory {
       background: #e2e2e2;
-    .bottom_data {
-      
-      padding-bottom: 12px;
-      h4 {
-        margin: 0px;
-        text-align: center;
-        font-size: 15px;
-        padding: 10px 0px;
-      }
-      .three_btns {
-        border-radius: 10px;
-        background-color: #EEEEEE; 
-        Button {
-          font-size: 12px;
-          color: #9c9a9a;
-          background-color: #eeeeee;
-          margin: 5px 15px;
-          &:nth-child(1) {
-            background-color: #126cb5;
-            color: #f7f7f7;
+
+      .bottom_data {
+
+        padding-bottom: 12px;
+
+        h4 {
+          margin: 0px;
+          text-align: center;
+          font-size: 15px;
+          padding: 10px 0px;
+        }
+
+        .three_btns {
+          border-radius: 10px;
+          background-color: #EEEEEE;
+
+          Button {
+            font-size: 12px;
+            color: #9c9a9a;
+            background-color: #eeeeee;
+            margin: 5px 15px;
+
+            &:nth-child(1) {
+              background-color: #126cb5;
+              color: #f7f7f7;
+            }
           }
         }
       }
-    }
-    .main_head{
-      padding: 10px;
-        p{
-          font-size: clamp(10px,2vw,15px);
+
+      .main_head {
+        padding: 10px;
+
+        p {
+          font-size: clamp(10px, 2vw, 15px);
           font-weight: 700;
         }
-        .head{
+
+        .head {
           padding: 10px;
           border: 0.3px solid #EDEEF3;
         }
       }
+    }
   }
+}
+
+
+.span-sheet {
+  font-weight: 700;
+  font-size: 8px;
+  color: #9c9a9a;
+}
+
+.table {
+  margin-top: 10px;
+}
+
+table tbody tr {
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+table tbody th {
+  font-size: 8px;
+}
+
+.table-head tr th {
+  font-size: 9px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+table .table-head tr th span .span-sheet {
+  font-weight: lighter important;
+  font-size: 8px;
+  color: #9c9a9a;
+}
+
+.tbl-inventory td {
+  font-size: 8px;
+  // padding-left: 22px;
+  text-align: center;
+}
+
+@media (max-width: 450px) {
+  .main-table {
+    overflow-x: scroll;
   }
+
+  ;
 }
