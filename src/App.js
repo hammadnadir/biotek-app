@@ -25,7 +25,7 @@ import { getVoucherRequest } from "./redux/voucher";
 
 function App() {
   const dispatch = useDispatch();
-  // const router = useLocation();
+  const router = useLocation();
 
   const { loading } = useSelector((state) => state.global);
 
