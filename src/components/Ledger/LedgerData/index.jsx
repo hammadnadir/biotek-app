@@ -17,8 +17,8 @@ function LedgerData() {
 
         <div className="search-bar" >
           {/* <i class="bi bi-search"></i> */}
-          <img className="vector" src={Vector} alt="search image" />
-          <img src={filter} alt="filter image" />
+          <img className="vector" src={Vector} alt="search" />
+          <img src={filter} alt="filter" />
           <p>Search For?</p> 
           <input type="search" placeholder="Voucher, Expense, Labels etc" />
         </div>

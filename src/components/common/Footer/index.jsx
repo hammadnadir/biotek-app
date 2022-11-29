@@ -1,11 +1,11 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Link, useLocation , NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import "./styles.scss";
 
 function Footer() {
 
-  const location = useLocation()
+  // const location = useLocation()
   // console.log(location.pathname)
 
   return (

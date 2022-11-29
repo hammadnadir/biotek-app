@@ -2,18 +2,12 @@ import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import {
-  Navigate,
   Route,
   Routes,
-  useLocation,
-  useNavigate,
 } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
-import { getCurrentUser } from "./utils";
-import { Header } from "./components/common";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setLoading } from "./redux/global";
 import { Chats, Expense, Inventory, Ledger, Notification, Settings } from "./pages";
 import Home from "./pages/Home";
 import SubMenu from "./pages/SubMenu";
@@ -25,13 +19,14 @@ import { getVoucherRequest } from "./redux/voucher";
 
 function App() {
   const dispatch = useDispatch();
-  const router = useLocation();
+  // const router = useLocation();
 
   const { loading } = useSelector((state) => state.global);
 
   useEffect(() => {
     dispatch(getVoucherRequest());
     dispatch(getExpenseRequest());
+    // eslint-disable-next-line
   }, []);
 
   // useEffect(() => {
@@ -59,9 +54,9 @@ function App() {
 
   return (
     <div>
-      {/* <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+      <div className={`${loading ? "spinner" : "spinner-hide"}`}>
         <Spinner animation="grow" />
-      </div> */}
+      </div>
       <Routes>
         <Route
           path="/"

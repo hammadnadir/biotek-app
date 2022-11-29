@@ -1,12 +1,11 @@
-import React, { useRef } from "react";
-import { PageItem } from "react-bootstrap";
+import React from "react";
 import "./styles.scss";
 
 function SelectForm({ label, optionsData ,handleHeadChange,value,selectField,...props }) {
-  const reference = useRef();
-  const handleClick = () => {
-    reference.current.focus();
-  };
+  // const reference = useRef();
+  // const handleClick = () => {
+  //   reference.current.focus();
+  // };
 
   return (
     <div className="select-field-new">

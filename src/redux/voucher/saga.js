@@ -6,9 +6,9 @@ import {
   getVoucherEditRequest,
   getVoucherEditSuccess,
   getVoucherEditFailure,
-  getVoucherDeleteRequest,
-  getVoucherDeleteSuccess,
-  getVoucherDeleteFailure,
+  // getVoucherDeleteRequest,
+  // getVoucherDeleteSuccess,
+  // getVoucherDeleteFailure,
 } from "./index";
 import { setLoading } from "../global";
 import { editVoucher, getVoucher } from "../../services/voucher";

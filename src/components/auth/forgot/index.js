@@ -34,7 +34,6 @@ const Forgot = () => {
     }
     if (Object.keys(error).length > 0) {
       setErr(error);
-      console .log(err);
     } else {
       console.log(input);
     //   if (!token) {

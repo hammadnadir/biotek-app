@@ -5,13 +5,12 @@ import { cards, cardsNew } from "../../../data";
 import { aaa } from "../../../assets";
 // import { storage } from "../../../firebase";
 // import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { v4 } from "uuid";
 // import { useEffect } from "react";
 
 function Options() {
-  const [imagesupload, setImagesupload] = useState("");
+  // const [imagesupload, setImagesupload] = useState("");
   // const [imagesList, setImagesList] = useState([]);
 
   // const imageListRef = ref(storage, "images/");

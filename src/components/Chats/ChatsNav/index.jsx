@@ -1,16 +1,16 @@
 import React from "react";
 import { Container, Dropdown } from "react-bootstrap";
 import "./styles.scss";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { backarrow, message, search, vdots } from "../../../assets";
 
 function ChatsNav() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate("/expense");
-  };
+  // const handleBack = () => {
+  //   navigate("/expense");
+  // };
 
   return (
     <div className="chats_nav">

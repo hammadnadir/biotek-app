@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { book } from "../../../../assets";
 import { SelectForm, TextFieldForm } from "../../../common";
 import { Carousel } from "react-responsive-carousel";
 import "./styles.scss";
@@ -8,23 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { editExpenseRequest } from "../../../../redux/expense";
 import { useState } from "react";
 import { useEffect } from "react";
-import { deleteObject, ref } from "firebase/storage";
-import { storage } from "../../../../firebase";
 import { useRef } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { getVoucherEditRequest } from "../../../../redux/voucher";
+import { useNavigate } from "react-router-dom";
 
 function EditModal({
-  handleShowEditModal,
-  setShowEditModal,
   showEditModal,
   handleCloseEditModal,
-  ExpenseEdit,
-  id,
   data,
 }) {
   const [editData, setEditData] = useState({});
-  const { editVoucher } = useSelector((state) => state.voucher);
   const { setExpense } = useSelector((state) => state.expense);
 
   const dispatch = useDispatch();
@@ -35,8 +26,8 @@ function EditModal({
     if (data) {
       setEditData({ ...data, expense_account: data?.expense_head?.account_no });
     }
+    // eslint-disable-next-line
   }, [data]);
-  console.log("Okkkk",setExpense)
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -121,10 +112,10 @@ function EditModal({
             style={{ display: "none" }}
           />
           <div className="images_carousel">
-            {editData.image == "no_image.jpg" && (
+            {editData.image === "no_image.jpg" && (
               <p className="no_image">No Image Avalible</p>
             )}
-            {editData.image != "no_image.jpg" && (
+            {editData.image !== "no_image.jpg" && (
               <Carousel>
                 {editData &&
                   editData.image &&
@@ -142,7 +133,7 @@ function EditModal({
           <div className="expense_total_images">
             {editData &&
               editData.image &&
-              editData.image != "no_image.jpg" &&
+              editData.image !== "no_image.jpg" &&
               editData?.image.map((item, index) => {
                 return (
                   <div className="expense_images" key={index}>

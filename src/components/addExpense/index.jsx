@@ -6,7 +6,7 @@ import { SelectForm, TextFieldForm, TextFieldNew } from "../common";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { createExpenseRequest, getExpenseRequest } from "../../redux/expense";
+import { createExpenseRequest } from "../../redux/expense";
 import { useState } from "react";
 import { storage } from "../../firebase";
 import {
@@ -16,7 +16,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { v4 } from "uuid";
-import axios from "axios";
+// import axios from "axios";
 
 function AddExpense() {
   const [imageUpload, setImageUpload] = useState([]);
@@ -30,10 +30,6 @@ function AddExpense() {
 
   const dispatch = useDispatch();
   const { expense } = useSelector((state) => state.expense);
-
-  useEffect(() => {
-    console.log(expense);
-  }, [expense]);
 
   console.log(expense);
   const reference = useRef();
@@ -141,7 +137,7 @@ function AddExpense() {
       expense_account: expense?.data?.expense_heads[0].account_no,
       expense_head: expense?.data?.expense_heads[0].account_no,
     });
-    console.log(expense?.data?.expense_heads[0].account_no);
+    // eslint-disable-next-line
   }, [expense]);
 
   const handleDeleteFirbase = (e, index, key, item) => {
@@ -175,6 +171,7 @@ function AddExpense() {
 
   useEffect(() => {
     document.getElementById("addnew").click();
+    // eslint-disable-next-line
   }, []);
 
   const handleBthClick = (index) => {

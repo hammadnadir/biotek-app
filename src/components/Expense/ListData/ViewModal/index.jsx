@@ -1,37 +1,25 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import { SelectForm, TextFieldForm } from "../../../common";
+import { TextFieldForm } from "../../../common";
 import "./styles.scss";
 import { Carousel } from "react-responsive-carousel";
-import { book } from "../../../../assets";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function ViewModal({
   viewModal,
   handleCloseViewModal,
-  ExpenseView,
-  item,
-  index,
   data,
   setShowEditModal
 }) {
-  const [boxOpen, setBoxOpen] = useState(false);
-  const [imageIndex, setImageIndex] = useState(0);
+  // const [boxOpen, setBoxOpen] = useState(false);
+  // const [imageIndex, setImageIndex] = useState(0);
   // const [data, setData] = useState({});
   let newDate = new Date();
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
 
-  const { expense } = useSelector((state) => state.expense);
+  // const { expense } = useSelector((state) => state.expense);
 
-  useEffect(() => {
-    if (expense) {
-      // setData(expense?.data?.lfe_daywise[0])
-    }
-  }, [expense]);
   // useEffect(()=>{
   // setData(expense?.data?.lfe_daywise[index])
   // },[index])
@@ -55,7 +43,7 @@ function ViewModal({
             </h1>
             <i className="bi bi-pencil-square" onClick={showEditModals}></i>
             <div className="images_carousel">
-              {data.image == "no_image.jpg" && (
+              {data.image === "no_image.jpg" && (
                 <p className="no_image">No Image Avalible</p>
               )}
               {/* {data?.image.length == 0 && (
@@ -68,7 +56,7 @@ function ViewModal({
                       <div key={index} className="main_data_img">
                         <img
                           src={item}
-                          onClick={() => setBoxOpen(true)}
+                          // onClick={() => setBoxOpen(true)}
                           alt="img"
                         />
                       </div>

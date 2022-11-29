@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import { book, expense, notify } from "../../../assets";
+import { expense, notify } from "../../../assets";
 import "./styles.scss";
 
 function MessageData() {

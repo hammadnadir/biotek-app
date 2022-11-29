@@ -1,23 +1,23 @@
 import { Button, Dropdown } from "react-bootstrap";
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { SearchField } from "../../common";
-import { Link, Router, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVoucherEditRequest,
-  getVoucherRequest,
+  // getVoucherRequest,
 } from "../../../redux/voucher";
-import { getExpenseRequest } from "../../../redux/expense";
-import axios from "axios";
-import VoucherDeleteModal from "../DeleteModal";
+// import { getExpenseRequest } from "../../../redux/expense";
+// import axios from "axios";
+// import VoucherDeleteModal from "../DeleteModal";
 
 function VoucherData() {
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  // const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { voucher } = useSelector((state) => state.voucher);
 
@@ -29,6 +29,7 @@ function VoucherData() {
     //     console.log(response);
     //   });
     // console.log("Hi");
+    // eslint-disable-next-line
   }, []);
   console.log(voucher);
 

@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import React from "react";
+// import { useDispatch } from "react-redux";
 // import { deleteExpenseRequest } from "../../../../redux/expense";
 import "./styles.scss";
 
 const VoucherDeleteModal = () => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleVoucherDel = (id) => {
+  // const handleVoucherDel = (id) => {
     // dispatch(deleteVoucherRequest({deleteid: id }));
-  }
+  // }
   
   return (
     <>

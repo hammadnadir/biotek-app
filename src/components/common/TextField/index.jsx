@@ -3,9 +3,9 @@ import "./styles.scss"
 
 function TextField({label ,...props}) {
     const reference=useRef()
-    const handleClick=()=>{
-    reference.current.focus();
-    }
+    // const handleClick=()=>{
+    // reference.current.focus();
+    // }
 
   return (
     <div className="text-field">

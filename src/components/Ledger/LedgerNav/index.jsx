@@ -1,15 +1,15 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { Navigate, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
 function LedgerNav() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate("/expense");
-  };
+  // const handleBack = () => {
+  //   navigate("/expense");
+  // };
   return (
     <div className="expense-navbar">
       <Container>

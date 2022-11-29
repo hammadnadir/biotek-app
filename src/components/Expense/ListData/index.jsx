@@ -1,38 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { vouchers } from "../../../data";
-import { Button } from "react-bootstrap";
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
 import { storage } from "../../../firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { ref,  listAll, getDownloadURL } from "firebase/storage";
 import { Dropdown } from "react-bootstrap";
 import ModalPage from "./Modal";
 import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getExpenseRequest, setExpencesData } from "../../../redux/expense";
+import { setExpencesData } from "../../../redux/expense";
 import { noimg } from "../../../assets";
 import EditModal from "./EditModal";
 import ViewModal from "./ViewModal";
-import { editExpenseRequest } from "../../../redux/expense";
-import { deleteExpenseRequest } from "../../../redux/expense";
-import { history } from "../../../redux/history";
+// import { editExpenseRequest } from "../../../redux/expense";
+// import { deleteExpenseRequest } from "../../../redux/expense";
+// import { history } from "../../../redux/history";
 import { useLocation } from "react-router-dom";
 
-function ListData({ searchVal, setSearchVal, handleSearchVal }) {
+function ListData({ searchVal, handleSearchVal }) {
   const [vouchersData, setVouchersData] = useState([]);
-  const [inputData, setInputData] = useState({});
+  // const [inputData, setInputData] = useState({});
   const [imagesupload, setImagesupload] = useState([]);
   const [itemData, setItemData] = useState({});
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [viewModal, setShowViewModal] = useState(false);
   const [itemId, setItemId] = useState(0);
-  const [showMain, setShowMain] = useState(false);
+  // const [showMain, setShowMain] = useState(false);
 
-  const reference = useRef();
+  // const reference = useRef();
   const navigate = useLocation();
   const dispatch = useDispatch();
   const imageListRef = ref(storage, "images/");
@@ -44,6 +43,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   console.log(navigate.pathname)
   useEffect(() => {
     setVouchersData(vouchers);
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -53,30 +53,27 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
     return () => {
       dispatch(setExpencesData(false));
     };
+    // eslint-disable-next-line
   }, [navigate.pathname]);
 
-  useEffect(()=>{
-    console.log("ABCD",setExpense)
-  },[setExpense])
+  // const monthsName = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  //   "August",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December",
+  // ];
 
-  const monthsName = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const date = new Date();
-  const month = monthsName[date.getMonth()];
-  const year = date.getFullYear();
+  // const date = new Date();
+  // const month = monthsName[date.getMonth()];
+  // const year = date.getFullYear();
 
   const handleShowModal = (item) => {
     setShowEditModal(false);
@@ -128,6 +125,7 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
       });
     });
     console.log(imagesupload);
+    // eslint-disable-next-line
   }, []);
 
   //   const handleUpload = (e) => {
@@ -136,48 +134,37 @@ function ListData({ searchVal, setSearchVal, handleSearchVal }) {
   // alert("hi")
   //   };
 
-  const handleUpload = (e) => {
-    let data = [];
-    for (let i = 0; i < e.target.files.length; i++) {
-      data.push(e.target.files[i]);
-      const imageRef = ref(
-        storage,
-        `images/${month}_${year}/${data[i].name + v4()}`
-      );
-      uploadBytes(imageRef, data[i]);
-    }
-    // setImagesupload([...imagesupload, ...data]);
-    //   .then((snapshot) => {
-    //    getDownloadURL(snapshot.ref).then((url) => {
-    //   setImagesList([...imagesList, url]);
-    // });
-    //   });
-    // }
-  };
+  // const handleUpload = (e) => {
+  //   let data = [];
+  //   for (let i = 0; i < e.target.files.length; i++) {
+  //     data.push(e.target.files[i]);
+  //     const imageRef = ref(
+  //       storage,
+  //       `images/${month}_${year}/${data[i].name + v4()}`
+  //     );
+  //     uploadBytes(imageRef, data[i]);
+  //   }
+  // };
 
-  const list = [
-    { name: "View", icon: "bi bi-eye-fill" },
-    { name: "Edit", icon: "bi bi-pencil-square" },
-    { name: "Delete", icon: "bi bi-trash-fill" },
-  ];
+  // const list = [
+  //   { name: "View", icon: "bi bi-eye-fill" },
+  //   { name: "Edit", icon: "bi bi-pencil-square" },
+  //   { name: "Delete", icon: "bi bi-trash-fill" },
+  // ];
 
-  const handleShow = (item) => {
-    vouchers.map((data) => {
-      return item.id === data.id && setShow(!show);
-    });
-  };
+  // const handleShow = (item) => {
+  //   vouchers.map((data) => {
+  //     return item.id === data.id && setShow(!show);
+  //   });
+  // };
 
-  useEffect(() => {
-    console.log(imagesupload);
-  }, [imagesupload]);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleInputChange = (e) => {
-    setInputData({ ...inputData, [e.target.name]: e.target.value });
-  };
+  // const handleInputChange = (e) => {
+  //   setInputData({ ...inputData, [e.target.name]: e.target.value });
+  // };
   const sum =
     expense?.data?.balance - expense?.data?.in[0]?.total_in ||
     expense?.data?.balance;
