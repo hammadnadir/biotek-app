@@ -1,14 +1,18 @@
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import {
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Chats, Expense, Inventory, Ledger, Notification, Settings } from "./pages";
+import {
+  Chats,
+  Expense,
+  Inventory,
+  Ledger,
+  Notification,
+  Settings,
+} from "./pages";
 import Home from "./pages/Home";
 import SubMenu from "./pages/SubMenu";
 import Voucher from "./pages/vocher";
@@ -24,8 +28,8 @@ function App() {
   const { loading } = useSelector((state) => state.global);
 
   useEffect(() => {
-    dispatch(getVoucherRequest());
-    dispatch(getExpenseRequest());
+    // dispatch(getVoucherRequest());
+    // dispatch(getExpenseRequest());
     // eslint-disable-next-line
   }, []);
 
@@ -42,15 +46,15 @@ function App() {
   //   router.events.on("routeChangeError", handleComplete);
   // }, [router]);
 
-  const RequireAuth = ({ children }) => {
+  // const RequireAuth = ({ children }) => {
     // let auth = getCurrentUser();
     // let location = useLocation();
 
     // if (!auth) {
     //   return <Navigate to="/login" state={{ from: location }} replace />;
     // }
-    return children;
-  };
+    // return children;
+  // };
 
   return (
     <div>
@@ -61,85 +65,84 @@ function App() {
         <Route
           path="/"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Home />
-            </RequireAuth>
+            // </RequireAuth>
           }
         ></Route>
         <Route
           path="/expense"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Expense />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
-        {/* <Route path='/' element={<Header />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/sub-menu"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <SubMenu />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
         <Route
           path="/voucher"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Voucher />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
         <Route
           path="/new-expense"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <NewExpense />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
-         <Route
+        <Route
           path="/notification"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Notification />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
         <Route
           path="/chats"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Chats />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
         <Route
           path="/settings"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Settings />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
-         <Route
+        <Route
           path="/ledger"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Ledger />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
         <Route
           path="/raw-inventory"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Inventory />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
       </Routes>

@@ -1,0 +1,20 @@
+.close_modal {
+  .modal-dialog {
+    justify-content: center;
+    z-index: 2222;
+    .modal-content {
+      border-radius: 0px;
+      max-width: 300px;
+    }
+  }
+}
+.remarks_data {
+  padding: 20px;
+  h2 {
+    font-size: 20px;
+  }
+  Button {
+    text-align: end;
+    margin-left: 20px;
+  }
+}

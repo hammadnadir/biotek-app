@@ -15,16 +15,29 @@ import { editVoucher, getVoucher } from "../../services/voucher";
 import { history } from "../history";
 import { setExpencesData } from "../expense";
 
+// export function* handleGetVoucher() {
+//   while (true) {
+//     try {
+//       const { payload } = yield take(getVoucherRequest.type);
+//       yield put(setLoading(true));
+//       const response = yield call(getVoucher, payload);
+//       yield put(setLoading(false));
+//       yield put(getVoucherSuccess(response));
+//     } catch (error) {
+//       yield put(setLoading(false));
+//       yield put(getVoucherFailure(error));
+//     }
+//   }
+// }
 export function* handleGetVoucher() {
   while (true) {
     try {
-      const { payload } = yield take(getVoucherRequest.type);
+      yield take(getVoucherRequest.type);
       yield put(setLoading(true));
-      const response = yield call(getVoucher, payload);
+      const response = yield call(getVoucher);
       yield put(setLoading(false));
       yield put(getVoucherSuccess(response));
     } catch (error) {
-      yield put(setLoading(false));
       yield put(getVoucherFailure(error));
     }
   }

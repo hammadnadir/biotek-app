@@ -1,10 +1,13 @@
 import axios from "axios";
-// const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
+import request from "./request";
+const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
 
-export const getExpense = (payload) => {
+export const getExpense = () => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`http://192.168.10.189:8000/api/add_expense?unit_expense=1`, payload)
+    request
+      .get(`api/add_expense?unit_expense=1`)
+      // axios
+      // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
         resolve(response);
       })
@@ -46,6 +49,20 @@ export const deleteExpense = (payload) => {
   return new Promise((resolve, reject) => {
     axios
       .post(`api/delete_expense`,payload)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+
+export const clearExpense = (payload) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`api/close_form`,payload)
       .then((response) => {
         resolve(response);
       })

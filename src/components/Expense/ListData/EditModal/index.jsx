@@ -31,6 +31,7 @@ function EditModal({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    handleCloseEditModal();
     const editFormData = {
       lfe_id: editData.id,
       expense_head: editData.expense_head.account_no,

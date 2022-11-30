@@ -12,21 +12,38 @@ import {
   deleteExpenseRequest,
   deleteExpenseSuccess,
   deleteExpenseFailure,
+  clearExpenseRequest,
+  clearExpenseSuccess,
+  clearExpenseFailure,
 } from "./index";
-import { createExpense, deleteExpense, editExpense, getExpense } from "../../services/expense";
+import { clearExpense, createExpense, deleteExpense, editExpense, getExpense } from "../../services/expense";
 import { setLoading } from "../global";
 import { history } from "../history";
+import { getVoucherRequest } from "../voucher";
 
+// export function* handleGetExpense() {
+//   while (true) {
+//     try {
+//       // const { payload } = yield take(getExpenseRequest.type);
+//       yield put(setLoading(true));
+//       const response = yield call(getExpense, payload);
+//       yield put(setLoading(false));
+//       yield put(getExpenseSuccess(response));
+//     } catch (error) {
+//       yield put(setLoading(false));
+//       yield put(getExpenseFailure(error));
+//     }
+//   }
+// }
 export function* handleGetExpense() {
   while (true) {
     try {
-      const { payload } = yield take(getExpenseRequest.type);
+      yield take(getExpenseRequest.type);
       yield put(setLoading(true));
-      const response = yield call(getExpense, payload);
+      const response = yield call(getExpense);
+      yield put(setLoading(false));
       yield put(getExpenseSuccess(response));
-      yield put(setLoading(false));
     } catch (error) {
-      yield put(setLoading(false));
       yield put(getExpenseFailure(error));
     }
   }
@@ -82,6 +99,29 @@ export function* handleDeleteExpense() {
       yield put(deleteExpenseSuccess(response));
     } catch (error) {
       yield put(deleteExpenseFailure(error));
+      yield put(setLoading(false));
+    }
+  }
+}
+
+export function* handleClearExpense() {
+  while (true) {
+    try {
+      const { payload } = yield take(clearExpenseRequest.type);
+      yield put(setLoading(true));
+      const response = yield call(clearExpense, payload);
+
+      // let shippings = yield select(shippingSelector);
+      // const filterShipping = shippings.data.filter(
+      //   (shipping) => shipping.id !== payload
+      // );
+      // yield put(updateShipping({ data: filterShipping }));
+      yield put(setLoading(false));
+      yield put(getExpenseRequest());
+      yield put(clearExpenseSuccess(response));
+
+    } catch (error) {
+      yield put(clearExpenseFailure(error));
       yield put(setLoading(false));
     }
   }

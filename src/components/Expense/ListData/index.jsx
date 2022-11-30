@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import "./styles.scss";
 import { vouchers } from "../../../data";
 // import { v4 } from "uuid";
 import { storage } from "../../../firebase";
-import { ref,  listAll, getDownloadURL } from "firebase/storage";
+import { ref, listAll, getDownloadURL } from "firebase/storage";
 import { Dropdown } from "react-bootstrap";
 import ModalPage from "./Modal";
 import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setExpencesData } from "../../../redux/expense";
+import {
+  clearExpenseRequest,
+  getExpenseRequest,
+  setExpencesData,
+} from "../../../redux/expense";
 import { noimg } from "../../../assets";
 import EditModal from "./EditModal";
 import ViewModal from "./ViewModal";
@@ -18,6 +22,8 @@ import ViewModal from "./ViewModal";
 // import { deleteExpenseRequest } from "../../../redux/expense";
 // import { history } from "../../../redux/history";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import CloseModal from "./CloseModal";
 
 function ListData({ searchVal, handleSearchVal }) {
   const [vouchersData, setVouchersData] = useState([]);
@@ -28,6 +34,7 @@ function ListData({ searchVal, handleSearchVal }) {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [viewModal, setShowViewModal] = useState(false);
+  const [closeModal, setCloseModal] = useState(false);
   const [itemId, setItemId] = useState(0);
   // const [showMain, setShowMain] = useState(false);
 
@@ -39,15 +46,15 @@ function ListData({ searchVal, handleSearchVal }) {
   const { editVoucher } = useSelector((state) => state.voucher);
   const { setExpense } = useSelector((state) => state.expense);
 
-  console.log(editVoucher);
-  console.log(navigate.pathname)
+  console.log(editVoucher.balance);
+  console.log(navigate.pathname);
   useEffect(() => {
     setVouchersData(vouchers);
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    if (setExpense){
+    if (setExpense) {
       dispatch(setExpencesData(true));
     }
     return () => {
@@ -75,12 +82,28 @@ function ListData({ searchVal, handleSearchVal }) {
   // const month = monthsName[date.getMonth()];
   // const year = date.getFullYear();
 
+  console.log(expense?.data?.lfe_id)
   const handleShowModal = (item) => {
     setShowEditModal(false);
     setShowViewModal(false);
     setShowModal(true);
     setItemData(item);
     setItemId(item.id);
+  };
+  const handleShowCloseModal = () => {
+    setShowEditModal(false);
+    setShowViewModal(false);
+    setShowModal(false);
+    setCloseModal(true);
+  }
+
+  const handleCCloseModal = () => {
+    // setShowEditModal(false);
+    // setShowViewModal(false);
+    // setShowModal(true);
+    // setItemData(item);
+    // setItemId(item.id);
+    setCloseModal(true)
   };
 
   const handleCloseModal = () => {
@@ -165,9 +188,23 @@ function ListData({ searchVal, handleSearchVal }) {
   // const handleInputChange = (e) => {
   //   setInputData({ ...inputData, [e.target.name]: e.target.value });
   // };
+  // useEffect(() => {
+  //   let called = true;
+  //   if (called) {
+  //     axios
+  //       .get("http://192.168.10.189:8000/api/add_expense?unit_expense=1")
+  //       .then(function (response) {
+  //         console.log(response);
+  //       });
+  //   }
+  //   return () => {
+  //     called = false;
+  //   };
+  // }, []);
+
   const sum =
     expense?.data?.balance - expense?.data?.in[0]?.total_in ||
-    expense?.data?.balance;
+    expense?.data?.balance || editVoucher?.balance;
 
   return (
     <div className="list-data">
@@ -180,18 +217,20 @@ function ListData({ searchVal, handleSearchVal }) {
             <div className="prices">
               <div>
                 <div className="total-amount">
-                  <h2>Rs. {expense?.data?.balance}</h2>
+                  <h2>Rs. {expense?.data?.balance || editVoucher?.balance}</h2>
                 </div>
                 <h4>Today Total Expanses</h4>
                 <div className="end-price">
                   <h3>Rs. {sum}</h3>
                 </div>
               </div>
-              <Link to="/new-expense">
-                <div className="new-icon">
-                  <i className="bi bi-plus"></i>
-                </div>
-              </Link>
+              {!setExpense && (
+                <Link to="/new-expense">
+                  <div className="new-icon">
+                    <i className="bi bi-plus"></i>
+                  </div>
+                </Link>
+              )}
             </div>
             {/* <div className="two-btns">
               <div
@@ -218,7 +257,20 @@ function ListData({ searchVal, handleSearchVal }) {
       <div className="section2">
         <Container>
           <div className="section2-data">
-            <h2>Expenses Info.</h2>
+            <div className="clear_form_data">
+              <h2>Expenses Info.</h2>
+              {!setExpense && expense && expense?.data?.lfe_daywise.length > 0 && (
+                <div className="clear-form">
+                  <Button onClick={()=>setCloseModal(true)}>Close Form</Button>
+                  <CloseModal
+                    setCloseModal={setCloseModal}
+                    handleCCloseModal={handleCCloseModal}
+                    closeModal={closeModal}
+                    id={expense?.data?.lfe_id}
+                  />
+                </div>
+              )}
+            </div>
             {setExpense
               ? editVoucher &&
                 editVoucher.daywise
@@ -256,7 +308,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           <Dropdown>
                             <Dropdown.Toggle
                               variant="success"
-                              id="dropdown-basic"
+                              id={`dropdown-basic${index}`}
                             >
                               <i className="bi bi-three-dots"></i>
                             </Dropdown.Toggle>

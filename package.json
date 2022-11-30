@@ -1,7 +1,7 @@
 {
   "name": "biotek",
   "version": "0.1.0",
-  "homepage":".",
+  "homepage": ".",
   "private": true,
   "proxy": "http://192.168.10.189:8000/",
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-bootstrap": "^2.6.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
+    "react-image-viewer-dv": "^1.0.2",
     "react-redux": "^8.0.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.3",

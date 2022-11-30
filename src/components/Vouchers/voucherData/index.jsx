@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVoucherEditRequest,
-  // getVoucherRequest,
+  getVoucherRequest,
 } from "../../../redux/voucher";
+import axios from "axios";
 // import { getExpenseRequest } from "../../../redux/expense";
 // import axios from "axios";
 // import VoucherDeleteModal from "../DeleteModal";
@@ -24,11 +25,10 @@ function VoucherData() {
   useEffect(() => {
     // dispatch(getVoucherRequest());
     // axios
-    //   .get("http://192.168.10.189:8000/api/expense")
+    //   .get("http://192.168.10.189:8000/api/add_expense?unit_expense=1")
     //   .then(function (response) {
     //     console.log(response);
     //   });
-    // console.log("Hi");
     // eslint-disable-next-line
   }, []);
   console.log(voucher);

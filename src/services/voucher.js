@@ -1,10 +1,13 @@
 import axios from "axios";
+import request from "./request";
 // const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
 
-export const getVoucher = (payload) => {
+export const getVoucher = () => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`http://192.168.10.189:8000/api/expense`)
+    request
+      .get(`api/expense`)
+      // axios
+      // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
         resolve(response);
       })

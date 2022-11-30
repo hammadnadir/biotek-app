@@ -5,6 +5,7 @@ const initialState = {
   isLoadingExpense: false,
   createExpense: {},
   setExpense: false,
+  clearAll : "",
 };
 
 export const expenseSlice = createSlice({
@@ -55,6 +56,17 @@ export const expenseSlice = createSlice({
       state.isLoadingExpense = false;
       console.log("Error:", { message: action.payload.message });
     },
+    clearExpenseRequest: (state) => {
+      state.isLoadingExpense = true;
+    },
+    clearExpenseSuccess: (state, action) => {
+      state.createExpense = action.payload;
+      state.isLoadingExpense = false;
+    },
+    clearExpenseFailure: (state, action) => {
+      state.isLoadingExpense = false;
+      console.log("Error:", { message: action.payload.message });
+    },
     setExpencesData: (state, action) => {
       state.setExpense = action.payload;
     },
@@ -74,6 +86,9 @@ export const {
   deleteExpenseRequest,
   deleteExpenseSuccess,
   deleteExpenseFailure,
+  clearExpenseRequest,
+  clearExpenseSuccess,
+  clearExpenseFailure,
   setExpencesData
 } = expenseSlice.actions;
 

@@ -18,6 +18,7 @@ const ModalPage = ({
   const { setExpense } = useSelector((state) => state.expense);
 
   const handleExpenseDel = (id) => {
+    setShowModal(false)
     dispatch(deleteExpenseRequest({deleteid: id }));
     if (setExpense){
       navigate("/voucher");
