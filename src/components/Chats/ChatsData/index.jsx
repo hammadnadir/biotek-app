@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { book } from "../../../assets";
 import "./styles.scss";
 
@@ -69,23 +70,25 @@ function ChatsData() {
           <h1>All Messages</h1>
           {chats.map((item, index) => {
             return (
-              <div className="chat_card" key={index}>
-                <div className="card_sub_data">
-                  <div className="image_section">
-                    <img src={item.image} alt="person" />
-                  </div>
-                  <div className="lists_data">
-                    <div className="name_section">
-                      <p>{item.name}</p>
-                      <span>{item.quantity}</span>
+              <Link to="/personalChat">
+                <div className="chat_card" key={index}>
+                  <div className="card_sub_data">
+                    <div className="image_section">
+                      <img src={item.image} alt="person" />
                     </div>
-                    <p className="text">{item.message}</p>
+                    <div className="lists_data">
+                      <div className="name_section">
+                        <p>{item.name}</p>
+                        <span>{item.quantity}</span>
+                      </div>
+                      <p className="text">{item.message}</p>
+                    </div>
+                  </div>
+                  <div className="time_zone">
+                    <small>{item.time}</small>
                   </div>
                 </div>
-                <div className="time_zone">
-                  <small>{item.time}</small>
-                </div>
-              </div>
+              </Link>
             );
           })}
         </div>

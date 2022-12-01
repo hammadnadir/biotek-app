@@ -20,6 +20,7 @@ import NewExpense from "./pages/New-Expense";
 import { Spinner } from "react-bootstrap";
 import { getExpenseRequest } from "./redux/expense";
 import { getVoucherRequest } from "./redux/voucher";
+import PersonalChat from "./pages/PersonalChat";
 
 function App() {
   const dispatch = useDispatch();
@@ -142,6 +143,14 @@ function App() {
           element={
             // <RequireAuth>
               <Inventory />
+            // </RequireAuth>
+          }
+        />
+        <Route
+          path="/personalChat"
+          element={
+            // <RequireAuth>
+              <PersonalChat />
             // </RequireAuth>
           }
         />
