@@ -1,9 +1,18 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import AddExpense from "../../components/addExpense";
 import { Footer } from "../../components/common";
 import { NavExpense } from "../../components/Expense";
+import { getExpenseRequest } from "../../redux/expense";
 
 function NewExpense() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getExpenseRequest());
+  }, []);
+
   return (
     <div>
       <NavExpense />

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { createExpenseRequest } from "../../redux/expense";
 import { useState } from "react";
 import { storage } from "../../firebase";
+
 import {
   getDownloadURL,
   ref,
@@ -16,6 +17,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { v4 } from "uuid";
+import { setLoading } from "../../redux/global";
 // import axios from "axios";
 
 function AddExpense() {
@@ -56,7 +58,6 @@ function AddExpense() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("aaaaaaaa");
     const allFieldData = {
       lfe_narration: narrationData,
       lfe_amount: amountData,
@@ -83,10 +84,13 @@ function AddExpense() {
   };
 
   const handleUpload = (e, index) => {
+    
+    // dispatch(setLoading(false))
     console.log(arrayIndex);
     const data = [];
     const urls = [];
     for (let x = 0; x < e.target.files.length; x++) {
+      dispatch(setLoading(true));
       data.push(e.target.files[x]);
       const imageRef = ref(
         storage,
@@ -96,7 +100,9 @@ function AddExpense() {
         getDownloadURL(snapshot.ref).then((url) => {
           if (url) {
             urls.push(url);
+            dispatch(setLoading(true));
             if (urls.length === e.target.files.length) {
+              dispatch(setLoading(false));
               console.log(urls);
               const firebaseArray = [...allImages];
               firebaseArray[arrayIndex] =
@@ -110,6 +116,7 @@ function AddExpense() {
           }
         });
       });
+      // dispatch(setLoading(false))
     }
     console.log([...data]);
     const arrayabc = [...imageUpload];
@@ -142,6 +149,7 @@ function AddExpense() {
 
   const handleDeleteFirbase = (e, index, key, item) => {
     const desertRef = ref(storage, item);
+    dispatch(setLoading(true));
     deleteObject(desertRef)
       .then(() => {
         const filtered = allImages[key].filter((img) => {
@@ -151,8 +159,10 @@ function AddExpense() {
         const data = [...allImages];
         data[key] = filtered;
         setAllImages(data);
+        dispatch(setLoading(false));
       })
       .catch((error) => {
+        dispatch(setLoading(false));
         console.log(error);
       });
     // const filtered = allImages[key].filter((img) => {
@@ -175,9 +185,13 @@ function AddExpense() {
   }, []);
 
   const handleBthClick = (index) => {
-    console.log(index)
+    console.log(index);
     setArrayIndex(index);
-    reference.current.click();
+    if (reference.current) {
+      reference.current.click();
+    } else {
+      document.getElementById("abcdef").click();
+    }
   };
   const handleExpenseDelete = (e, index, item) => {
     console.log(index);
@@ -186,31 +200,34 @@ function AddExpense() {
     setInputList(filterData);
     const narr = [...narrationData];
     const data = narr[index];
-    const filtered = narrationData.filter((item) => {
+    const filtered = narr.filter((item) => {
       return item !== data;
     });
+    console.log(data)
     setNarrationData(filtered);
     const amou = [...amountData];
     const dataAmount = amou[index];
+    console.log(dataAmount)
     const filteredNew = amou.filter((item) => {
       return item !== dataAmount;
     });
     setAmountData(filteredNew);
     // for (let x = 0; x < item.image.length; x++) {
     //   const desertRef = ref(storage, item.image[x]);
-    //   deleteObject(desertRef)
+    //   deleteObject(desertRef);
     //   .then(() => {
     //   })
     //   .catch((error) => {
     //     console.log(error);
     //   });
-    // }
+    // };
     const images = [...allImages];
     const specific = images[index];
-    const filteredImg = images[index]?.filter((img) => {
+    const filteredImg = images?.filter((img) => {
       return img !== specific;
     });
-    setAllImages([filteredImg]);
+    setAllImages(filteredImg);
+    console.log(filteredImg)
   };
 
   return (
@@ -302,13 +319,13 @@ function AddExpense() {
                         </div>
                       </div>
                     </div>
-                    {allImages[index]  && (
+                    {allImages[index] && (
                       <div className="attachments">
                         <h3>Attachments :</h3>
                         <div className="expense_total_images">
                           {allImages[index] &&
-                          allImages[index].length > 0 &&
-                          // allImages[index].length > 0 &&
+                            allImages[index].length > 0 &&
+                            // allImages[index].length > 0 &&
                             allImages[index].map((item, key) => {
                               return (
                                 <div className="expense_images" key={key}>
@@ -332,6 +349,7 @@ function AddExpense() {
                       multiple
                       onChange={(e) => handleUpload(e, index)}
                       accept="image/jpg, image/jpeg, image/png"
+                      id="abcdef"
                     />
                   </div>
                 </Container>
