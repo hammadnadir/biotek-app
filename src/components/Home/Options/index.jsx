@@ -74,7 +74,15 @@ function Options() {
         <div className="recent-data">
           <h1>Recent Links</h1>
           <div className="options-new-data">
-            {cardsNew.map((item, index) => {
+          <div className="main-inner-data">
+            <Link to="/voucher">
+              <div className="cards">
+                <img src={aaa} alt="logo" />
+              </div>
+            </Link>
+            <p>Expense</p>
+          </div>
+            {/* {cardsNew.map((item, index) => {
               return (
                 <div className="main-inner-data" key={index}>
                   <div className="cards">
@@ -83,7 +91,7 @@ function Options() {
                   <p>data</p>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </Container>

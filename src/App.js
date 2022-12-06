@@ -1,7 +1,7 @@
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -21,40 +21,36 @@ import { Spinner } from "react-bootstrap";
 import { getExpenseRequest } from "./redux/expense";
 import { getVoucherRequest } from "./redux/voucher";
 import PersonalChat from "./pages/PersonalChat";
+import { setLoading } from "./redux/global";
 
 function App() {
   const dispatch = useDispatch();
-  // const router = useLocation();
+  const router = useLocation();
 
   const { loading } = useSelector((state) => state.global);
 
   useEffect(() => {
-    // dispatch(getVoucherRequest());
-    // dispatch(getExpenseRequest());
-    // eslint-disable-next-line
-  }, []);
+    // const handleStart = (url) => {
+    //   url !== router.pathname
+    //     ? dispatch(setLoading(true))
+    //     : dispatch(setLoading(false));
+    // };
+    // const handleComplete = (url) => dispatch(setLoading(false));
 
-  // useEffect(() => {
-  //   const handleStart = (url) => {
-  //     url !== router.pathname
-  //       ? dispatch(setLoading(true))
-  //       : dispatch(setLoading(false));
-  //   };
-  //   const handleComplete = (url) => dispatch(setLoading(false));
-
-  //   router.events.on("routeChangeStart", handleStart);
-  //   router.events.on("routeChangeComplete", handleComplete);
-  //   router.events.on("routeChangeError", handleComplete);
-  // }, [router]);
+    // router.events.on("routeChangeStart", handleStart);
+    // router.events.on("routeChangeComplete", handleComplete);
+    // router.events.on("routeChangeError", handleComplete);
+    
+  }, [router]);
 
   // const RequireAuth = ({ children }) => {
-    // let auth = getCurrentUser();
-    // let location = useLocation();
+  //   let auth = getCurrentUser();
+  //   let location = useLocation();
 
-    // if (!auth) {
-    //   return <Navigate to="/login" state={{ from: location }} replace />;
-    // }
-    // return children;
+  //   if (!auth) {
+  //     return <Navigate to="/login" state={{ from: location }} replace />;
+  //   }
+  //   return children;
   // };
 
   return (
