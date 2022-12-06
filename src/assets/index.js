@@ -11,3 +11,4 @@ export { default as vdots } from "./vdots.png";
 export { default as backarrow } from "./backarrow.png";
 export { default as filter } from "./filter.png";
 export { default as Vector } from "./Vector.png";
+export { default as ellipse } from "./ellipse.png";
