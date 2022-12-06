@@ -37,7 +37,7 @@ function App() {
     // router.events.on("routeChangeStart", handleStart);
     // router.events.on("routeChangeComplete", handleComplete);
     // router.events.on("routeChangeError", handleComplete);
-    
+    // eslint-disable-next-line
   }, [router]);
 
   const RequireAuth = ({ children }) => {

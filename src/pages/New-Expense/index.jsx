@@ -15,6 +15,7 @@ function NewExpense() {
 
   useEffect(() => {
     dispatch(getExpenseRequest());
+    // eslint-disable-next-line
   }, []);
 
   return (

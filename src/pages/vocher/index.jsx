@@ -14,6 +14,7 @@ function Voucher() {
 
   useEffect(() => {
     dispatch(getVoucherRequest());
+    // eslint-disable-next-line
   }, []);
 
   return (
