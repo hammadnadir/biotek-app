@@ -1,24 +1,15 @@
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
 import {
   clearExpenseRequest,
-  deleteExpenseRequest,
 } from "../../../../redux/expense";
 import { TextField } from "../../../common";
 import "./styles.scss";
 
 const CloseModal = ({
-  //   handleShowModal,
-  //   setShowModal,
-  //   showModal,
-  //   handleCloseModal,
-  //   ExpenseDelete,
-  //   id
   setCloseModal,
   closeModal,
-  handleCCloseModal,
   id
 }) => {
   const dispatch = useDispatch();

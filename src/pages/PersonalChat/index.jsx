@@ -1,5 +1,4 @@
 import React from "react";
-import { Footer } from "../../components/common";
 import { MessageNav } from "../../components/Messages";
 import MessageChat from "../../components/personalMessage/MessageChat";
 

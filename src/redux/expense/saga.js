@@ -19,7 +19,6 @@ import {
 import { clearExpense, createExpense, deleteExpense, editExpense, getExpense } from "../../services/expense";
 import { setLoading } from "../global";
 import { history } from "../history";
-import { getVoucherRequest } from "../voucher";
 
 // export function* handleGetExpense() {
 //   while (true) {

@@ -1,6 +1,5 @@
 import axios from "axios";
 import request from "./request";
-const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
 
 export const getExpense = (payload) => {
   return new Promise((resolve, reject) => {

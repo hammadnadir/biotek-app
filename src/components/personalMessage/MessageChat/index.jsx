@@ -56,9 +56,9 @@ function MessageChat() {
 
       <div className="footer">
         <input type="text" placeholder="Type Message Here........" />
-        <a href="">
+        {/* <a href=""> */}
           <i class="bi bi-arrow-right-circle-fill"></i>
-        </a>
+        {/* </a> */}
       </div>
     </div>
 

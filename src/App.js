@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   Chats,
@@ -18,14 +18,10 @@ import SubMenu from "./pages/SubMenu";
 import Voucher from "./pages/vocher";
 import NewExpense from "./pages/New-Expense";
 import { Spinner } from "react-bootstrap";
-import { getExpenseRequest } from "./redux/expense";
-import { getVoucherRequest } from "./redux/voucher";
 import PersonalChat from "./pages/PersonalChat";
-import { setLoading } from "./redux/global";
 import { getCurrentUser } from "./utils";
 
 function App() {
-  const dispatch = useDispatch();
   const router = useLocation();
 
   const { loading } = useSelector((state) => state.global);

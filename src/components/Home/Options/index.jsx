@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
-import { cards, cardsNew } from "../../../data";
+import { cards } from "../../../data";
 import { aaa } from "../../../assets";
 // import { storage } from "../../../firebase";
 // import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";

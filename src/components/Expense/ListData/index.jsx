@@ -11,8 +11,6 @@ import { SearchField } from "../../common";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearExpenseRequest,
-  getExpenseRequest,
   setExpencesData,
 } from "../../../redux/expense";
 import { noimg } from "../../../assets";
@@ -22,7 +20,6 @@ import ViewModal from "./ViewModal";
 // import { deleteExpenseRequest } from "../../../redux/expense";
 // import { history } from "../../../redux/history";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 import CloseModal from "./CloseModal";
 
 function ListData({ searchVal, handleSearchVal }) {
@@ -90,12 +87,12 @@ function ListData({ searchVal, handleSearchVal }) {
     setItemData(item);
     setItemId(item.id);
   };
-  const handleShowCloseModal = () => {
-    setShowEditModal(false);
-    setShowViewModal(false);
-    setShowModal(false);
-    setCloseModal(true);
-  }
+  // const handleShowCloseModal = () => {
+  //   setShowEditModal(false);
+  //   setShowViewModal(false);
+  //   setShowModal(false);
+  //   setCloseModal(true);
+  // }
 
   const handleCCloseModal = () => {
     // setShowEditModal(false);
@@ -278,7 +275,7 @@ function ListData({ searchVal, handleSearchVal }) {
                   .map((item, index) => {
                     return (
                       <div className="voucher-lists" key={index}>
-                        {/* <ModalPage
+                        <ModalPage
                           setShowModal={setShowModal}
                           handleShowModal={handleShowModal}
                           showModal={showModal}
@@ -303,7 +300,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           ExpenseView={() => ExpenseView(item)}
                           setShowEditModal={setShowEditModal}
                           data={itemData}
-                        /> */}
+                        />
                         <div className="dot-icon">
                           <Dropdown>
                             <Dropdown.Toggle
@@ -380,7 +377,7 @@ function ListData({ searchVal, handleSearchVal }) {
                   .map((item, index) => {
                     return (
                       <div className="voucher-lists" key={index}>
-                        {/* <ModalPage
+                        <ModalPage
                           setShowModal={setShowModal}
                           handleShowModal={handleShowModal}
                           showModal={showModal}
@@ -405,7 +402,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           ExpenseView={() => ExpenseView(item)}
                           setShowEditModal={setShowEditModal}
                           data={itemData}
-                        /> */}
+                        />
                         <div className="dot-icon">
                           <Dropdown>
                             <Dropdown.Toggle
@@ -479,66 +476,6 @@ function ListData({ searchVal, handleSearchVal }) {
           </div>
         </Container>
       </div>
-
-      {/* {!showData && (
-        <div className="new-section">
-          <Container>
-            <Form className="new-section-data" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Expense Voucher # "
-                name="voucher-no"
-              />
-              <input
-                type="file"
-                multiple
-                style={{ display: "none" }}
-                ref={reference}
-                onChange={handleUpload}
-                name="images"
-              />
-              <div className="select-fields-data">
-                <select name="date">
-                  <option>Date</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                </select>
-                <input
-                  type="text"
-                  name="expense-account "
-                  placeholder="Expense Account"
-                />
-              </div>
-              <div className="new-fields-data">
-                <select name="expense-head">
-                  <option>Select One</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                  <option>aa</option>
-                </select>
-              </div>
-              <div className="input-data">
-                <input type="text" placeholder="Narrations:" />
-              </div>
-              <div className="input-data">
-                <input type="text" placeholder="Add Amount:" />
-              </div>
-              <div className="end-data">
-                <Button onClick={() => reference.current.click()}>
-                  <i className="bi bi-upload"></i>&nbsp;&nbsp;Upload Image
-                </Button>
-                <div className="btn_status" type="submit">
-                  <i className="bi bi-check2"></i>
-                </div>
-                <div className="btn_cross">
-                  <i className="bi bi-plus"></i>
-                </div>
-              </div>
-            </Form>
-          </Container>
-        </div>
-      )} */}
     </div>
   );
 }

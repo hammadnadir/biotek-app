@@ -11,6 +11,7 @@ function Voucher() {
   const user = getCurrentUser();
 
   console.log("voucher111",user.data.session_id)
+
   useEffect(() => {
     dispatch(getVoucherRequest());
   }, []);
