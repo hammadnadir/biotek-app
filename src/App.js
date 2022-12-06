@@ -1,7 +1,7 @@
 import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -22,6 +22,7 @@ import { getExpenseRequest } from "./redux/expense";
 import { getVoucherRequest } from "./redux/voucher";
 import PersonalChat from "./pages/PersonalChat";
 import { setLoading } from "./redux/global";
+import { getCurrentUser } from "./utils";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,36 +44,37 @@ function App() {
     
   }, [router]);
 
-  // const RequireAuth = ({ children }) => {
-  //   let auth = getCurrentUser();
-  //   let location = useLocation();
+  const RequireAuth = ({ children }) => {
+    let auth = getCurrentUser();
+    let location = useLocation();
 
-  //   if (!auth) {
-  //     return <Navigate to="/login" state={{ from: location }} replace />;
-  //   }
-  //   return children;
-  // };
+    if (!auth) {
+      return <Navigate to="/login" state={{ from: location }} replace />;
+    }
+    return children;  
+  };
+
 
   return (
     <div>
-      {/* <div className={`${loading ? "spinner" : "spinner-hide"}`}>
+      <div className={`${loading ? "spinner" : "spinner-hide"}`}>
         <Spinner animation="grow" />
-      </div> */}
+      </div>
       <Routes>
         <Route
           path="/"
           element={
-            // <RequireAuth>
+            <RequireAuth>
               <Home />
-            // </RequireAuth>
+            </RequireAuth>
           }
         ></Route>
         <Route
           path="/expense"
           element={
-            // <RequireAuth>
+            // <PublicRoute>
               <Expense />
-            // </RequireAuth>
+            // </PublicRoute>
           }
         />
         <Route path="/login" element={<Login />} />

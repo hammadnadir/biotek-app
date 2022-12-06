@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../components/common/Footer";
 import { ListData, NavExpense } from "../../components/Expense";
 import { getExpenseRequest } from "../../redux/expense";
+import { getCurrentUser } from "../../utils";
 
 function Expense() {
   const [searchVal, setSearchVal] = useState("");
+  const user = getCurrentUser()
 
   const dispatch = useDispatch();
   const handleSearchVal = (e) => {
@@ -14,7 +16,8 @@ function Expense() {
   };
   const { editVoucher } = useSelector((state) => state.voucher);
 
-  console.log(editVoucher);
+  console.log(user?.data?.session_id);
+
   useEffect(() => {
     if (Object.keys(editVoucher).length === 0) {
       dispatch(getExpenseRequest());

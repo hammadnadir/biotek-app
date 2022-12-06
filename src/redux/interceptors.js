@@ -1,11 +1,11 @@
 import { history } from "./history";
 
 export const requestInterceptor = async (config) => {
-  // try {
-  //   config.headers.common.Authorization = localStorage.getItem("biztek_token");
-  // } catch (e) {
-  //   console.log(e);
-  // }
+  try {
+    config.headers.common.Authorization = localStorage.getItem("biztek_token");
+  } catch (e) {
+    console.log(e);
+  }
   return config;
 };
 

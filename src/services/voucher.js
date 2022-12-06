@@ -1,11 +1,11 @@
 import axios from "axios";
 import request from "./request";
-// const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
+const baseURL = `${process.env.REACT_APP_BASE_URL_NEW}`;
 
-export const getVoucher = () => {
+export const getVoucher = (payload) => {
   return new Promise((resolve, reject) => {
     request
-      .get(`api/expense`)
+      .get(`api/expense`,payload)
       // axios
       // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
@@ -20,7 +20,7 @@ export const getVoucher = () => {
 
 export const editVoucher = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
+    request
       .get(`api/edit_expense/?id=${payload}`, payload)
       .then((response) => {
         resolve(response.data);

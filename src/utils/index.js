@@ -21,7 +21,7 @@ export const isLoggedIn = () => {
       return false;
     }
   };
-  
+
   export const getCurrentUser = () => {
     try {
       if (localStorage.getItem("currentUser") !== "") {

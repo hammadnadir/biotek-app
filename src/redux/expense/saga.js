@@ -38,9 +38,9 @@ import { getVoucherRequest } from "../voucher";
 export function* handleGetExpense() {
   while (true) {
     try {
-      yield take(getExpenseRequest.type);
+      const { payload } = yield take(getExpenseRequest.type);
       yield put(setLoading(true));
-      const response = yield call(getExpense);
+      const response = yield call(getExpense, payload);
       yield put(setLoading(false));
       yield put(getExpenseSuccess(response));
     } catch (error) {
@@ -110,16 +110,10 @@ export function* handleClearExpense() {
       const { payload } = yield take(clearExpenseRequest.type);
       yield put(setLoading(true));
       const response = yield call(clearExpense, payload);
-
-      // let shippings = yield select(shippingSelector);
-      // const filterShipping = shippings.data.filter(
-      //   (shipping) => shipping.id !== payload
-      // );
-      // yield put(updateShipping({ data: filterShipping }));
+      history.push("/voucher");
       yield put(setLoading(false));
       yield put(getExpenseRequest());
       yield put(clearExpenseSuccess(response));
-
     } catch (error) {
       yield put(clearExpenseFailure(error));
       yield put(setLoading(false));

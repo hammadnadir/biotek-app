@@ -1,12 +1,12 @@
 import axios from "axios";
-import { baseURL } from "./request";
+import request, { baseURL } from "./request";
 
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`api/user/login`, payload)
+    request
+      .post(`api/user/login`,payload)
       .then((response) => {
-        console.log(response.data.data.session_id.session_id);
+        // console.log(response.data.data.session_id.session_id);
         let authHeader = response.data.data.session_id.session_id;
         // let token = authHeader.substring(7, authHeader.length);
         localStorage.setItem("biztek_token", authHeader);
@@ -28,8 +28,8 @@ export const login = (payload) => {
 export const logout = (payload) => {
   // console.log("payload", payload);
   return new Promise((resolve, reject) => {
-    axios
-      .delete(`${baseURL}auth/logout`, {
+    request
+      .delete(`auth/logout`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("biztek_token") },
       })
       .then(() => {
@@ -45,8 +45,8 @@ export const logout = (payload) => {
 
 export const signUp = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`${baseURL}auth/signup`, payload)
+    request
+      .post(`auth/signup`, payload)
       .then((response) => {
         // resolve(response.data);
       })
@@ -58,8 +58,8 @@ export const signUp = (payload) => {
 
 export const forgotPassword = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`${baseURL}password/reset${payload?.token ? "/" + payload.token : ""}`, payload)
+    request
+      .post(`password/reset${payload?.token ? "/" + payload.token : ""}`, payload)
       .then((data) => {
         resolve(data);
       })

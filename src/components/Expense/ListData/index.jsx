@@ -221,7 +221,7 @@ function ListData({ searchVal, handleSearchVal }) {
                 </div>
                 <h4>Today Total Expanses</h4>
                 <div className="end-price">
-                  <h3>Rs. {sum}</h3>
+                  <h3>Rs. {-(-expense?.data?.balance + sum ) || 0}</h3>
                 </div>
               </div>
               {!setExpense && (
@@ -278,7 +278,7 @@ function ListData({ searchVal, handleSearchVal }) {
                   .map((item, index) => {
                     return (
                       <div className="voucher-lists" key={index}>
-                        <ModalPage
+                        {/* <ModalPage
                           setShowModal={setShowModal}
                           handleShowModal={handleShowModal}
                           showModal={showModal}
@@ -303,7 +303,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           ExpenseView={() => ExpenseView(item)}
                           setShowEditModal={setShowEditModal}
                           data={itemData}
-                        />
+                        /> */}
                         <div className="dot-icon">
                           <Dropdown>
                             <Dropdown.Toggle
@@ -380,7 +380,7 @@ function ListData({ searchVal, handleSearchVal }) {
                   .map((item, index) => {
                     return (
                       <div className="voucher-lists" key={index}>
-                        <ModalPage
+                        {/* <ModalPage
                           setShowModal={setShowModal}
                           handleShowModal={handleShowModal}
                           showModal={showModal}
@@ -405,7 +405,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           ExpenseView={() => ExpenseView(item)}
                           setShowEditModal={setShowEditModal}
                           data={itemData}
-                        />
+                        /> */}
                         <div className="dot-icon">
                           <Dropdown>
                             <Dropdown.Toggle

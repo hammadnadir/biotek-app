@@ -32,9 +32,9 @@ import { setExpencesData } from "../expense";
 export function* handleGetVoucher() {
   while (true) {
     try {
-      yield take(getVoucherRequest.type);
+      const { payload } = yield take(getVoucherRequest.type);
       yield put(setLoading(true));
-      const response = yield call(getVoucher);
+      const response = yield call(getVoucher, payload);
       yield put(setLoading(false));
       yield put(getVoucherSuccess(response));
     } catch (error) {

@@ -51,7 +51,7 @@ function ViewModal({
               )} */}
               {/* {data && data.image && data.image != "no_image.jpg" && ( */}
                 <Carousel>
-                  {data && data.image && data.image.length > 0 && data.image.map((item, index) => {
+                  {data && data.image && data.image.length > 0 && data?.image?.map((item, index) => {
                     return (
                       <div key={index} className="main_data_img">
                         <img

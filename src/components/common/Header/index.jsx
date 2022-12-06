@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { logo } from "../../../assets";
+import { getCurrentUser } from "../../../utils";
 import SearchField from "../SearchField";
 import "./styles.scss";
 
@@ -10,6 +11,8 @@ function Header() {
   const handleChange = (e) => {
     setInput(e.target.value);
   };
+  const user = getCurrentUser();
+  console.log(user.data.session_id.session_id);
 
   return (
     <div className="main-data">
