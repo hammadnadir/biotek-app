@@ -3,7 +3,7 @@ import request from "./request";
 export const getVoucher = (payload) => {
   return new Promise((resolve, reject) => {
     request
-      .get(`api/expense`,payload)
+      .get(`expense`,payload)
       // axios
       // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
@@ -19,7 +19,7 @@ export const getVoucher = (payload) => {
 export const editVoucher = (payload) => {
   return new Promise((resolve, reject) => {
     request
-      .get(`api/edit_expense/?id=${payload}`, payload)
+      .get(`edit_expense/?id=${payload}`, payload)
       .then((response) => {
         resolve(response.data);
       })

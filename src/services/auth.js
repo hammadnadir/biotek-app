@@ -4,7 +4,7 @@ import request, { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}api/user/login`,payload ,{mode:'cors'})
+      .post(`${baseURL}user/login`,payload ,{mode:'cors'})
       .then((response) => {
         // console.log(response.data.data.session_id.session_id);
         let authHeader = response.data.data.session_id.session_id;
@@ -29,7 +29,7 @@ export const logout = (payload) => {
   // console.log("payload", payload);
   return new Promise((resolve, reject) => {
     request
-      .delete(`auth/logout`, {
+      .delete(`logout`, {
         headers: { Authorization: "Bearer " + localStorage.getItem("biztek_token") },
       })
       .then(() => {
