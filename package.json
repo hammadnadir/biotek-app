@@ -1,9 +1,9 @@
 {
   "name": "biotek",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://www.biotecherp.work/",
   "private": true,
-  "proxy": "https://www.biotecherp.work/public/api/",
+  "proxy": "https://www.biotecherp.work/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.5",
