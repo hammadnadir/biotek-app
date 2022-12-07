@@ -65,7 +65,7 @@ function App() {
       </div>
       <Routes>
         <Route
-          path="/"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/`}
           element={
             <RequireAuth>
               <Home />
@@ -73,7 +73,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/expense"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/expense`}
           element={
             // <PublicRoute>
             <Expense />
@@ -81,17 +81,24 @@ function App() {
           }
         />
         <Route
-          path="/login"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/login`}
           element={
             <PublicRoute>
               <Login />
             </PublicRoute>
           }
         />
-        <Route path="/forgot-password" element={<Forgot />} />
-        <Route path="/signup" element={<Signup />} />
         <Route
-          path="/sub-menu"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/forgot-password`}
+          element={<Forgot />}
+        />
+        <Route
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/signup`}
+          element={<Signup />}
+        />
+        <Route
+          signup
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/sub-menu`}
           element={
             // <RequireAuth>
             <SubMenu />
@@ -99,7 +106,7 @@ function App() {
           }
         />
         <Route
-          path="/voucher"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/voucher`}
           element={
             // <RequireAuth>
             <Voucher />
@@ -107,7 +114,7 @@ function App() {
           }
         />
         <Route
-          path="/new-expense"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/new-expense`}
           element={
             // <RequireAuth>
             <NewExpense />
@@ -115,7 +122,7 @@ function App() {
           }
         />
         <Route
-          path="/notification"
+        path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/notification`}
           element={
             // <RequireAuth>
             <Notification />
@@ -123,7 +130,7 @@ function App() {
           }
         />
         <Route
-          path="/chats"
+        path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/chats`}
           element={
             // <RequireAuth>
             <Chats />
@@ -131,7 +138,7 @@ function App() {
           }
         />
         <Route
-          path="/settings"
+         path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/settings`}
           element={
             // <RequireAuth>
             <Settings />
@@ -139,7 +146,7 @@ function App() {
           }
         />
         <Route
-          path="/ledger"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/ledger`}
           element={
             // <RequireAuth>
             <Ledger />
@@ -147,7 +154,7 @@ function App() {
           }
         />
         <Route
-          path="/raw-inventory"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/raw-inventory`}
           element={
             // <RequireAuth>
             <Inventory />
@@ -155,7 +162,7 @@ function App() {
           }
         />
         <Route
-          path="/personalChat"
+          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/personalChat`}
           element={
             // <RequireAuth>
             <PersonalChat />
