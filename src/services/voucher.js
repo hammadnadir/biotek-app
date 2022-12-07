@@ -1,8 +1,8 @@
-import request from "./request";
+import axios from "axios";
 
 export const getVoucher = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .get(`expense`,payload)
       // axios
       // .get(`https://jsonplaceholder.typicode.com/posts`)
@@ -18,7 +18,7 @@ export const getVoucher = (payload) => {
 
 export const editVoucher = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .get(`edit_expense/?id=${payload}`, payload)
       .then((response) => {
         resolve(response.data);

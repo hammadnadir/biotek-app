@@ -1,8 +1,10 @@
-import request from "./request";
+// import request from "./request";
+
+import axios from "axios";
 
 export const getExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .get(`add_expense?unit_expense=1`,payload)
       // axios
       // .get(`https://jsonplaceholder.typicode.com/posts`)
@@ -18,7 +20,7 @@ export const getExpense = (payload) => {
 
 export const createExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .post(`store_expense`, payload)
       .then((response) => {
         resolve(response);
@@ -32,7 +34,7 @@ export const createExpense = (payload) => {
 
 export const editExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .post(`update_expense`, payload)
       .then((response) => {
         resolve(response.data);
@@ -45,7 +47,7 @@ export const editExpense = (payload) => {
 
 export const deleteExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .post(`delete_expense`,payload)
       .then((response) => {
         resolve(response);
@@ -59,7 +61,7 @@ export const deleteExpense = (payload) => {
 
 export const clearExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    request
+    axios
       .post(`close_form`,payload)
       .then((response) => {
         resolve(response);
