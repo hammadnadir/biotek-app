@@ -4,7 +4,7 @@ import request, { baseURL } from "./request";
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}user/login`,payload ,{mode:'cors'})
+      .post(`user/login`,payload ,{mode:'cors'})
       .then((response) => {
         // console.log(response.data.data.session_id.session_id);
         let authHeader = response.data.data.session_id.session_id;

@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Forgot, Login, Signup } from "./components/auth";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   Chats,
@@ -33,7 +33,6 @@ function App() {
     //     : dispatch(setLoading(false));
     // };
     // const handleComplete = (url) => dispatch(setLoading(false));
-
     // router.events.on("routeChangeStart", handleStart);
     // router.events.on("routeChangeComplete", handleComplete);
     // router.events.on("routeChangeError", handleComplete);
@@ -47,9 +46,17 @@ function App() {
     if (!auth) {
       return <Navigate to="/login" state={{ from: location }} replace />;
     }
-    return children;  
+    return children;
   };
+  const PublicRoute = ({ children }) => {
+    // let auth = localStorage.getItem("graceshopaholic_token");
+    // let location = useLocation();
 
+    // if (auth) {
+    //   return <Navigate to={location.state?.from?.pathname || "/"} replace />;
+    // }
+    return children;
+  };
 
   return (
     <div>
@@ -69,18 +76,25 @@ function App() {
           path="/expense"
           element={
             // <PublicRoute>
-              <Expense />
+            <Expense />
             // </PublicRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
         <Route path="/forgot-password" element={<Forgot />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/sub-menu"
           element={
             // <RequireAuth>
-              <SubMenu />
+            <SubMenu />
             // </RequireAuth>
           }
         />
@@ -88,7 +102,7 @@ function App() {
           path="/voucher"
           element={
             // <RequireAuth>
-              <Voucher />
+            <Voucher />
             // </RequireAuth>
           }
         />
@@ -96,7 +110,7 @@ function App() {
           path="/new-expense"
           element={
             // <RequireAuth>
-              <NewExpense />
+            <NewExpense />
             // </RequireAuth>
           }
         />
@@ -104,7 +118,7 @@ function App() {
           path="/notification"
           element={
             // <RequireAuth>
-              <Notification />
+            <Notification />
             // </RequireAuth>
           }
         />
@@ -112,7 +126,7 @@ function App() {
           path="/chats"
           element={
             // <RequireAuth>
-              <Chats />
+            <Chats />
             // </RequireAuth>
           }
         />
@@ -120,7 +134,7 @@ function App() {
           path="/settings"
           element={
             // <RequireAuth>
-              <Settings />
+            <Settings />
             // </RequireAuth>
           }
         />
@@ -128,7 +142,7 @@ function App() {
           path="/ledger"
           element={
             // <RequireAuth>
-              <Ledger />
+            <Ledger />
             // </RequireAuth>
           }
         />
@@ -136,7 +150,7 @@ function App() {
           path="/raw-inventory"
           element={
             // <RequireAuth>
-              <Inventory />
+            <Inventory />
             // </RequireAuth>
           }
         />
@@ -144,7 +158,7 @@ function App() {
           path="/personalChat"
           element={
             // <RequireAuth>
-              <PersonalChat />
+            <PersonalChat />
             // </RequireAuth>
           }
         />
