@@ -3,25 +3,27 @@ import { Container } from "react-bootstrap";
 import { logo } from "../../../assets";
 import { getCurrentUser } from "../../../utils";
 import SearchField from "../SearchField";
+import User from "../User";
 import "./styles.scss";
 
-function Header() {
-  const [input, setInput] = useState("");
+function Header({ val ,setVal }) {
+  const [show, setShow] = useState(false);
 
   const handleChange = (e) => {
-    setInput(e.target.value);
+    setVal(e.target.value);
   };
   const user = getCurrentUser();
-  console.log(user.data.session_id.session_id);
+  // console.log(user.data.session_id.session_id);
 
   return (
     <div className="main-data">
       <Container>
         <div className="inner-data">
           <div className="top_field">
-            <div className="icons">
+            <div className="icons" onClick={()=>setShow(!show)}>
               <i className="bi bi-person-fill"></i>
             </div>
+            {show && <User show={show} setShow={setShow}/>}
             <img src={logo} alt="logo-img" />
           </div>
           <div className="search-header">
@@ -30,7 +32,7 @@ function Header() {
               name="input"
               placeholder="Search....."
               icon="bi bi-search"
-              value={input || ""}
+              value={val || ""}
               onChange={handleChange}
             />
           </div>

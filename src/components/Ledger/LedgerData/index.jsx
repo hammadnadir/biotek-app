@@ -16,7 +16,7 @@ function LedgerData() {
         </div>
 
         <div className="search-bar" >
-          {/* <i class="bi bi-search"></i> */}
+          {/* <i className="bi bi-search"></i> */}
           <img className="vector" src={Vector} alt="search" />
           <img src={filter} alt="filter" />
           <p>Search For?</p> 

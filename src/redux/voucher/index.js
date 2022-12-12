@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   voucher: {},
+  viewVoucher: {},
   editVoucher: {},
   isLoadingVoucher: false
 };
@@ -32,6 +33,17 @@ export const voucherSlice = createSlice({
       state.isLoadingVoucher = false;
       console.log("Error:", { message: action.payload.message });
     },
+    getVoucherViewRequest: (state) => {
+      state.isLoadingVoucher = true;
+    },
+    getVoucherViewSuccess: (state, action) => {
+      state.viewVoucher = action.payload;
+      state.isLoadingVoucher = false;
+    },
+    getVoucherViewFailure: (state, action) => {
+      state.isLoadingVoucher = false;
+      console.log("Error:", { message: action.payload.message });
+    },
     getVoucherDeleteRequest: (state) => {
       state.isLoadingVoucher = true;
     },
@@ -55,7 +67,10 @@ export const {
   getVoucherEditFailure,
   getVoucherDeleteRequest,
   getVoucherDeleteSuccess,
-  getVoucherDeleteFailure
+  getVoucherDeleteFailure,
+  getVoucherViewRequest,
+  getVoucherViewSuccess,
+  getVoucherViewFailure
 } = voucherSlice.actions;
 
 export default voucherSlice.reducer;

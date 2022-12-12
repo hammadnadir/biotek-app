@@ -5,6 +5,7 @@ const initialState = {
   isLoadingExpense: false,
   createExpense: {},
   setExpense: false,
+  viewExpense: false,
   clearAll : "",
 };
 
@@ -70,6 +71,9 @@ export const expenseSlice = createSlice({
     setExpencesData: (state, action) => {
       state.setExpense = action.payload;
     },
+    setViewData: (state, action) => {
+      state.viewExpense = action.payload;
+    },
   },
 });
 
@@ -89,7 +93,8 @@ export const {
   clearExpenseRequest,
   clearExpenseSuccess,
   clearExpenseFailure,
-  setExpencesData
+  setExpencesData,
+  setViewData
 } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

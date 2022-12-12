@@ -1,12 +1,13 @@
 // import request from "./request";
 
-import axios from "axios";
+import request from "./request";
+
 
 export const getExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`public/app/api/add_expense?unit_expense=1`,payload)
-      // axios
+    request
+      .get(`public/api/add_expense?unit_expense=1`,payload)
+      // request
       // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
         resolve(response);
@@ -20,8 +21,8 @@ export const getExpense = (payload) => {
 
 export const createExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`public/app/api/store_expense`, payload)
+    request
+      .post(`public/api/store_expense`, payload ,{mode:'cors'})
       .then((response) => {
         resolve(response);
       })
@@ -34,8 +35,8 @@ export const createExpense = (payload) => {
 
 export const editExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`public/app/api/update_expense`, payload)
+    request
+      .post(`public/api/update_expense`, payload,{mode:'cors'})
       .then((response) => {
         resolve(response.data);
       })
@@ -47,8 +48,8 @@ export const editExpense = (payload) => {
 
 export const deleteExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`public/app/api/delete_expense`,payload)
+    request
+      .post(`public/api/delete_expense`,payload,{mode:'cors'})
       .then((response) => {
         resolve(response);
       })
@@ -61,8 +62,8 @@ export const deleteExpense = (payload) => {
 
 export const clearExpense = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`public/app/api/close_form`,payload)
+    request
+      .post(`public/api/close_form`,payload,{mode:'cors'})
       .then((response) => {
         resolve(response);
       })

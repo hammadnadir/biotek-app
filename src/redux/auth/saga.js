@@ -22,16 +22,15 @@ import { history } from "../history";
 import { login, logout, signUp, forgotPassword, changePassword } from "../../services/auth"
 
 import { setLoading } from "../global";
+import { logoutUser } from "../../utils";
 
 export function* handleLogin() {
   while (true) {
     try {
       const { payload } = yield take(loginRequest.type);
-
       yield put(setLoading(true));
       const response = yield call(login, payload);
       yield put(setLoading(false));
-      // console.log(response);
       yield put(loginSuccess(response));
       history.push("/");
     } catch (error) {
@@ -44,9 +43,9 @@ export function* handleLogin() {
 export function* handleLogout() {
   while (true) {
     try {
-      const { payload } = yield take(logoutRequest.type);
+      yield take(logoutRequest.type);
       yield put(setLoading(true));
-      const response = yield call(logout, payload);
+      const response = yield call(logoutUser);
       yield put(setLoading(false));
       yield put(logoutSuccess(response));
       history.replace("/login");

@@ -8,138 +8,108 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVoucherEditRequest,
+  getVoucherViewRequest,
 } from "../../../redux/voucher";
-// import { getExpenseRequest } from "../../../redux/expense";
-// import axios from "axios";
-// import VoucherDeleteModal from "../DeleteModal";
+import { useState } from "react";
+
 
 function VoucherData() {
-  // const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // const navigate = useNavigate();
+  const [inputData ,setInputData] = useState("");
   const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+
   const { voucher } = useSelector((state) => state.voucher);
 
-  useEffect(() => {
-    // dispatch(getVoucherRequest());
-    // axios
-    //   .get("http://192.168.10.189:8000/api/add_expense?unit_expense=1")
-    //   .then(function (response) {
-    //     console.log(response);
-    //   });
-    // eslint-disable-next-line
-  }, []);
-  console.log(voucher);
-
-  // const handleShowDeleteModal = (item) => {
-  //   // setItemData(item)
-  //   setShowDeleteModal(item.id);
-  // };
-
-  // const handleCloseModal = () => {
-  //   setShowModal(false);
-  // };
-
-  // const handleShowEditModal = (item) => {
-  //   setShowEditModal(true);
-  //   setShowViewModal(false);
-  //   setShowModal(false);
-  //   setItemData(item);
-  // };
-  // const handleCloseEditModal = () => {
-  //   setShowEditModal(false);
-  // };
-  // const ExpenseEdit = () => {};
-
-  // const handleShowViewModal = (item) => {
-  //   setShowEditModal(false);
-  //   setShowViewModal(true);
-  //   setShowModal(false);
-  //   setItemData(item);
-  // };
-
-  // const handleCloseViewModal = () => {
-  //   setShowViewModal(false);
-  // };
-  // const ExpenseView = (item) => {};
-
-  // const handleExpenseDelete = (item) => {
-  //   vouchersData.map((data) => {
-  //     return item.id === data.id;
-  //   });
-  // };
   const handleEditVoucher = (item) => {
     dispatch(getVoucherEditRequest(item.id));
   };
+
+  const handleViewVoucher = (item) => {
+    dispatch(getVoucherViewRequest(item.id));
+  };
+
+  const handleChange = (value) => {
+    setInputData(value)
+    filterData(value)
+  };
+  useEffect(()=>{
+    setData(voucher?.data?.lfes)
+   console.log("Here",voucher?.data?.lfes)
+  },[voucher?.data?.lfes])
+
+  const excludeColumns = ["supplyrecheckremarks"];
+
+  const filterData = (value) => {
+    const lowercasedValue = value.toLowerCase().trim();
+    if (lowercasedValue === "") setData(voucher?.data?.lfes);
+    else {
+      const filteredData = voucher?.data?.lfes?.filter(item => {
+        return Object.keys(item).some(key =>
+          excludeColumns.includes(key) ? false : item[key]?.toString().toLowerCase().includes(lowercasedValue)
+        );
+      });
+      setData(filteredData);
+    }
+  }
 
   return (
     <div className="main_voucher_page">
       <Container>
         <div className="voucher_data">
-          <div className="voucher_btns">
+          <div
+            className="voucher_btns"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Button>
               <Link to="/expense">
                 <i className="bi bi-plus" />
                 Company Exp
               </Link>
             </Button>
-            <Button>
+            {/* <Button>
               <i className="bi bi-plus" />
               Factory Exp
-            </Button>
+            </Button> */}
           </div>
           <div className="search_header">
             <SearchField
               type="input"
               placeholder="Search....."
               icon="bi bi-search"
+              name="search_data"
+              onChange={(e)=>handleChange(e.target.value)}
+              value={inputData}
             />
           </div>
-          {voucher &&
-            voucher.data &&
-            voucher?.data?.lfes?.map((item, index) => {
+          {/* {voucher && */}
+            {/* voucher.data && */}
+            {/* voucher?.data?.lfes?.map((item, index) => { */}
+            { data &&
+              data.map((item, index) => {
               return (
                 <div className="main_vouchers" key={index}>
-                  <div
-                    className="dot-icon"
-                    // onClick={() => handleShow(item)}
-                  >
+                  <div className="dot-icon">
                     <Dropdown>
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
                         <i className="bi bi-three-dots new_icon"></i>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        {/* {list.map((data, index) => { */}
-                        {/* return ( */}
-                        {/* <div className="opened-cruds" key={index}>
-                              <i className={data.icon} />
-                               <p>{data.name}</p>
-                            </div> */}
-                        <Dropdown.Item onClick={()=>handleEditVoucher(item)}>
+                        <Dropdown.Item onClick={() => handleViewVoucher(item)}>
                           <i className="bi bi-eye-fill" />
-                          {/* <Link to="/expense"> */}
-                            <p>View</p>
-                          {/* </Link> */}
+                          <p>View</p>
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={()=>handleEditVoucher(item)}>
+                        {item.status !== "2" && <Dropdown.Item onClick={() => handleEditVoucher(item)}>
                           <i className="bi bi-pencil-square" />
                           <p>Edit</p>
-                        </Dropdown.Item>
-                        {/* <Dropdown.Item>
-                          <i className="bi bi-trash-fill" />
-                          <p>Delete</p>
-                        </Dropdown.Item> */}
-                        {/* <VoucherDeleteModal
-                          setShowModal={setShowModal}
-                          handleShowModal={handleShowModal}
-                          showModal={showModal}
-                          handleCloseModal={handleCloseModal}
-                          ExpenseDelete={() => handleExpenseDelete(item)}
-                        /> */}
+                        </Dropdown.Item>}
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                  <div className="inner_main_data">
+                  <div
+                    className="inner_main_data"
+                    // onClick={() => handleViewVoucher(item)}
+                  >
                     <p>
                       Voucher ID # <span> &nbsp;LFP-{item.id}</span>
                     </p>
@@ -147,39 +117,43 @@ function VoucherData() {
                       Date: <span>{item.created_at}</span>
                     </p>
                   </div>
-                  <div className="bottom-data">
-                    <div className="sub_menues">
-                      <h3>Descritpion : </h3>
-                      <p> &nbsp;{item.remarks}</p>
-                    </div>
-                    <div className="sub_menues">
-                      <h3>Total Expense : </h3>
-                      <p> &nbsp;Rs. {item.expence}</p>
-                    </div>
-                    <div className="sub_menues">
-                      <h3>Remarks : </h3>
-                      <p> &nbsp;{item.remarks}</p>
-                    </div>
-                    <div className="sub_menues">
-                      <h3>Status : </h3>&nbsp;
-                      {item.status === 2 && (
-                        <p className="approved">Approved</p>
-                      )}
-                      {item.status === 3 && (
-                        <p className="recheck">Recheck Required</p>
-                      )}
-                      {item.status === 4 && (
-                        <p className="pending">Pending for CEO Approval</p>
-                      )}
-                      {item.status === 5 && (
-                        <p className="disagree">Disagree by CEO</p>
-                      )}
-                      {item.status !== 2 &&
-                        item.status !== 3 &&
-                        item.status !== 4 &&
-                        item.status !== 5 && (
-                          <p className="all_rounder">Approvel pending</p>
+                  <div
+                    className="bottom-data"
+                  >
+                    <div onClick={() => handleViewVoucher(item)} style={{width: "fit-content"}}>
+                      <div className="sub_menues">
+                        <h3>Descritpion : </h3>
+                        <p> &nbsp;{item.remarks}</p>
+                      </div>
+                      <div className="sub_menues">
+                        <h3>Total Expense : </h3>
+                        <p> &nbsp;Rs. {item.expence}</p>
+                      </div>
+                      <div className="sub_menues">
+                        <h3>Remarks : </h3>
+                        <p> &nbsp;{item.remarks}</p>
+                      </div>
+                      <div className="sub_menues">
+                        <h3>Status : </h3>&nbsp;
+                        {item.status === "2" && (
+                          <p className="approved">Approved</p>
                         )}
+                        {item.status === "3" && (
+                          <p className="recheck">Recheck Required</p>
+                        )}
+                        {item.status === "4" && (
+                          <p className="pending">Pending for CEO Approval</p>
+                        )}
+                        {item.status === "5" && (
+                          <p className="disagree">Disagree by CEO</p>
+                        )}
+                        {item.status !== "2" &&
+                          item.status !== "3" &&
+                          item.status !== "4" &&
+                          item.status !== "5" && (
+                            <p className="all_rounder">Approvel pending</p>
+                          )}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -19,10 +19,12 @@ import Voucher from "./pages/vocher";
 import NewExpense from "./pages/New-Expense";
 import { Spinner } from "react-bootstrap";
 import PersonalChat from "./pages/PersonalChat";
-import { getCurrentUser } from "./utils";
+import { getCurrentUser, isLoggedIn } from "./utils";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
   const router = useLocation();
+  const login = isLoggedIn();
 
   const { loading } = useSelector((state) => state.global);
 
@@ -44,7 +46,7 @@ function App() {
     let location = useLocation();
 
     if (!auth) {
-      return <Navigate to="/login" state={{ from: location }} replace />;
+      return <Navigate to={`/login`} state={{ from: location }} replace />;
     }
     return children;
   };
@@ -61,114 +63,106 @@ function App() {
   return (
     <div>
       <div className={`${loading ? "spinner" : "spinner-hide"}`}>
-        <Spinner animation="grow" />
+        <div className="spinner-border text-danger" role="status">
+          {/* <span className="sr-only">Loading...</span> */}
+        </div>
       </div>
-      <Routes>
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/`}
-          element={
-            <RequireAuth>
-              <Home />
-            </RequireAuth>
-          }
-        ></Route>
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/expense`}
-          element={
-            // <PublicRoute>
-            <Expense />
-            // </PublicRoute>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/login`}
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/forgot-password`}
-          element={<Forgot />}
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/signup`}
-          element={<Signup />}
-        />
-        <Route
-          signup
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/sub-menu`}
-          element={
-            // <RequireAuth>
-            <SubMenu />
-            // </RequireAuth>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/voucher`}
-          element={
-            // <RequireAuth>
-            <Voucher />
-            // </RequireAuth>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/new-expense`}
-          element={
-            // <RequireAuth>
-            <NewExpense />
-            // </RequireAuth>
-          }
-        />
-        <Route
-        path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/notification`}
-          element={
-            // <RequireAuth>
-            <Notification />
-            // </RequireAuth>
-          }
-        />
-        <Route
-        path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/chats`}
-          element={
-            // <RequireAuth>
-            <Chats />
-            // </RequireAuth>
-          }
-        />
-        <Route
-         path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/settings`}
-          element={
-            // <RequireAuth>
-            <Settings />
-            // </RequireAuth>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/ledger`}
-          element={
-            // <RequireAuth>
-            <Ledger />
-            // </RequireAuth>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/raw-inventory`}
-          element={
-            // <RequireAuth>
-            <Inventory />
-            // </RequireAuth>
-          }
-        />
-        <Route
-          path={`${process.env.REACT_APP_BASE_URL_NEW}public/app/personalChat`}
-          element={
-            // <RequireAuth>
-            <PersonalChat />
-            // </RequireAuth>
-          }
-        />
+      <Routes >
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route
+            path={`/`}
+            element={
+              // <RequireAuth>
+                <Home />
+              // </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path={`expense`}
+            element={
+              // <PublicRoute>
+              <Expense />
+              // </PublicRoute>
+            }
+          />
+
+          <Route path={`/forgot-password`} element={<Forgot />} />
+          <Route path={`/signup`} element={<Signup />} />
+          <Route
+            signup
+            path={`/sub-menu`}
+            element={
+              // <RequireAuth>
+              <SubMenu />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/voucher`}
+            element={
+              // <RequireAuth>
+              <Voucher />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/new-expense`}
+            element={
+              // <RequireAuth>
+              <NewExpense />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/notification`}
+            element={
+              // <RequireAuth>
+              <Notification />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/chats`}
+            element={
+              // <RequireAuth>
+              <Chats />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/settings`}
+            element={
+              // <RequireAuth>
+              <Settings />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/ledger`}
+            element={
+              // <RequireAuth>
+              <Ledger />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/raw-inventory`}
+            element={
+              // <RequireAuth>
+              <Inventory />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/personalChat`}
+            element={
+              // <RequireAuth>
+              <PersonalChat />
+              // </RequireAuth>
+            }
+          />
+        </Route>
+        <Route path={`/login`} element={<Login />} />
       </Routes>
     </div>
   );

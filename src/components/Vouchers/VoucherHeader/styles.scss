@@ -38,6 +38,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      .user_details_data{
+        right: 15px !important;
+        top: 9px !important;
+      }
     }
   }
 }

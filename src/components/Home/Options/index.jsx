@@ -2,14 +2,14 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { cards } from "../../../data";
-import { aaa } from "../../../assets";
+import { aaa, expenseImg, document } from "../../../assets";
 // import { storage } from "../../../firebase";
 // import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { Link } from "react-router-dom";
 // import { v4 } from "uuid";
 // import { useEffect } from "react";
 
-function Options() {
+function Options({val ,setVal}) {
   // const [imagesupload, setImagesupload] = useState("");
   // const [imagesList, setImagesList] = useState([]);
 
@@ -49,49 +49,43 @@ function Options() {
         {imagesList.map((item) => {
           return <img src={item} />;
         })} */}
-        <div className="options-data">
-          <div className="main-inner-data">
-            <Link to="/voucher">
-              <div className="cards">
-                <img src={aaa} alt="logo" />
-              </div>
-            </Link>
-            <p>Expense</p>
+        <div className="scroll_data">
+          <div className="options-data">
+            <div className="main-inner-data">
+              <Link to="/voucher">
+                <div className="cards">
+                  <img src={expenseImg} alt="expenseImg" />
+                </div>
+              </Link>
+              <p>Expense</p>
+            </div>
+            {cards
+            .filter((data) => data.text.includes(val))
+            .map((item, index) => {
+              return (
+                <div className="main-inner-data" key={index}>
+                  <Link to="/">
+                    <div className="cards">
+                      <img src={item.img} alt="logo" />
+                    </div>
+                  </Link>
+                  <p>{item.text}</p>
+                </div>
+              );
+            })}
           </div>
-          {cards.map((item, index) => {
-            return (
-              <div className="main-inner-data" key={index}>
-                <Link to="/">
-                  <div className="cards">
-                    <img src={aaa} alt="logo" />
-                  </div>
-                </Link>
-                <p>Data</p>
-              </div>
-            );
-          })}
         </div>
         <div className="recent-data">
           <h1>Recent Links</h1>
-          <div className="options-new-data">
-          <div className="main-inner-data">
-            <Link to="/voucher">
-              <div className="cards">
-                <img src={aaa} alt="logo" />
-              </div>
-            </Link>
-            <p>Expense</p>
-          </div>
-            {/* {cardsNew.map((item, index) => {
-              return (
-                <div className="main-inner-data" key={index}>
-                  <div className="cards">
-                    <img src={aaa} alt="logo" />
-                  </div>
-                  <p>data</p>
+          <div className="options_new">
+            <div className="main-inner">
+              <Link to="/voucher">
+                <div className="cards">
+                  <img src={document} alt="logo" />
                 </div>
-              );
-            })} */}
+              </Link>
+              <p>Dashboard</p>
+            </div>
           </div>
         </div>
       </Container>

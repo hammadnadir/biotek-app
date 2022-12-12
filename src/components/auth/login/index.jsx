@@ -104,9 +104,9 @@ function Login() {
                 <span>{err.password}</span>
               </div>
             )}
-            <p>
+            {/* <p>
               <Link to="/login">Forget your Password?</Link>
-            </p>
+            </p> */}
             <Button name="Sign In" type="submit" />
             <small>
               {/* Don’t Have An Account.?<Link to="/login"> Sign Up</Link> */}

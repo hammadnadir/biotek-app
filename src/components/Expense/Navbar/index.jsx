@@ -3,8 +3,12 @@ import { Container } from "react-bootstrap";
 // import { Navigate, useNavigate } from "react-router-dom";
 import "./styles.scss";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import User from "../../common/User";
 
 function NavExpense({searchVal, setSearchVal}) {
+
+  const [show ,setShow] = useState(false)
   // const navigate = useNavigate();
 
   // const handleBack = () => {
@@ -22,8 +26,9 @@ function NavExpense({searchVal, setSearchVal}) {
           <div className="main-heading">
             <h1>New Expense</h1>
           </div>
-          <div className="user-icon">
+          <div className="user-icon" onClick={()=>setShow(!show)}>
             <i className="bi bi-person-fill"></i>
+            {show ? <User show={show} setShow={setShow}/> : ""}
           </div>
         </div>
       </Container>

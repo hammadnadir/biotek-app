@@ -1,10 +1,10 @@
-import axios from "axios";
+import request from "./request";
 
 export const getVoucher = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`public/app/api/expense`,payload)
-      // axios
+    request
+      .get(`public/api/expense`,payload)
+      // request
       // .get(`https://jsonplaceholder.typicode.com/posts`)
       .then((response) => {
         resolve(response);
@@ -18,8 +18,22 @@ export const getVoucher = (payload) => {
 
 export const editVoucher = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .get(`public/app/api/edit_expense/?id=${payload}`, payload)
+    request
+      .get(`public/api/edit_expense?id=${payload}`, payload,{mode:'cors'})
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+
+export const viewVoucher = (payload) => {
+  return new Promise((resolve, reject) => {
+    request
+      .get(`public/api/show_expense?id=${payload}`, payload,{mode:'cors'})
       .then((response) => {
         resolve(response.data);
       })

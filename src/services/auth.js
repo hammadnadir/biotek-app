@@ -1,10 +1,9 @@
-import axios from "axios";
 import request, { baseURL } from "./request";
 
 export const login = (payload) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post(`public/app/api/user/login`,payload ,{mode:'cors'})
+    request
+      .post(`public/api/user/login`,payload ,{mode:'cors'})
       .then((response) => {
         // console.log(response.data.data.session_id.session_id);
         let authHeader = response.data.data.session_id.session_id;
@@ -25,7 +24,7 @@ export const login = (payload) => {
   });
 };
 
-export const logout = (payload) => {
+export const logout = () => {
   // console.log("payload", payload);
   return new Promise((resolve, reject) => {
     request
@@ -72,7 +71,7 @@ export const forgotPassword = (payload) => {
 export const changePassword = (payload) => {
   const { oldPassword, newPassword } = payload;
   return new Promise((resolve, reject) => {
-    axios
+    request
       .post(`${baseURL}password/reset/token`, { oldPassword, newPassword })
       .then((data) => {
         resolve(data);
