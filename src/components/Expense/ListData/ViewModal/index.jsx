@@ -6,7 +6,6 @@ import { Carousel } from "react-responsive-carousel";
 import { useSelector } from "react-redux";
 import { noimg } from "../../../../assets";
 import ImageViewer from "react-simple-image-viewer";
-import { json } from "react-router-dom";
 
 function ViewModal({
   viewModal,
@@ -27,9 +26,11 @@ function ViewModal({
   const openImageViewer = useCallback((index, item) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
-    console.log("ooooooo", item.image);
+    console.log(data.image);
     // setFullImage(item.image);
+
   }, []);
+  console.log(data.image)
 
   const closeImageViewer = () => {
     setCurrentImage(0);
@@ -47,7 +48,7 @@ function ViewModal({
     setShowEditModal(true);
   };
   const { viewExpense, setExpense } = useSelector((state) => state.expense);
-  console.log("abcd", viewExpense);
+  console.log(data,"llllllllllll");
 
   return (
     <div className="view_modal">
@@ -79,7 +80,7 @@ function ViewModal({
             {/* {data && data.image && data.image != "no_image.jpg" && ( */}
             {isViewerOpen && (
               <ImageViewer
-                src={viewExpense ? JSON.parse(data.image) : data.image}
+                src={viewExpense ? data.status === "2" ? [data.image] :  JSON.parse(data.image) : data.image}
                 currentIndex={currentImage}
                 disableScroll={false}
                 closeOnClickOutside={true}
@@ -112,29 +113,13 @@ function ViewModal({
             )}
             {viewExpense && (
               <Carousel>
-                {/* {data.image !== "no_image.jpg"  && data &&
-                data.image &&
-                data.image.length > 0 &&
-                data?.image?.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="main_data_img"
-                      onClick={() => openImageViewer(0, item)}
-                    >
-                      {item === "no_image.jpg" ? (
-                        <img src={noimg} alt="" />
-                      ) : (
-                        <img
-                          src={item}
-                          alt="img"
-                        />
-                      )}
-                    </div>
-                  );
-                })
-                } */}
                 {data.image !== undefined && data.image !== "no_image.jpg" ? (
+                  data.status === "2" ? <div
+                  className="main_data_img"
+                  onClick={() => openImageViewer(0, data)}
+                >
+                  <img src={data.image} alt="" />
+                </div> :
                   <div
                     className="main_data_img"
                     onClick={() => openImageViewer(0, JSON.parse(data.image))}
@@ -144,12 +129,11 @@ function ViewModal({
                 ) : (
                   <div
                     className="main_data_img"
-                    onClick={() => openImageViewer(0, JSON.parse(data.image))}
+                    onClick={() => openImageViewer(0, [noimg])}
                   >
                     <img src={noimg} alt="img" />
                   </div>
                 )}
-                {/* </div> */}
               </Carousel>
             )}
           </div>

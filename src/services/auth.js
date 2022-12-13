@@ -24,6 +24,29 @@ export const login = (payload) => {
   });
 };
 
+
+export const update = (payload) => {
+  return new Promise((resolve, reject) => {
+    request
+      .post(`public/api/user/login`,payload ,{mode:'cors'})
+      .then((response) => {
+        // let authHeader = response.data.data.session_id.session_id;
+        // localStorage.setItem("biztek_token", authHeader);
+        // localStorage.setItem("currentUser", JSON.stringify(response));
+        // console.log(response.data);
+
+        // let refreshHeader = response.headers['refresh'];
+        // let refreshToken = refreshHeader.substring(7, refreshHeader.length);
+        // localStorage.setItem('wcr_refres_token', refreshToken);
+        resolve(response);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        // reject(error.response.data.errors);
+      });
+  });
+};
+
 export const logout = () => {
   // console.log("payload", payload);
   return new Promise((resolve, reject) => {

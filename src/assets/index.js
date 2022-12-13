@@ -37,3 +37,7 @@ export { default as edit } from "./edit.png";
 export { default as home1 } from "./home1.png";
 export { default as logout } from "./logout.png";
 export { default as usersss } from "./usersss.jpg";
+export { default as photo } from "./photo.jfif";
+export { default as camera } from "./camera.png";
+export { default as close } from "./close.png";
+export { default as nouser } from "./nouser.webp";

@@ -9,6 +9,7 @@ const initialState = {
   authError: false,
   token: "",
   refresh_token: "",
+  updateUser: {} ,
 };
 
 export const authSlice = createSlice({
@@ -28,6 +29,24 @@ export const authSlice = createSlice({
       state.user = action.payload;
     },
     loginFailure: (state, action) => {
+      state.isLoading = false;
+      state.authError = action.payload;
+      state.isLoggedIn = false;
+      console.log("Error:", { message: action.payload.message });
+    },
+    updateRequest: (state, action) => {
+      state.isLoading = true;
+      state.authError = false;
+      state.isLoggedIn = false;
+      state.user = action.payload;
+    },
+    updateSuccess: (state, action) => {
+      state.isLoading = false;
+      state.authError = false;
+      state.isLoggedIn = true;
+      state.user = action.payload;
+    },
+    updateFailure: (state, action) => {
       state.isLoading = false;
       state.authError = action.payload;
       state.isLoggedIn = false;
@@ -93,6 +112,9 @@ export const {
   loginRequest,
   loginSuccess,
   loginFailure,
+  updateRequest,
+  updateSuccess,
+  updateFailure,
   logoutRequest,
   logoutSuccess,
   logoutFailure,

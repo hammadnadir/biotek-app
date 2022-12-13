@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ImageViewer from "react-simple-image-viewer";
 import { setExpencesData } from "../../../redux/expense";
-import { noimg } from "../../../assets";
+import { noimg, search } from "../../../assets";
 import EditModal from "./EditModal";
 import ViewModal from "./ViewModal";
 // import { editExpenseRequest } from "../../../redux/expense";
@@ -35,12 +35,23 @@ function ListData({ searchVal, handleSearchVal }) {
   const [itemId, setItemId] = useState(0);
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [allData, setAllData] = useState({});
 
   const openImageViewer = useCallback((index, item) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
-    console.log("ooooooo", item.image);
-    setFullImage(item.image);
+    // console.log("ooooooo", item.image);
+    if (viewExpense) {
+      if (viewVoucher?.lfes?.status !== "2"){
+        setFullImage(JSON.parse(item.image));
+      }else{
+        setFullImage([item.image]);
+        console.log(item.image);
+      }
+      console.log(viewExpense, true, item);
+    } else {
+      setFullImage(item.image);
+    }
   }, []);
 
   const closeImageViewer = () => {
@@ -61,7 +72,14 @@ function ListData({ searchVal, handleSearchVal }) {
     setVouchersData(vouchers);
     // eslint-disable-next-line
   }, []);
-  console.log("sdss", viewExpense, viewVoucher);
+
+  console.log("sdss", viewExpense, viewVoucher?.lfes?.status);
+
+  ////////////////////////////////// PENDING
+  // useEffect(()=>{
+  //   setAllData(editVoucher);
+  // },[editVoucher]);
+
   // console.log(JSON.parse(viewVoucher?.lfes?.lfdaywise[0]?.image));
   // console.log(editVoucher.daywise[0].image);
   // console.log(JSON.parse(viewVoucher?.lfes?.lfdaywise[0]?.image.split(".")))
@@ -614,7 +632,7 @@ function ListData({ searchVal, handleSearchVal }) {
                         handleCloseViewModal={handleCloseViewModal}
                         ExpenseView={() => ExpenseView(item)}
                         setShowEditModal={setShowEditModal}
-                        data={itemData}
+                        data={{...itemData,status: viewVoucher.lfes.status}}
                       />
                       {!viewExpense ? (
                         <div className="dot-icon">
@@ -677,14 +695,14 @@ function ListData({ searchVal, handleSearchVal }) {
                         className="list-img"
                         onClick={() => openImageViewer(0, item)}
                       >
-                        {item.image[0] === "no_image.jpg" ? (
+                        {item.image === "no_image.jpg" ? (
                           <img src={noimg} alt="" />
-                        ) : (
-                          <img
-                            src={JSON.parse(item.image)}
-                            alt=""
-                          />
-                        )}
+                        ) : viewVoucher?.lfes?.status === "2" ? (
+                          <img src={item.image} alt="" />
+                        ):(
+                          <img src={JSON.parse(item.image)} alt="" />
+                        )
+                        }
                       </div>
                       <div
                         className="voucher-data"
@@ -704,7 +722,7 @@ function ListData({ searchVal, handleSearchVal }) {
                           Expense Head:{" "}
                           <span>&nbsp;{item.lf_expense_name}</span>
                         </div>
-                        <div className="menus">
+                        <div className="menus" style={{ width: "fit-content" }}>
                           Narrations:
                           <span>&nbsp;{item.lfe_narration}</span>
                         </div>

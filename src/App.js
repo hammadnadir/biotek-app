@@ -21,6 +21,7 @@ import { Spinner } from "react-bootstrap";
 import PersonalChat from "./pages/PersonalChat";
 import { getCurrentUser, isLoggedIn } from "./utils";
 import ProtectedRoute from "./components/common/ProtectedRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   const router = useLocation();
@@ -102,6 +103,14 @@ function App() {
             element={
               // <RequireAuth>
               <Voucher />
+              // </RequireAuth>
+            }
+          />
+          <Route
+            path={`/edit_profile`}
+            element={
+              // <RequireAuth>
+              <Profile />
               // </RequireAuth>
             }
           />

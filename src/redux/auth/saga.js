@@ -12,6 +12,9 @@ import {
   forgotRequest,
   forgotSuccess,
   forgotFailure,
+  updateRequest,
+  updateSuccess,
+  updateFailure,
   changePasswordRequest,
   changePasswordSuccess,
   changePasswordFailure,
@@ -35,6 +38,22 @@ export function* handleLogin() {
       history.push("/");
     } catch (error) {
       yield put(loginFailure(error));
+      yield put(setLoading(false));
+    }
+  }
+}
+
+export function* handleUpdateUser() {
+  while (true) {
+    try {
+      const { payload } = yield take(updateRequest.type);
+      yield put(setLoading(true));
+      const response = yield call(login, payload);
+      yield put(setLoading(false));
+      yield put(updateSuccess(response));
+      history.push("/");
+    } catch (error) {
+      yield put(updateFailure(error));
       yield put(setLoading(false));
     }
   }

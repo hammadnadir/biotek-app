@@ -19,18 +19,21 @@ function User({ show, setShow }) {
     navigate("/");
     setShow(false);
   };
+  console.log(user.data.user.avatar);
 
   return (
     <div className="user_details_data">
       <div className="user_account">
-        <div className="main_user_data">
-          <img src={usersss} alt="user_img" />
-          <div className="user_name">
-            {/* <h5>Abdullah Ali</h5> */}
-            <h5>{user.data.user.name}</h5>
-            <p>{user.data.user.email}</p>
+        <Link to="/edit_profile">
+          <div className="main_user_data">
+            <img src={user?.data?.user?.avatar} alt="" />
+            <div className="user_name">
+              {/* <h5>Abdullah Ali</h5> */}
+              <h5>{user.data.user.name}</h5>
+              <p>{user.data.user.email}</p>
+            </div>
           </div>
-        </div>
+        </Link>
         {/* <div className="edit_user_main">
             <div className="icon_img">
               <img src={edit} alt="img" />

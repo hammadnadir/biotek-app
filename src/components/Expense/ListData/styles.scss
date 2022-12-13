@@ -110,6 +110,9 @@
           }
         }
       }
+      .menus{
+        width: fit-content;
+      }
       .voucher-lists {
         background: #fcfcfc;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
@@ -196,6 +199,7 @@
             }
           }
         }
+        
         .voucher-data {
           width: 100%;
           .menus {
@@ -204,7 +208,7 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            width: max-content;
+            width: fit-content !important;
             overflow-x: hidden;
             span {
               font-weight: 700;
