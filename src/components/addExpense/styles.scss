@@ -196,4 +196,30 @@
       }
     }
   }
+  .new_line {
+    // margin: 20px 0px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    Button {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      background-color: #fcfcfc;
+      border-radius: 8px;
+      border: none;
+      font-size: clamp(17px, 2vw, 18px);
+      font-weight: 700;
+        background: #179814;
+        box-shadow: 1px 1px 4px #179814;
+        border-radius: 8px;
+        i {
+          font-size: 25px !important;
+          display: flex;
+          -webkit-text-stroke: 1px;
+          -webkit-text-stroke-width: 0%;
+      }
+    }
+  }
 }

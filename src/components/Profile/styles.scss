@@ -80,18 +80,24 @@
       }
       .users_name{
         text-align: center;
-        margin-top: 50px !important;
+        margin-top: -20px !important;
         width: fit-content;
         margin: auto;
         position: relative;
+        h2{
+          text-transform: capitalize;
+          color: #FFFFFF;
+          font-weight: 700; 
+        }
         input{
           outline: none;
           border: none;
-          border-bottom: 2px solid #FFFFFF;
+          // border-bottom: 2px solid #FFFFFF;
           background: transparent;
           color: #FFFFFF;
           font-weight: 700;
-          padding-right: 20px;
+          // padding-right: 20px;
+          text-transform: capitalize;
         }
         img{
             position: absolute;

@@ -2,53 +2,13 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import "./styles.scss";
 import { cards } from "../../../data";
-import { aaa, expenseImg, document } from "../../../assets";
-// import { storage } from "../../../firebase";
-// import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { expenseImg, document } from "../../../assets";
 import { Link } from "react-router-dom";
-// import { v4 } from "uuid";
-// import { useEffect } from "react";
 
-function Options({val ,setVal}) {
-  // const [imagesupload, setImagesupload] = useState("");
-  // const [imagesList, setImagesList] = useState([]);
-
-  // const imageListRef = ref(storage, "images/");
-
-  // const uploadPic = () => {
-  //   if (imagesupload) {
-  //     const imageRef = ref(storage, `images/${imagesupload.name + v4()}`);
-  //     uploadBytes(imageRef, imagesupload).then((snapshot) => {
-  //       // alert("Image Uploaded");
-  //       getDownloadURL(snapshot.ref).then((url)=>{
-  //         setImagesList([...imagesList,url])
-  //       })
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   listAll(imageListRef).then((response) => {
-  //     // console.log(response)
-  //     response.items.forEach((item) => {
-  //       getDownloadURL(item).then((url) => {
-  //         setImagesList((prev) => [...prev, url]);
-  //       });
-  //     });
-  //   });
-  // }, []);
-
+function Options({ val }) {
   return (
     <div className="options-page">
       <Container>
-        {/* <input
-          type="file"
-          onChange={(e) => setImagesupload(e.target.files[0])}
-        />
-        <button onClick={uploadPic}>upload</button>
-        {imagesList.map((item) => {
-          return <img src={item} />;
-        })} */}
         <div className="scroll_data">
           <div className="options-data">
             <div className="main-inner-data">
@@ -60,19 +20,19 @@ function Options({val ,setVal}) {
               <p>Expense</p>
             </div>
             {cards
-            .filter((data) => data.text.includes(val))
-            .map((item, index) => {
-              return (
-                <div className="main-inner-data" key={index}>
-                  <Link to="/">
-                    <div className="cards">
-                      <img src={item.img} alt="logo" />
-                    </div>
-                  </Link>
-                  <p>{item.text}</p>
-                </div>
-              );
-            })}
+              .filter((data) => data.text.includes(val))
+              .map((item, index) => {
+                return (
+                  <div className="main-inner-data" key={index}>
+                    <Link to="/">
+                      <div className="cards">
+                        <img src={item.img} alt="logo" />
+                      </div>
+                    </Link>
+                    <p>{item.text}</p>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <div className="recent-data">

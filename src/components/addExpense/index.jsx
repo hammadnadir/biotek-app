@@ -84,7 +84,6 @@ function AddExpense() {
   };
 
   const handleUpload = (e, index) => {
-    
     // dispatch(setLoading(false))
     console.log(arrayIndex);
     const data = [];
@@ -203,11 +202,11 @@ function AddExpense() {
     const filtered = narr.filter((item) => {
       return item !== data;
     });
-    console.log(data)
+    console.log(data);
     setNarrationData(filtered);
     const amou = [...amountData];
     const dataAmount = amou[index];
-    console.log(dataAmount)
+    console.log(dataAmount);
     const filteredNew = amou.filter((item) => {
       return item !== dataAmount;
     });
@@ -227,7 +226,7 @@ function AddExpense() {
       return img !== specific;
     });
     setAllImages(filteredImg);
-    console.log(filteredImg)
+    console.log(filteredImg);
   };
 
   return (
@@ -236,9 +235,9 @@ function AddExpense() {
         <Container>
           <div className="expense_button">
             <Button type="submit">Save</Button>
-            <Button id="addnew" onClick={handleAdd}>
+            {/* <Button id="addnew" onClick={handleAdd}>
               <i className="bi bi-plus"></i>Add Line
-            </Button>
+            </Button> */}
           </div>
         </Container>
         <div>
@@ -356,6 +355,13 @@ function AddExpense() {
               </div>
             );
           })}
+          <Container>
+            <div className="new_line">
+              <Button id="addnew" onClick={handleAdd}>
+                <i className="bi bi-plus"></i>Add Line
+              </Button>
+            </div>
+          </Container>
         </div>
       </Form>
     </div>

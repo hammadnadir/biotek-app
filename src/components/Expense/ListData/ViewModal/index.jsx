@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { TextFieldForm } from "../../../common";
 import "./styles.scss";
 import { Carousel } from "react-responsive-carousel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { noimg } from "../../../../assets";
 import ImageViewer from "react-simple-image-viewer";
 
@@ -13,42 +13,30 @@ function ViewModal({
   data,
   setShowEditModal,
 }) {
-  // const [boxOpen, setBoxOpen] = useState(false);
-  // const [imageIndex, setImageIndex] = useState(0);
-  // const [data, setData] = useState({});
   let newDate = new Date();
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
+  const dispatch = useDispatch();
+
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const openImageViewer = useCallback((index, item) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
-    console.log(data.image);
-    // setFullImage(item.image);
-
   }, []);
-  console.log(data.image)
 
   const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
-  // const abcd = json(data?.image,true);
 
-  // const { expense } = useSelector((state) => state.expense);
-
-  // useEffect(()=>{
-  // setData(expense?.data?.lfe_daywise[index])
-  // },[index])
   const showEditModals = () => {
     handleCloseViewModal(true);
     setShowEditModal(true);
   };
   const { viewExpense, setExpense } = useSelector((state) => state.expense);
-  console.log(data,"llllllllllll");
 
   return (
     <div className="view_modal">
@@ -74,10 +62,6 @@ function ViewModal({
             {data.image === "no_image.jpg" && (
               <p className="no_image">No Image Avalible</p>
             )}
-            {/* {data?.image.length == 0 && (
-                <p className="no_image">No Image Avalible</p>
-              )} */}
-            {/* {data && data.image && data.image != "no_image.jpg" && ( */}
             {isViewerOpen && (
               <ImageViewer
                 src={viewExpense ? data.status === "2" ? [data.image] :  JSON.parse(data.image) : data.image}
@@ -141,13 +125,11 @@ function ViewModal({
             <div className="voucher_field">
               <TextFieldForm
                 placeholder="Expense Voucher # "
-                // value={`Expense Voucher # LFE-${expense.data.lfe_id}`}
                 value={`Expense Voucher # ${data.liberty_factory_exp_id}`}
               />
               <TextFieldForm
                 placeholder="Expense Voucher # "
                 name="lfe_id"
-                // value={formData.expense.data.lfe_id}
                 hidden
               />
             </div>
@@ -171,15 +153,9 @@ function ViewModal({
               <TextFieldForm
                 label="Expense Head:"
                 value={`${data.lf_expense_name}`}
-                // selected={data.lf_expense_name}
-                // optionsData={expense.data.expense_heads}
-                // name="expense_head"
-                // onChange={handleHeadChange}
-                // value={formData.expense_head}
               />
             </div>
             <TextFieldForm
-              //   value={`Date : ${date}-${month}-${year}`}
               value={`Narration : ${
                 data && data.lfe_narration && data.lfe_narration
               }`}
@@ -187,7 +163,6 @@ function ViewModal({
             />
             <TextFieldForm
               placeholder="Amount"
-              //   value={`Date : ${date}-${month}-${year}`}
               value={`Amount : ${data && data.lfe_amount && data.lfe_amount}`}
             />
           </div>

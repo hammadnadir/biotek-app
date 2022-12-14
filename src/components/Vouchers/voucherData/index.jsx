@@ -127,7 +127,7 @@ function VoucherData() {
                       </div>
                       <div className="sub_menues">
                         <h3>Total Expense : </h3>
-                        <p> &nbsp;Rs. {item.expence}</p>
+                        <p> &nbsp;Rs. {JSON.parse(item.expence).toLocaleString('en-US')}</p>
                       </div>
                       <div className="sub_menues">
                         <h3>Remarks : </h3>

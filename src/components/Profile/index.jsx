@@ -24,9 +24,12 @@ function ProfileMain() {
     name: user.data.user.name,
     email: user.data.user.email,
     phone : user.data.user.mobile_number,
+    locale : user.data.user.settings.locale,
    });
-   setImage(user.data.user.avatar)
-  },[])
+   const abcd = `https://www.biotecherp.work/public/storage/`
+   setImage(`${abcd}${user.data.user.avatar}`)
+  //  console.log(`${abcd}${user.data.user.avatar}`)
+  },[]);
 //   useEffect(()=>{
 //     console.log(user.data.user.avatar)
 //    },[user])
@@ -76,24 +79,25 @@ function ProfileMain() {
             </div>
           </div>
         <div className="edit_profile">
-          <h2>Edit Profile</h2>
+          <h2>View Profile</h2>
           <div className="circled_user">
           <img src={image} className="photo_main" alt="" /> 
             {/* <img src={photo} className="photo_main" alt="" /> */}
-            <div className="camera_img" onClick={handleClick}>
+            {/* <div className="camera_img" onClick={handleClick}>
               <img src={camera} className="camera" alt="" />
-            </div>
+            </div> */}
           </div>
           <div className="users_name">
-            <input
+            {/* <input
               type="text"
               name="name"
-              onChange={handleChange}
+              // onChange={handleChange}
               value={userData.name}
-            />
-            {userData?.name?.length > 0 && (
+            /> */}
+            <h2>{userData.name}</h2>
+            {/* {userData?.name?.length > 0 && (
               <img src={close} alt="" onClick={handleClear} />
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -105,21 +109,28 @@ function ProfileMain() {
       />
       <Container>
         <div>
+        <TextField
+            placeholder="name"
+            // name="email"
+            value={userData.name}
+            // onChange={handleChange}
+            type="name"
+          />
           <TextField
             placeholder="abcd@gmail.com"
             name="email"
             value={userData.email}
-            onChange={handleChange}
+            // onChange={handleChange}
             type="email"
           />
-          <TextField
+          {/* <TextField
             placeholder="phone"
             name="phone"
             value={userData.phone}
             onChange={handleChange}
             type="phone"
-          />
-          <TextField
+          /> */}
+          {/* <TextField
             placeholder="Type Password......"
             name="password"
             value={userData.password}
@@ -132,16 +143,16 @@ function ProfileMain() {
             value={userData.confirm_password}
             onChange={handleChange}
             type="password"
-          />
+          /> */}
           <TextField
             placeholder="ABC xyz"
             name="locale"
             value={userData.locale}
-            onChange={handleChange}
+            // onChange={handleChange}
           />
-          <div className="main_btns">
+          {/* <div className="main_btns">
             <Button type="submit">Save</Button>
-          </div>
+          </div> */}
         </div>
       </Container>
     </Form>

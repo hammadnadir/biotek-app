@@ -1,74 +1,74 @@
 .amount {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    width: 100%;
-    background-color: #F3F2F2BF;
-    align-items: center;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    padding-left: 25px;
-    padding-right: 25px;
-    font-size: small;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  background-color: #f3f2f2bf;
+  align-items: center;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: small;
 }
 
 .expense {
-    font-weight: bolder;
-    color: black;
+  font-weight: bolder;
+  color: black;
 }
 
 .balance {
-    font-weight: bolder;
-    color: black;
+  font-weight: bolder;
+  color: black;
 }
 
 // ################# Search Bar Styling ################
 
 .search-bar {
-    padding: 10px;
-    // width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    width: fit-content;
-    margin: auto;
+  padding: 10px;
+  // width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+  margin: auto;
 }
 
 .search-bar input {
-    padding: 30px 20px 10px 57px;
-    padding-left: 60px;
-    width: 350px;
-    margin-top: 10px;
-    border-radius: 50px;
-    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
-    border: none;
-    text-decoration: none;
-    outline: none;
+  padding: 30px 20px 10px 57px;
+  padding-left: 60px;
+  width: 350px;
+  margin-top: 10px;
+  border-radius: 50px;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25);
+  border: none;
+  text-decoration: none;
+  outline: none;
 }
 
-.search-bar .vector{
-    position: absolute;
-    top: 45px;
-    left: 33px;
-}    
-
-.search-bar img{
-    position: absolute;
-    right: 39px;
-    top: 35px;
+.search-bar .vector {
+  position: absolute;
+  top: 45px;
+  left: 33px;
 }
 
-.search-bar p{
-position: absolute;
-/* padding-right: 144px; */
-font-weight: bolder;
-font-size: 700;
-/* padding-top: 18px; */
-/* top: 0; */
-text-align: 0;
-top: 31px;
-font-size: 14px;
-left: 71px;
+.search-bar img {
+  position: absolute;
+  right: 39px;
+  top: 35px;
+}
+
+.search-bar p {
+  position: absolute;
+  /* padding-right: 144px; */
+  font-weight: bolder;
+  font-size: 700;
+  /* padding-top: 18px; */
+  /* top: 0; */
+  text-align: 0;
+  top: 31px;
+  font-size: 14px;
+  left: 71px;
 }
 
 // .search-bar p{
@@ -79,10 +79,9 @@ left: 71px;
 //     padding-top: 18px;
 // }
 @media (max-width: 325px) {
-   
-    .search-bar p {
-        padding-right: 95px;
-    }
+  .search-bar p {
+    padding-right: 95px;
+  }
 }
 
 // .search-bar input {
@@ -99,44 +98,42 @@ left: 71px;
 // #################### Total Expense Styling #################
 
 .total-amount {
-    display: flex;
-    justify-content: space-between;
-    // justify-content: center;
-    height: 46px;
-    width: 100%;
-    background-color: #F3F2F2BF;
-    align-items: center;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    padding-left: 25px;
-    padding-right: 25px;
-    font-size: 12px;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 46px;
+  width: 100%;
+  background-color: #f3f2f2bf;
+  align-items: center;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 12px;
+  margin-top: 10px;
 }
 
 .total-expense {
-    font-weight: bolder;
-    color: #F90F0F;
+  font-weight: bolder;
+  color: #f90f0f;
 }
 
 .total-balance {
-    font-weight: bolder;
-    color: #179814;
-
+  font-weight: bolder;
+  color: #179814;
 }
 
 .exp p {
-    font-size: 200;
-    color: #F90F0F;
+  font-size: 200;
+  color: #f90f0f;
 }
 
 .bal p {
-    font-size: 200;
-    color: #179814;
+  font-size: 200;
+  color: #179814;
 }
 
 .exp-table {
-    width: 100%;
+  width: 100%;
 }
 
 // ################### Table Styling #################
@@ -144,92 +141,92 @@ left: 71px;
 table,
 thead,
 tbody {
-    // border: 1px solid black;
+  // border: 1px solid black;
 }
 
 tr,
 td {
-    // border: 1px solid black;
-    border-bottom: 1px solid;
-    padding: 10px;  
+  // border: 1px solid black;
+  border-bottom: 1px solid;
+  padding: 10px;
 }
 
 .descript {
-    display: flex;
-    flex-direction: column;
-    font-size: small;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
 }
 
 td {
-    font-size: small;
+  font-size: small;
 }
 
-.exp-table th{
-    // margin: 6px;
-    // padding-left: 24px;
-    // padding: 20px 24px;
-    white-space: nowrap;
-    text-align: center;
+.exp-table th {
+  // margin: 6px;
+  // padding-left: 24px;
+  // padding: 20px 24px;
+  white-space: nowrap;
+  text-align: center;
 }
 
-.exp-table{
-    // padding-bottom: 80px;
-    margin-bottom: 140px;
+.exp-table {
+  // padding-bottom: 80px;
+  margin-bottom: 140px;
 }
 
 span {
-    font-weight: bolder;
+  font-weight: bolder;
 }
 
 .grid-data {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .green-color-custom {
-    color: #179814;
-    background-color: #FFDFDF;
-    border-bottom-color: black
+  color: #179814;
+  background-color: #ffdfdf;
+  border-bottom-color: black;
 }
 
-.grey-color-custom{
-    background-color: #F7F7F7;
-    border-bottom-color: black;
-    white-space: nowrap;
+.grey-color-custom {
+  background-color: #f7f7f7;
+  border-bottom-color: black;
+  white-space: nowrap;
 }
 
 .red-color-custom {
-    color: #F90F0F;
-    background-color: #F7F7F7;
-    border-bottom-color: black
+  color: #f90f0f;
+  background-color: #f7f7f7;
+  border-bottom-color: black;
 }
 
-.bg-red{
-    background-color: #FFDFDF; 
-    border-bottom-color: black
+.bg-red {
+  background-color: #ffdfdf;
+  border-bottom-color: black;
 }
 
 // ########################## Responsive ######################
 
 @media (max-width: 455px) {
-    .amount{
-        font-size: 12px;
-    };
+  .amount {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 450px) {
-        .table-width {
-            overflow-x: scroll;
-        };
+  .table-width {
+    overflow-x: scroll;
+  }
 }
 
 @media (max-width: 320px) {
-    .search-bar .vector {
-        left: 35px
-    };
+  .search-bar .vector {
+    left: 35px;
+  }
 }
 @media (max-width: 370px) {
-    .search-bar input {
-        width: 100%;
-    }
+  .search-bar input {
+    width: 100%;
+  }
 }

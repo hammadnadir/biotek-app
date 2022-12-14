@@ -21,6 +21,7 @@ import ViewModal from "./ViewModal";
 import { useLocation } from "react-router-dom";
 import CloseModal from "./CloseModal";
 import { setViewData } from "../../../redux/expense";
+import { setLoading } from "../../../redux/global";
 
 function ListData({ searchVal, handleSearchVal }) {
   const [vouchersData, setVouchersData] = useState([]);
@@ -40,15 +41,12 @@ function ListData({ searchVal, handleSearchVal }) {
   const openImageViewer = useCallback((index, item) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
-    // console.log("ooooooo", item.image);
     if (viewExpense) {
       if (viewVoucher?.lfes?.status !== "2"){
         setFullImage(JSON.parse(item.image));
       }else{
         setFullImage([item.image]);
-        console.log(item.image);
       }
-      console.log(viewExpense, true, item);
     } else {
       setFullImage(item.image);
     }
@@ -73,16 +71,12 @@ function ListData({ searchVal, handleSearchVal }) {
     // eslint-disable-next-line
   }, []);
 
-  console.log("sdss", viewExpense, viewVoucher?.lfes?.status);
 
   ////////////////////////////////// PENDING
   // useEffect(()=>{
   //   setAllData(editVoucher);
   // },[editVoucher]);
 
-  // console.log(JSON.parse(viewVoucher?.lfes?.lfdaywise[0]?.image));
-  // console.log(editVoucher.daywise[0].image);
-  // console.log(JSON.parse(viewVoucher?.lfes?.lfdaywise[0]?.image.split(".")))
 
   // const excludeColumns = [];
 
@@ -202,7 +196,6 @@ function ListData({ searchVal, handleSearchVal }) {
         });
       });
     });
-    console.log(imagesupload);
     // eslint-disable-next-line
   }, []);
 
@@ -256,6 +249,7 @@ function ListData({ searchVal, handleSearchVal }) {
   //     called = false;
   //   };
   // }, []);
+  const status = viewVoucher?.lfes?.status
 
   const sum =
     expense?.data?.balance - expense?.data?.in[0]?.total_in ||
@@ -288,21 +282,21 @@ function ListData({ searchVal, handleSearchVal }) {
                   <h3>
                     Rs.{" "}
                     {!setExpense
-                      ? -(-expense?.data?.balance + sum) || 0
-                      : editVoucher.in[0].total_in}
+                      ? (-(-expense?.data?.balance + sum))?.toLocaleString('en-US') || 0
+                      : JSON.parse(editVoucher?.in[0]?.total_in).toLocaleString('en-US')} 
                   </h3>
                 </div>
               )}
               {viewExpense && (
                 <div className="end-price">
-                  <h3>Rs. {viewVoucher?.in[0]?.total_in}</h3>
+                  <h3>Rs. {JSON.parse(viewVoucher?.in[0]?.total_in).toLocaleString('en-US')}</h3>
                 </div>
               )}
               {!setExpense && !viewExpense && (
                 <div>
                   <div className="total-amount">
                     <h2>
-                      Rs. {expense?.data?.balance || editVoucher?.balance}
+                      Rs. {JSON.parse(expense?.data?.balance).toLocaleString('en-US') || JSON.parse(editVoucher?.balance).toLocaleString('en-US')}
                     </h2>
                   </div>
                   <h4>Today Total Expanses</h4>
@@ -310,8 +304,8 @@ function ListData({ searchVal, handleSearchVal }) {
                     <h3>
                       Rs.{" "}
                       {!setExpense
-                        ? -(-expense?.data?.balance + sum) || 0
-                        : editVoucher.in[0].total_in}
+                        ? -(-expense?.data?.balance + sum)?.toLocaleString('en-US') || 0
+                        : JSON.parse(editVoucher?.in[0]?.total_in).toLocaleString('en-US')}
                     </h3>
                   </div>
                 </div>
@@ -632,7 +626,7 @@ function ListData({ searchVal, handleSearchVal }) {
                         handleCloseViewModal={handleCloseViewModal}
                         ExpenseView={() => ExpenseView(item)}
                         setShowEditModal={setShowEditModal}
-                        data={{...itemData,status: viewVoucher.lfes.status}}
+                        data={{...itemData,status: status}}
                       />
                       {!viewExpense ? (
                         <div className="dot-icon">

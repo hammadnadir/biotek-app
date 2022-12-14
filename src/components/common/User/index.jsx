@@ -26,10 +26,10 @@ function User({ show, setShow }) {
       <div className="user_account">
         <Link to="/edit_profile">
           <div className="main_user_data">
-            <img src={user?.data?.user?.avatar} alt="" />
+            <img src={`${`https://www.biotecherp.work/public/storage/`}${user?.data?.user?.avatar}`} alt="" />
             <div className="user_name">
               {/* <h5>Abdullah Ali</h5> */}
-              <h5>{user.data.user.name}</h5>
+              <h5>{`${user.data.user.name}`}</h5>
               <p>{user.data.user.email}</p>
             </div>
           </div>
